@@ -1,0 +1,10 @@
+---
+- name: Register to Red Hat Portal {{ inventory_hostname }}
+  ansible.builtin.include_role:
+    name: redhat.rhel_system_roles.rhc
+  vars:
+    rhc_auth:
+      activation_keys:
+        keys:
+          - "{{ activation_key_vault }}"
+    rhc_organization: "{{ org_number_vault }}"

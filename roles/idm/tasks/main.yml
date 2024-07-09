@@ -1,4 +1,7 @@
 ---
+- name: "Ensure system is registered"
+  ansible.builtin.include_tasks: ensure_system_registered.yml
+
 - name: "Ensure prerequisites are applied"
   ansible.builtin.include_tasks: ensure_prerequisites.yml
 
