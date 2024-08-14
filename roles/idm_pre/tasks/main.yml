@@ -1,0 +1,28 @@
+---
+
+- name: "Ensure dns or hosts resolution"
+  ansible.builtin.include_tasks: "ensure_dns_resolution.yml"
+
+- name: "Ensure system is registered to CDN"
+  ansible.builtin.include_tasks: "ensure_system_registered.yml"
+
+- name: "Ensure updates are applied"
+  ansible.builtin.include_tasks: "ensure_update_system.yml"
+
+- name: "Ensure time is in sync"
+  ansible.builtin.include_tasks: "ensure_time_service.yml"
+
+- name: "Ensure firewall ports are configured"
+  ansible.builtin.include_tasks: "ensure_firewall.yml"
+
+- name: "Ensure system-wide cryptographic policy is set"
+  ansible.builtin.include_tasks: "ensure_crypto_policy.yml"
+
+- name: "Ensure that the hostname is fully qualified"
+  ansible.builtin.include_tasks: "ensure_hostname_fqdn.yml"
+
+- name: "Ensure proper umask"
+  ansible.builtin.include_tasks: "ensure_umask.yml"
+
+- name: "Ensure idm packages"
+  ansible.builtin.include_tasks: "ensure_idm_packages.yml"

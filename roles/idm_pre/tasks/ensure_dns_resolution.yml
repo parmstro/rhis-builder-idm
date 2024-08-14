@@ -1,0 +1,29 @@
+---
+#
+# host resolves forward and backward OR
+- name: "Make sure we are resolving internet addresses"
+  ansible.builtin.command: "nmcli conn mod {{ ansible_default_ipv4.interface }} ipv4.dns 8.8.8.8"
+  changed_when: true
+
+- name: "Ensure the interface is up with defined configuration"
+  ansible.builtin.command: "nmcli conn up {{ ansible_default_ipv4.interface }}"
+  changed_when: true
+
+# /etc/hosts
+# only local host entries OR
+
+# The first two entries are the IPv4 and IPv6 localhost entries.
+# The next entry specifies the IdM server IPv4 address and host name.
+# The FQDN of the IdM server comes before the short name of the IdM server.
+# The IdM server host name is not part of the localhost entry.
+
+
+# we will setup /etc/hosts if ipaserver_setup_dns is true
+
+- name: "Configure /etc/hosts for resolve the local host if ipaserver_setup_dns is true"
+  ansible.builtin.template:
+    src: "etc_hosts.j2"
+    dest: "/etc/hosts"
+    owner: "root"
+    group: "root"
+    mode: "0644"

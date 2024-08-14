@@ -1,0 +1,35 @@
+---
+
+# Set the crypto-policy of the server if requested"
+# IdM server cannot be installed with system wide crypto policy "FUTURE"
+
+- name: "Determine the current system-wide cryptographic policy"
+  when: (ansible_distribution_major_version | int) > 8
+  block:
+
+    - name: "If requested, ensure system-wide-crypto policy is valid and set it"
+      when: ipa_crypto_policy is defined
+      block:
+        - name: "Assert that the requested policy is not FUTURE"
+          ansible.builtin.assert:
+            that:
+              - (ipa_crypto_policy | upper) != "FUTURE"
+            fail_msg: "Requested policy is FUTURE. IdM Server deployment is not supported with policy FUTURE. Aborting."
+
+
+        - name: "Set the policy as requested"
+          ansible.builtin.include_role:
+            name: redhat.rhel_system_roles.crypto_policies
+          vars:
+            crypto_policies_policy: "{{ ipa_crypto_policy | upper }}"
+
+    - name: "Validate the current crypto-policy"
+      ansible.builtin.include_role:
+        name: redhat.rhel_system_roles.crypto_policies
+
+    - name: "Assert that the current cryptographic policy is not FUTURE"
+      when: crypto_policies_active is defined
+      ansible.builtin.assert:
+        that:
+          - crypto_policies_active != "FUTURE"
+        fail_msg: "The current system-wide cryptographic policy is FUTURE. IdM Server deployment is not supported with policy FUTURE. Aborting."

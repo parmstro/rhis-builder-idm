@@ -1,0 +1,14 @@
+---
+- name: "Ensure the proper repositories are enabled"
+  community.general.rhsm_repository:
+    name: "{{ repository_ids }}"
+    state: enabled
+    purge: true
+
+# We are purposefully trying to update the system, hence latest.
+- name: "Update the system" # noqa: package-latest
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
+  async: "{{ async_timeout }}"
+  poll: "{{ async_delay }}"

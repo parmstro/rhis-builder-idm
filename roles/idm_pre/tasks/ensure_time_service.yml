@@ -1,0 +1,25 @@
+---
+# We will only use chrony
+
+- name: "Install chrony for accurate time keeping"
+  ansible.builtin.dnf:
+    name: chrony
+    state: present
+
+- name: "Configure time servers"
+  ansible.builtin.template:
+    src: "chrony.j2"
+    dest: "/etc/chrony.conf"
+    owner: root
+    group: root
+    mode: "0744"
+
+- name: "Start the chronyd service with default settings"
+  ansible.builtin.service:
+    name: chronyd
+    state: restarted
+    enabled: true
+
+- name: "Ensure the time is synchronized"
+  ansible.builtin.command: "chronyc makestep"
+  changed_when: true

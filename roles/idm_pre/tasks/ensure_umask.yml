@@ -1,0 +1,7 @@
+---
+
+# In RHEL 8 and RHEL 9 system requires umask 0022
+
+- name: "Ensure system umask"
+  ansible.builtin.command: "umask {{ ipa_required_umask }}"
+  changed_when: true

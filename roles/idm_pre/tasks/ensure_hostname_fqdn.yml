@@ -1,0 +1,15 @@
+---
+
+# ensure fqdn is set
+- name: "Determine what the system thinks its name is"
+  ansible.builtin.command: "hostname"
+  register: idm_pre_hostname
+  changed_when: true
+
+- name: "Assert that hostname is a valid FQDN"
+  ansible.builtin.assert:
+    that:
+      - idm_pre_hostname.stdout is community.general.fqdn_valid(min_labels=2, allow_underscores=False)
+      - idm_pre_hostname.stdout == (idm_pre_hostname.stdout | lower)
+      - idm_pre_hostname.stdout != "localhost"
+      - idm_pre_hostname.stdout != "localhost6"
