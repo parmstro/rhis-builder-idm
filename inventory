@@ -5,11 +5,15 @@ localhost
 idm.example.ca
 
 [idm_replicas]
+idmr1.example.ca
+idmr2.example.ca
 
 [sat_primary]
-sat.example.ca
+satellite.example.ca
 
 [sat_capsule]
+capsule1.example.ca
+capsule2.example.ca
 
 [aap_controller]
 controller1.example.ca

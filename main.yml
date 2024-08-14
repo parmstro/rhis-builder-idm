@@ -6,11 +6,44 @@
   become: true
   gather_facts: true
   vars_files:
-    - "vars/idm_vars.yml"
-    - "~/rhisbuilder_vault.yml"    
+    - "~/rhisbuilder_vault.yml"
 
   tasks:
 
-    - name: "Apply role idm"
+    - name: "Apply role idm_pre"
       ansible.builtin.include_role:
-        name: idm
+        name: idm_pre
+
+    - name: "Apply role idm_primary"
+      ansible.builtin.include_role:
+        name: idm_primary
+
+    - name: "Apply role user_groups"
+      ansible.builtin.include_role:
+        name: user_groups
+
+    - name: "Apply role users"
+      ansible.builtin.include_role:
+        name: user_groups
+
+    - name: "Apply role host_groups"
+      ansible.builtin.include_role:
+        name: host_groups
+
+    # Add the hosts do not support ipa_client
+    # Add hosts that *do* support ipa_client
+    - name: "Apply role hosts"
+      ansible.builtin.include_role:
+        name: hosts
+
+    - name: "Apply hbac policy"
+      ansible.builtin.include_role:
+        name: hbac_policy
+
+    - name: "Apply sudo policy"
+      ansible.builtin.include_role:
+        name: sudo_policy
+
+    - name: "Apply dns setup"
+      ansible.builtin.include_role:
+        name: dns_setup
