@@ -5,11 +5,10 @@
   gather_facts: true
 
   vars_files:
-
     - "~/rhisbuilder_vault.yml"
 
   tasks:
 
-    - name: "Run a role test "
+    - name: "Apply role {{ role_name }}"
       ansible.builtin.include_role:
         name: "{{ role_name }}"
