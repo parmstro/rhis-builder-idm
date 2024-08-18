@@ -1,0 +1,28 @@
+---
+# you can combine action and state to add or delete members from the sudo rule group elements.
+
+- name: "Ensure the state of the sudo rule - {{ sudo_rule.name }}"
+  redhat.rhel_idm.ipasudorule:
+    ipaadmin_principal: "{{ ipa_admin_principal }}"
+    ipaadmin_password: "{{ ipa_admin_password }}"
+    name: "{{ sudo_rule.name }}"
+    action: "{{ sudo_rule.action | default(omit) }}"
+    state: "{{ sudo_rule.state | default(omit) }}"    # present (d), absent, enabled, disabled
+    description: "{{ sudo_rule.description | default('Created by rhis-builder-ipa') }}"
+    order: "{{ sudo_rule.order | default(omit) }}"
+    sudooption: "{{ sudo_rule.sudo_options | default(omit) }}"
+    cmdcategory: "{{ sudo_rule.command_category | default(omit) }}"
+    allow_sudocmd: "{{ sudo_rule.allow_commands | default(omit) }}"
+    allow_sudocmdgroup: "{{ sudo_rule.allow_command_groups | default(omit) }}"
+    deny_sudocmd: "{{ sudo_rule.deny_commands | default(omit) }}"
+    deny_sudocmdgroup: "{{ sudo_rule.deny_command_groups | default(omit) }}"
+    hostcategory: "{{ sudo_rule.host_category | default(omit) }}"
+    host: "{{ sudo_rule.hosts | default(omit) }}"
+    hostgroup: "{{ sudo_rule.host_groups | default(omit) }}"
+    usercategory: "{{ sudo_rule.user_category | default(omit) }}"
+    user: "{{ sudo_rule.users | default(omit) }}"
+    group: "{{ sudo_rule.user_groups | default(omit) }}"
+    runasuser: "{{ sudo_rule.runas_users | default(omit) }}"
+    runasusercategory: "{{ sudo_rule.runas_user_category | default(omit) }}"
+    runasgroup: "{{ sudo_rule.user_groups | default(omit) }}"
+    runasgroupcategory: "{{ sudo_rule.runas_group_category | default(omit) }}"
