@@ -138,11 +138,11 @@ aws1_region_vault: "ca-central-1"
 # Phase 2 - IdM Intaller Role Secrets
 #####################################
 # variable names required by the role
-# (the Satellite Pre role uses these to install the IdM client)
+# (the Satellite Pre role also uses these to install the IdM client)
 ipa_admin_principal_vault: "{{ default_admin_username }}"                                         # notsecret
 ipa_admin_password_vault: "{{ default_environment_password_vault }}"                              # notsecret
 ipa_dm_password_vault: "{{ default_environment_password_vault }}"                                 # notsecret
-
+ipa_default_user_password_vault: "redhat1!" # not-secret
 
 #####################################
 # Phase 3 - Satellite Install secrets
