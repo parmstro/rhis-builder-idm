@@ -1,0 +1,29 @@
+---
+#
+
+- name: "Configure the idm password_policies specified for rh-isam sample environment"
+  when: idm_password_policies_rhisam is defined
+  ansible.builtin.include_tasks: "ensure_password_policy.yml"
+  loop: "{{ idm_password_policies_rhisam }}"
+  loop_control:
+    loop_var: pwpolicy
+  no_log: true
+  tags:
+    - tags_rhisam
+    - tags_authentication_config
+    - tags_idm_password_policies
+    - tags_idm_password_policies_rhisam
+
+
+- name: "Configure the idm password_policies specified for user defined environment"
+  when: idm_password_policies_user is defined
+  ansible.builtin.include_tasks: "ensure_password_policy.yml"
+  loop: "{{ idm_password_policies_user }}"
+  loop_control:
+    loop_var: pwpolicy
+  no_log: true
+  tags:
+    - tags_user
+    - tags_authentication_config
+    - tags_idm_password_policies
+    - tags_idm_password_policies_user
