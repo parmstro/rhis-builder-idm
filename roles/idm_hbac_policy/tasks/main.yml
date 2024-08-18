@@ -1,0 +1,27 @@
+---
+
+- name: "Ensure rhisam HBAC rule states"
+  when: hbac_rules_rhisam is defined
+  ansible.builtin.include_tasks: "ensure_hbac_rule.yml"
+  loop: "{{ hbac_rules_rhisam }}"
+  loop_control:
+    loop_var: hbac_rule
+  no_log: true
+  tags:
+    - tags_rhisam
+    - tags_rhis_builder_idm
+    - tags_hbac_rules
+    - tags_hbac_rules_rhisam
+
+- name: "Ensure user HBAC rule states"
+  when: hbac_rules_user is defined
+  ansible.builtin.include_tasks: "ensure_hbac_rule.yml"
+  loop: "{{ hbac_rules_user }}"
+  loop_control:
+    loop_var: hbac_rule
+  no_log: true
+  tags:
+    - tags_rhisam
+    - tags_rhis_builder_idm
+    - tags_hbac_rules
+    - tags_hbac_rules_rhisam

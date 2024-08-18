@@ -1,0 +1,12 @@
+---
+
+- name: "Run the hbac policy test items through hbactest"
+  ansible.builtin.include_tasks: "hbactest.yml"
+  loop: "{{ hbac_policy_tests }}"
+  loop_control:
+    loop_var: hbactest
+  when: hbac_policy_tests is defined
+  tags:
+    - tags_rhisam
+    - tags_rhis_builder_idm
+    - tags_hbac_tests

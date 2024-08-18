@@ -1,0 +1,8 @@
+---
+
+- name: "Ensuring the state of rule {{ hbac_rule.name }}"
+  redhat.rhel_idm.ipahbacrule:
+    ipaadmin_principal: "{{ ipa_admin_principal }}"
+    ipaadmin_password: "{{ ipa_admin_password }}"
+    name: "{{ hbac_rule.name }}"
+    description: "{{ hbac_rule.description }}"
