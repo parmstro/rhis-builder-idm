@@ -1,47 +1,18 @@
 ---
 # Use this section to configure user groups and users
-# These are sample values. For brown-field deployments, you might pre-populate this file
-# Otherwise the values here would be day2 data
 
-# The list of groups
-idm_user_groups:
-  - name: "ug-satellite-administrators"
-    description: "Satellite Server Administrators"
-  - name: "ug-satellite-org-administrators"
-    description: "Satellite Default Org Administrators - Manager Role"
-  - name: "ug-satellite-site-administrators"
-    description: "Satellite Default Org Administrators - Manager Role for a Location"
-  - name: "ug-satellite-compliance-managers"
-    description: "Satellite Systems Compliance Managers - Full control compliance content"
-  - name: "ug-satellite-compliance-auditors"
-    description: "Satellite Systems Compliance Auditors - Read only control compliance content"
-  - name: "ug-satellite-operators"
-    description: "Satellite Server Operators - Full control on hosts and content hosts"
-  - name: "ug-satellite-content-managerss"
-    description: "Satellite Content Managers - manage all content"
-  - name: "ug-aap-administrators"
-    description: "Ansible Automation Platform Administrators"
-  - name: "ug-aap-auditors"
-    description: "Ansible Automation Platform Auditors"
-  - name: "ug-aap-operators"
-    description: "Ansible Automation Platform Server Operators"
-  - name: "ug-aap-project-managers"
-    description: "Ansible Automation Platform Project Managers"
-  - name: "ug-aap-template-managers"
-    description: "Ansible Automation Platform Template Managers"
-  - name: "ug-aap-users"
-    description: "Ansible Automation Platform Users - can run basic Templates and Workflows"
-  - name: "ug-aap-developers"
-    description: "Ansible Automation Platform Programmers - an AAP power user"
-  - name: "ug-prod-sysadmins"
-    description: "Production System Administrators"
-  - name: "ug-non-prod-sysadmins"
-    description: "Non-production System Administrators"
-  - name: "ug-web-server-administrators"
-    description: "Web Server Administrators"
+# Add entries to this section to create your own setup
+# idm_user_groups_user:
+# idm_users_user:
+# idm_group_users_user:
+# idm_group_groups_user:
 
-# The list of users
-idm_users:
+# This section creates a set of sample users and groups that
+# demonstrate the organization of components in IdM and how to
+# define your configuration using ansible
+
+# The list of rhisam example users
+idm_users_rhisam:
   - login: "poc-admin"
     first: "POC"
     last: "Admin"
@@ -107,61 +78,110 @@ idm_users:
     first: "Content"
     last: "Mgr"
 
-# The idm_users in a group
-idm_group_users:
-  - group: "ug-admins"
-    user:
+# The list of rhisam example groups
+# possible values:
+#  - name: The name of the group
+#    description: The description of the group
+#    state: present, absent, renamed
+#    external: Whether the group is an external (trusted domain) group or not
+#    gid: To override the automatic group assignment
+#    group_list: a list of groups that are to be included
+#    group_dict: a nested dictionary of group attributes that are to be included AND created
+#    membermanager_groups: a list of groups that already exist able to manage group membership
+#    membermanager_users: a list of users that already exist able to manage group membership
+#    posix: defaults to true, set to false to create a non-posix group
+#    rename: a new name for the group. must set state to renamed
+#    user_list: a list of **existing** users that you want to assigned to the group
+
+# Turn off no_log: for the user_groups role by setting this to true
+# This will not work until 2.17 or later as
+# "no_log: does not honour variable interpretation"
+# https://github.com/ansible/ansible/issues/83323
+# when this is fixed we will update the code to allow toggling
+# no_log
+
+# e.g.
+# no_log: "{{ not (main_logging or idm_user_groups_logging) }}"
+user_groups_logging: true
+
+idm_user_groups_rhisam:
+  - name: "ug-services"
+    description: "Service Accounts"
+  - name: "ug-admins"
+    description: "Environment Administrators"
+    user_list:
       - "admin"
       - "poc-admin"
       - "bofh"
-  - group: "ug-aap-developers"
-    user:
-      - "developer1"
-      - "developer2"
-      - "developer3"
-  - group: "ug-aap-administrators"
-    user:
+  - name: "ug-satellite-administrators"
+    description: "Satellite Server Administrators"
+    group_list:
+      - ug-admins
+    user_list:
+      - "admin"
       - "poc-admin"
-      - "bofh"
-  - group: "ug-aap-users"
-    user:
-      - "poc-admin"
-      - "bofh"
-      - "developer1"
-      - "developer2"
-      - "developer3"
-  - group: "ug-satellite-administrators"
-    user:
-      - "sat-admin"
-      - "poc-admin"
-  - group: "ug-satellite-org-administrators"
-    user:
+  - name: "ug-satellite-org-administrators"
+    description: "Satellite Default Org Administrators - Manager Role for an Organization"
+    user_list:
       - "sat-org-admin"
       - "poc-admin"
-  - group: "ug-satellite-site-administrators"
-    user:
-      - "site-admin"
+  - name: "ug-satellite-site-administrators"
+    description: "Satellite Default Site Administrators - Manager Role for a Location"
+    user_list:
+      - "sat-org-admin"
       - "poc-admin"
-  - group: "ug-satellite-compliance-managers"
-    user:
+  - name: "ug-satellite-compliance-managers"
+    description: "Satellite Systems Compliance Managers - Full control compliance content"
+    user_list:
       - "comply-mgr"
       - "poc-admin"
-  - group: "ug-satellite-compliance-auditors"
-    user:
+  - name: "ug-satellite-compliance-auditors"
+    description: "Satellite Systems Compliance Auditors - Read only control compliance content"
+    user_list:
       - "comply-aud"
       - "poc-admin"
-  - group: "ug-satellite-operators"
-    user:
+  - name: "ug-satellite-operators"
+    description: "Satellite Server Operators - Full control on hosts and content hosts"
+    user_list:
       - "pfy-operator"
       - "bofh"
-  - group: "ug-satellite-content-managers"
-    user:
+  - name: "ug-satellite-content-managers"
+    description: "Satellite Content Managers - manage all content"
+    user_list:
       - "content-mgr"
       - "poc-admin"
-
-# The idm_groups in a group
-idm_group_groups:
-  - group: "ug-satellite-administrators"
-    value: "ug-admins"
-  - group: "ug-aap-administrators"
-    value: "ug-admins"
+  - name: "ug-aap-administrators"
+    description: "Ansible Automation Platform Administrators"
+    group_list:
+      - ug-admins
+    user_list:
+      - "poc-admin"
+      - "bofh"
+  - name: "ug-aap-auditors"
+    description: "Ansible Automation Platform Auditors"
+  - name: "ug-aap-operators"
+    description: "Ansible Automation Platform Server Operators"
+  - name: "ug-aap-project-managers"
+    description: "Ansible Automation Platform Project Managers"
+  - name: "ug-aap-template-managers"
+    description: "Ansible Automation Platform Template Managers"
+  - name: "ug-aap-users"
+    description: "Ansible Automation Platform Users - can run basic Templates and Workflows"
+    user_list:
+      - "poc-admin"
+      - "bofh"
+      - "developer1"
+      - "developer2"
+      - "developer3"
+  - name: "ug-aap-developers"
+    description: "Ansible Automation Platform Programmers - an AAP power user"
+    user_list:
+      - "developer1"
+      - "developer2"
+      - "developer3"
+  - name: "ug-prod-sysadmins"
+    description: "Production System Administrators"
+  - name: "ug-non-prod-sysadmins"
+    description: "Non-production System Administrators"
+  - name: "ug-web-server-administrators"
+    description: "Web Server Administrators"
