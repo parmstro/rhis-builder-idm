@@ -1,0 +1,21 @@
+---
+- name: "Apply the ipaserver role"
+  ansible.builtin.include_role:
+    name: redhat.rhel_idm.ipaserver
+
+- name: "Ensure dns forward zones exist"
+  when: "dns_forward_zones is defined"
+  ansible.builtin.include_tasks: ensure_dns_forward_zone.yml
+  loop: "{{ dns_forward_zones }}"
+  loop_control:
+    loop_var: zone
+
+- name: "Ensure realm dns update permissions are configured"
+  when: "dns_update_zones is defined"
+  ansible.builtin.include_tasks: ensure_fp_realm_dns_update.yml
+  loop: "{{ dns_update_zones }}"
+  loop_control:
+    loop_var: zone
+
+- name: "Ensure DNS server is queryable on local network"
+  ansible.builtin.include_tasks: ensure_dns_queryable.yml
