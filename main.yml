@@ -18,13 +18,35 @@
       ansible.builtin.include_role:
         name: idm_primary
 
-    - name: "Apply role user_groups"
+    # set the base configurations for the deployment
+    - name: "Apply role idm_configuration"
       ansible.builtin.include_role:
-        name: user_groups
+        name: idm_configuration
+
+    # ensure your id ranges before you create users
+    - name: "Apply role idm_id_ranges"
+      ansible.builtin.include_role:
+        name: idm_id_ranges
+
+    # idp references must exist before you can
+    # apply to a user authentication scheme
+    - name: "Apply role idm_idp_reference"
+      ansible.builtin.include_role:
+        name: idm_idp_reference
 
     - name: "Apply role users"
       ansible.builtin.include_role:
         name: user_groups
+
+    - name: "Apply role user_groups"
+      ansible.builtin.include_role:
+        name: user_groups
+
+    # password policy is applied to groups
+    # group needs to exist of will policy creation/mod will fail
+    - name: "Apply role idm_password_policy"
+      ansible.builtin.include_role:
+        name: idm_password_policy
 
     - name: "Apply role host_groups"
       ansible.builtin.include_role:
