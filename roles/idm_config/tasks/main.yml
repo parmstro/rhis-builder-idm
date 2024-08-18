@@ -1,0 +1,32 @@
+---
+
+# set the global configs for the environment.
+# there is only one setting for rhisam and user configuration
+
+- name: "Configure the idm server global settings"
+  redhat.rhel_idm.ipaconfig:
+    ipaadmin_principal: "{{ ipa_admin_principal }}"
+    ipaadmin_password: "{{ ipa_admin_password }}"
+    add_sids: "{{ idm_config_add_sids | default(omit) }}"
+    ca_renewal_master_server: "{{ idm_config_ca_renewal_master_server | default(omit) }}"
+    configstring: "{{ idm_config_confstring_list | default(omit) }}"
+    defaultgroup: "{{ idm_config_defaultgroup | default(omit) }}"
+    defaultshell: "{{ idm_config_defaultshell | default(omit) }}"
+    emaildomain: "{{ idm_config_emaildomain | default(omit) }}"
+    enable_migration: "{{ idm_config_enable_migration | default(omit) }}"
+    enable_sid: "{{ idm_config_enable_sid | default(true) }}"
+    groupobjectclasses: "{{ idm_config_groupobjectclasses_list | default(omit) }}"
+    groupsearch: "{{ idm_config_groupsearch_list | default(omit) }}"
+    homedirectory: "{{ idm_config_homedirectory | default(omit) }}"
+    maxhostname: "{{ idm_config_maxhostname | default(omit) }}"
+    maxusername: "{{ idm_config_maxusername | default(omit) }}"
+    netbios_name: "{{ idm_config_netbios_name | default(omit) }}"
+    pac_type: "{{ idm_config_pac_type_list | default(omit) }}"
+    pwdexpnotify: "{{ idm_config_pwdexpnotify | default(omit) }}"
+    searchrecordslimit: "{{ idm_config_searchrecordslimit | default(omit) }}"
+    searchtimelimit: "{{ idm_config_searchtimelimit | default(omit) }}"
+    selinuxusermapdefault: "{{ idm_config_selinuxusermapdefault | default(omit) }}"
+    selinuxusermaporder: "{{ idm_config_selinuxusermaporder_list | default(omit) }}"
+    user_auth_type: "{{ idm_config_auth_type_list | default(omit) }}"
+    userobjectclasses: "{{ idm_config_userobjectclasses_list | default(omit) }}"
+    usersearch: "{{ idm_config_usersearch_list | default(omit) }}"
