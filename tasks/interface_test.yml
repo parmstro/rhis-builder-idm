@@ -1,0 +1,9 @@
+---
+
+- name: "Get the interface"
+  ansible.builtin.set_fact:
+    interface_name: "{{ ansible_interfaces | map('regex_replace', '^', 'ansible_') | map('extract', vars) | selectattr('ipv4', 'defined') | selectattr('ipv4.address', 'match', ansible_default_ipv4.address) | map(attribute='device') | first }}" # noqa yaml[line-length]
+
+- name: "Debug ipa_prime_interface"
+  ansible.builtin.debug:
+    var: interface_name
