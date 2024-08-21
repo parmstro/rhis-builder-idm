@@ -1,0 +1,29 @@
+---
+
+# Configure the sample and user groups
+
+- name: "Add the rhisam specified groups when defined"
+  when: idm_user_groups_rhisam is defined
+  ansible.builtin.include_tasks: "ensure_group.yml"
+  loop: "{{ idm_user_groups_rhisam }}"
+  loop_control:
+    loop_var: group
+  no_log: true
+  tags:
+    - tags_rhisam
+    - tags_authentication_config
+    - tags_idm_groups
+    - tags_idm_groups_rhisam
+
+- name: "Add the user specified groups when defined"
+  when: idm_user_groups_user is defined
+  ansible.builtin.include_tasks: "ensure_group.yml"
+  loop: "{{ idm_user_groups_user }}"
+  loop_control:
+    loop_var: group
+  no_log: true
+  tags:
+    - tags_user
+    - tags_authentication_config
+    - tags_idm_groups
+    - tags_idm_groups_user

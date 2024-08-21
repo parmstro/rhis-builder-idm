@@ -1,0 +1,29 @@
+---
+#
+
+- name: "Configure the idm users specified for rh-isam sample environment"
+  when: idm_users_rhisam is defined
+  ansible.builtin.include_tasks: "ensure_user.yml"
+  loop: "{{ idm_users_rhisam }}"
+  loop_control:
+    loop_var: user
+  no_log: true
+  tags:
+    - tags_rhisam
+    - tags_authentication_config
+    - tags_idm_users
+    - tags_idm_users_rhisam
+
+
+- name: "Configure the idm users specified for user defined environment"
+  when: idm_users_user is defined
+  ansible.builtin.include_tasks: "ensure_user.yml"
+  loop: "{{ idm_users_user }}"
+  loop_control:
+    loop_var: user
+  no_log: true
+  tags:
+    - tags_user
+    - tags_authentication_config
+    - tags_idm_users
+    - tags_idm_users_user

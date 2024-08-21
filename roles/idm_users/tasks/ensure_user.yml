@@ -1,0 +1,39 @@
+- name: "Ensure state for user {{ user.name }}"
+  redhat.rhel_idm.ipauser:
+    action: "{{ user.action | default(omit) }}"                     # defaults to acting on user
+    ipaadmin_principal: "{{ ipa_admin_principal }}"
+    ipaadmin_password: "{{ ipa_admin_password }}"
+    name: "{{ user.login }}"
+    first: "{{ user.first | default(omit) }}"                       # alias givenname
+    last: "{{ user.last | default(omit) }}"
+    displayname: "{{ user.displayname | default(omit) }}"
+    carlicense: "{{ user.carlicenses | default(omit) }}"
+    certificate: "{{ user.certificates | default(omit) }}"          # alias usercertificate
+    certmapdata: "{{ user.certmaps | default(omit) }}"              # This requires a dictionary of certificate mappings
+    city: "{{ user.city | default(omit) }}"
+    departmentnumber: "{{ user.departmentnumber | default(omit) }}"
+    email: "{{ user.emails | default(omit) }}"                      # This can be a list of email address strings
+    employeenumber: "{{ user.employeenumber | default(omit) }}"
+    employeetype: "{{ user.employeetype | default(omit) }}"
+    fax: "{{ user.fax_numbers | default(omit) }}"                   # alias facsimiletelephonenumber - a list
+    fullname: "{{ user.fullname | default(omit) }}"                 # alias cn
+    gecos: "{{ user.gecos | default(omit) }}"
+    gid: "{{ user.user_gid | default(omit) }}"                      # alias gidnumber == the private group gid or default group
+    homedir: "{{ user.home_dir | default(omit) }}"
+    idp: "{{ user.idp | default(omit) }}"                           # alias ipaidpconfiglink == this is the identity provider reference name
+    idp_user_id: "{{ user.idp_user_id | default(omit) }}"           # alias ipaidpsub  == the string that identifies the user to the user.idp
+    initials: "{{ user.initials | default(omit) }}"                 # middle initials - a string
+    manager: "{{ user.managers | default(omit) }}"                  # a list
+    noprivate: "{{ user.noprivate | default(omit) }}"               # don't create the users private group
+    orgunit: "{{ user.orgunit | default(omit) }}"                   # alias ou
+    pager: "{{ user.pager_numbers | default(omit) }}"
+    password: "{{ user.password | default(omit) }}"
+    passwordexpiration: "{{ user.password_expiration | default(omit) }}"
+    phone: "{{ user.phone_numbers | default(omit) }}"
+    postalcode: "{{ user.postalcode | default(omit) }}"
+    preferredlanguage: "{{ user.preferred_language | default(omit) }}"
+    principal: "{{ user.principal | default(omit) }}"
+    principalexpiration: "{{ user.principal_expiration | default(omit) }}"
+    title: "{{ user.title | default(omit) }}"
+    userstate: "{{ user.userstate | default(omit) }}"
+    state: "{{ user.state | default(omit) }}"
