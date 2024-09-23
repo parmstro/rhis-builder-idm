@@ -6,8 +6,8 @@
   redhat.rhel_idm.ipasudocmdgroup:
     ipaadmin_principal: "{{ ipa_admin_principal }}"
     ipaadmin_password: "{{ ipa_admin_password }}"
-    action: "{{ command_group.action | default(omit) }}"  # defaults to working on the command group vs. members
-    name: "{{ command_group.name }}"
-    description: "{{ command_group.description }}"
-    state: "{{ command_group.state | default(omit) }}"
-    sudocmd: "{{ command_group.commands }}"
+    action: "{{ sudo_command_group.action | default(omit) }}"  # defaults to working on the command group vs. members
+    name: "{{ sudo_command_group.name }}"
+    description: "{{ sudo_command_group.description }}"
+    state: "{{ sudo_command_group.state | default(omit) }}"
+    sudocmd: "{{ sudo_command_group.commands }}"

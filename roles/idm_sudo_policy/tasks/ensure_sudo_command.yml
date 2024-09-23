@@ -5,6 +5,6 @@
   redhat.rhel_idm.ipasudocmd:
     ipaadmin_principal: "{{ ipa_admin_principal }}"
     ipaadmin_password: "{{ ipa_admin_password }}"
-    name: "{{ command.name }}"
-    description: "{{ command.description }}"
-    state: "{{ command.state | default(omit) }}"
+    name: "{{ sudo_command.name }}"
+    description: "{{ sudo_command.description }}"
+    state: "{{ sudo_command.state | default(omit) }}"
