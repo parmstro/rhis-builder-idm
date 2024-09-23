@@ -2,27 +2,27 @@
 localhost
 
 [idm_primary]
-idm.example.ca
+idm.example.lan ansible_host=192.168.7.183
 
 [idm_replicas]
-idmr1.example.ca
-idmr2.example.ca
+idmr1.example.lan
+idmr2.example.lan
 
 [sat_primary]
-satellite.example.ca
+satellite.example.lan
 
 [sat_capsule]
-capsule1.example.ca
-capsule2.example.ca
+capsule1.example.lan
+capsule2.example.lan
 
 [aap_controller]
-controller1.example.ca
+controller1.example.lan
 
 [automation_hub]
-ah1.example.ca
+ah1.example.lan
 
 [container_servers]
-containerhost1.example.ca
-containerhost2.example.ca
+containerhost1.example.lan
+containerhost2.example.lan
 
 [aws_nodes]
