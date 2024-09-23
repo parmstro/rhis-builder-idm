@@ -8,7 +8,7 @@
     ipaadmin_principal: "{{ ipa_admin_principal }}"
     ipaadmin_password: "{{ ipa_admin_password }}"
     add_sids: "{{ idm_config_add_sids | default(omit) }}"
-    ca_renewal_master_server: "{{ idm_config_ca_renewal_master_server | default(omit) }}"
+    #ca_renewal_master_server: "{{ idm_config_ca_renewal_master_server | default(omit) }}"
     configstring: "{{ idm_config_confstring_list | default(omit) }}"
     defaultgroup: "{{ idm_config_defaultgroup | default(omit) }}"
     defaultshell: "{{ idm_config_defaultshell | default(omit) }}"
