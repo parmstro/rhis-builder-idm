@@ -1,13 +1,14 @@
 ---
 - name: "Run Role"
-  hosts: idm_primary
+  hosts: all
   become: true
   gather_facts: true
 
-  vars_files:
-    - "~/rhisbuilder_vault.yml"
-
   tasks:
+
+    - name: "Load the vault variables"
+      ansible.builtin.include_vars:
+        file: "{{ vault_path }}"
 
     - name: "Apply role {{ role_name }}"
       ansible.builtin.include_role:
