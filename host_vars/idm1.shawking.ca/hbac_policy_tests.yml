@@ -12,16 +12,16 @@
 #    enabled: boolean            # whether to include all enabled rules, optional, default is false
 #    disabled: boolean           # whether to include all disabled rules, optional, default is false
 
-hbac_policy_tests:
-  - user: "bofh"                          # required
-    host: "idm.example.ca"          # required
-    service: "sshd"                       # required
-    enabled: true                         # whether to include all enabled rules, optional, default is false
-    disabled: false                       # whether to include all disabled rules, optional, default is false
-  - user: "pfy-operator"
-    host: "idm.example.ca"
-    service: "sshd"
-    rules:
-      - "hbacr-allow-prod-sysadmins-all-prod"
-    enabled: false
-    disabled: false
+# hbac_policy_tests:
+#   - user: "bofh"                          # required
+#     host: "idm.shawking.ca"          # required
+#     service: "sshd"                       # required
+#     enabled: true                         # whether to include all enabled rules, optional, default is false
+#     disabled: false                       # whether to include all disabled rules, optional, default is false
+  # - user: "pfy-operator"
+  #   host: "idm.example.ca"
+  #   service: "sshd"
+  #   rules:
+  #     - "hbacr-allow-prod-sysadmins-all-prod"
+  #   enabled: false
+  #   disabled: false
