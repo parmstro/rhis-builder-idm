@@ -57,28 +57,28 @@
     - tags_sudo_command_groups_rhisam
 
 # Sudo Rules
-- name: "Ensure rhisam sudo rule states"
-  when: sudo_rules_rhisam is defined
-  ansible.builtin.include_tasks: "ensure_sudo_rule.yml"
-  loop: "{{ sudo_rules_rhisam }}"
-  loop_control:
-    loop_var: sudo_rule
-  no_log: true
-  tags:
-    - tags_rhisam
-    - tags_rhis_builder_idm
-    - tags_sudo_rules
-    - tags_sudo_rules_rhisam
+# - name: "Ensure rhisam sudo rule states"
+#   when: sudo_rules_rhisam is defined
+#   ansible.builtin.include_tasks: "ensure_sudo_rule.yml"
+#   loop: "{{ sudo_rules_rhisam }}"
+#   loop_control:
+#     loop_var: sudo_rule
+#   no_log: true
+#   tags:
+#     - tags_rhisam
+#     - tags_rhis_builder_idm
+#     - tags_sudo_rules
+#     - tags_sudo_rules_rhisam
 
-- name: "Ensure user sudo rule states"
-  when: sudo_rules_user is defined
-  ansible.builtin.include_tasks: "ensure_sudo_rule.yml"
-  loop: "{{ sudo_rules_user }}"
-  loop_control:
-    loop_var: sudo_rule
-  no_log: true
-  tags:
-    - tags_rhisam
-    - tags_rhis_builder_idm
-    - tags_sudo_rules
-    - tags_sudo_rules_rhisam
+# - name: "Ensure user sudo rule states"
+#   when: sudo_rules_user is defined
+#   ansible.builtin.include_tasks: "ensure_sudo_rule.yml"
+#   loop: "{{ sudo_rules_user }}"
+#   loop_control:
+#     loop_var: sudo_rule
+#   no_log: true
+#   tags:
+#     - tags_rhisam
+#     - tags_rhis_builder_idm
+#     - tags_sudo_rules
+#     - tags_sudo_rules_rhisam

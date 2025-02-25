@@ -31,7 +31,10 @@ ipa_crypto_policy: "DeFaULt"
 # before IdM DNS comes up in your network here
 # These are simply test values
 etc_hosts_list:
-  - ip: "192.168.140.13"
-    fqdn: "provisioner.example.ca"
-  - ip: "192.168.140.12"
-    fqdn: "satellite.example.ca"
+  # - ip: "192.168.140.13"
+  #   fqdn: "provisioner.example.ca"
+  - ip: "192.168.52.11"
+    fqdn: "sat1.shawking.ca"
+
+async_timeout: 14400
+async_delay: 15
