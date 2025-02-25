@@ -14,7 +14,11 @@
 
 hbac_policy_tests:
   - user: "bofh"                          # required
+<<<<<<< HEAD:host_vars/idm.example.ca/hbac_policy_tests.yml
     host: "idm.example.ca"          # required
+=======
+    host: "idm.example.ca"          # required
+>>>>>>> 062f4ba (ensure_hostname_fqdn):host_vars/idm1.shawking.ca/hbac_policy_tests.yml
     service: "sshd"                       # required
     enabled: true                         # whether to include all enabled rules, optional, default is false
     disabled: false                       # whether to include all disabled rules, optional, default is false

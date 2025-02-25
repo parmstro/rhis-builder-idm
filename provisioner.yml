@@ -25,6 +25,7 @@
     - name: "Ensure we can ssh"
       ansible.builtin.shell: "ssh localhost 'whoami'" # noqa command-instead-of-shell
       changed_when: ansible_user_id in result.stdout
+      when: ansible_distribution == "Windows"
       register: result
 
 
