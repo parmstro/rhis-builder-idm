@@ -8,8 +8,14 @@
   tasks:
 
     - name: "Load the vault variables"
+      when: vault_path is defined
       ansible.builtin.include_vars:
         file: "{{ vault_path }}"
+
+    - name: "Load the other variables"
+      when: vars_path is defined
+      ansible.builtin.include_vars:
+        file: "{{ vars_path }}"
 
     - name: "Run the role task {{ role_name / task_name }}"
       ansible.builtin.include_tasks: roles/{{ role_name }}/tasks/{{ task_name }}.yml
