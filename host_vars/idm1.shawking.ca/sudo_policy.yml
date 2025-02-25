@@ -59,7 +59,7 @@ sudo_rules_rhisam:
       - "scg-webserver-service-control"
 #    deny_commands:          # use this to list individual commands that you want to deny the use of
 #    deny_command_groups:    # use this to list the command groups that you want to deny the use of
-    runas_user_category: "all"
+    # runas_user_category: "all"
 #   runas_users:             # use this to list the individual users able to be impersonated
 #   runas_group_category: "all"  # impersonate any groups (default)
 #   runas_groups:            # the list of groups able to be impersonated using the sudo commands.

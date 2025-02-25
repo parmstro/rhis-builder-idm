@@ -3,70 +3,70 @@
 # This file defines the HBAC policy for both the rhisam installation and user installations
 
 # Many services are created by default see end of this file
-# idm_hbac_services_rhisam:
-#   - name: "tftp"
-#     description: "trivial file transfer protocol - example hbac service"
-#   - name: "bootp"
-#     description: "bootstrap protocol - example hbac service"
+idm_hbac_services_rhisam:
+  - name: "tftp"
+    description: "trivial file transfer protocol - example hbac service"
+  - name: "bootp"
+    description: "bootstrap protocol - example hbac service"
 
-# idm_hbac_service_groups_rhisam:
-#   - name: "hbacsg-boot-services"
-#     description: "Boot services used for installing software - example hbac service group"
-#     services:
-#       - "tftp"
-#       - "bootp"
-#   - name: "hbacsg-webadmin-hbac-services"
-#     description: "Access services required by web administrators"
-#     services:
-#       - "sshd"
-#       - "su"
-#       - "su-l"
+idm_hbac_service_groups_rhisam:
+  - name: "hbacsg-boot-services"
+    description: "Boot services used for installing software - example hbac service group"
+    services:
+      - "tftp"
+      - "bootp"
+  - name: "hbacsg-webadmin-hbac-services"
+    description: "Access services required by web administrators"
+    services:
+      - "sshd"
+      - "su"
+      - "su-l"
 
-# idm_hbac_rules_rhisam:
-#   - name: "hbacr-allow-prod-sysadmins-all-prod"
-#     description: "System Administrator All Access Pass"
-#     action: "hbacrule"
-#     state: "enabled"
-#     user_groups:
-#       - "ug-admins"      # aka REALM admins
-#       - "ug-prod-sysadmins"
-#     host_groups:
-#       - "hg-production"
-#     servicecategory: "all"
+idm_hbac_rules_rhisam:
+  - name: "hbacr-allow-prod-sysadmins-all-prod"
+    description: "System Administrator All Access Pass"
+    action: "hbacrule"
+    state: "enabled"
+    user_groups:
+      - "ug-admins"      # aka REALM admins
+      - "ug-prod-sysadmins"
+    host_groups:
+      - "hg-production"
+    servicecategory: "all"
 
-#   - name: "hbacr-allow-satellite-boot-services"
-#     description: "Allow boot services to Satellite servers"
-#     action: "hbacrule"
-#     state: "enabled"
-#     users:
-#       - "sat-admin"
-#     user_groups:
-#       - "ug-satellite-org-administrators"
-#       - "ug-satellite-operators"
-#     hosts:
-#       - "satellite.example.ca"
-#     host_groups:
-#       - "hg-satellite-capsule-servers"
-#     hbac_services:
-#       - "sshd"
-#     hbac_service_groups:
-#       - "hbacsg-boot-services"
+  - name: "hbacr-allow-satellite-boot-services"
+    description: "Allow boot services to Satellite servers"
+    action: "hbacrule"
+    state: "enabled"
+    users:
+      - "sat-admin"
+    user_groups:
+      - "ug-satellite-org-administrators"
+      - "ug-satellite-operators"
+    hosts:
+      - "satellite.example.ca"
+    host_groups:
+      - "hg-satellite-capsule-servers"
+    hbac_services:
+      - "sshd"
+    hbac_service_groups:
+      - "hbacsg-boot-services"
 
-#   - name: "hbacr-allow-webadmins-webservers-ssh"
-#     description: "Allow boot services to Satellite servers"
-#     action: "hbacrule"
-#     state: "enabled"
-#     users:
-#       - "poc-admin"
-#     user_groups:
-#       - "ug-web-server-administrators"
-#     hosts:
-#     host_groups:
-#       - "hg-web-servers"
-#     hbac_services:
-#       - "sshd"
-#     hbac_service_groups:
-#       - "hbacsg-webadmin-hbac-services"
+  - name: "hbacr-allow-webadmins-webservers-ssh"
+    description: "Allow boot services to Satellite servers"
+    action: "hbacrule"
+    state: "enabled"
+    users:
+      - "poc-admin"
+    user_groups:
+      - "ug-web-server-administrators"
+    hosts:
+    host_groups:
+      - "hg-web-servers"
+    hbac_services:
+      - "sshd"
+    hbac_service_groups:
+      - "hbacsg-webadmin-hbac-services"
 
 
 # Define your own policy here...

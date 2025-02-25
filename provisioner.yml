@@ -3,7 +3,7 @@
 
 - name: "Setup provisioner"
   hosts: provisioner
-  connection: local
+  # connection: local
   gather_facts: true
 
   tasks:
@@ -25,13 +25,14 @@
     - name: "Ensure we can ssh"
       ansible.builtin.shell: "ssh localhost 'whoami'" # noqa command-instead-of-shell
       changed_when: ansible_user_id in result.stdout
+      when: ansible_distribution == "Windows"
       register: result
 
 
 - name: "Setup root configuration"
   hosts: provisioner
   become: true
-  connection: local
+  # connection: local
   gather_facts: true
 
   tasks:
@@ -47,17 +48,17 @@
           - pyvmomi
           - pyvim
 
-    - name: "Pull govc from github releases"
-      ansible.builtin.get_url:
-        url: "https://github.com/vmware/govmomi/releases/latest/download/govc_Linux_x86_64.tar.gz"
-        dest: /root/govc_Linux_x86_64.tar.gz
-        mode: '0700'
+    # - name: "Pull govc from github releases"
+    #   ansible.builtin.get_url:
+    #     url: "https://github.com/vmware/govmomi/releases/latest/download/govc_Linux_x86_64.tar.gz"
+    #     dest: /root/govc_Linux_x86_64.tar.gz
+    #     mode: '0700'
 
-    - name: "Unarchive the file"
-      ansible.builtin.unarchive:
-        src: /root/govc_Linux_x86_64.tar.gz
-        dest: /usr/bin
-        remote_src: true       # because we are not root
+    # - name: "Unarchive the file"
+    #   ansible.builtin.unarchive:
+    #     src: /root/govc_Linux_x86_64.tar.gz
+    #     dest: /usr/bin
+    #     remote_src: true       # because we are not root
 
     - name: "Ensure that provisioner can resolve itself"
       ansible.builtin.lineinfile:

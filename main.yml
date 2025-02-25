@@ -21,12 +21,13 @@
     # set the base configurations for the deployment
     - name: "Apply role idm_configuration"
       ansible.builtin.include_role:
-        name: idm_configuration
+        name: idm_config
 
     # ensure your id ranges before you create users
-    - name: "Apply role idm_id_ranges"
-      ansible.builtin.include_role:
-        name: idm_id_ranges
+    # TODO - THIS ROLE DOES NOT EXIST
+    # - name: "Apply role idm_id_ranges"
+    #   ansible.builtin.include_role:
+    #     name: idm_id_ranges
 
     # idp references must exist before you can
     # apply to a user authentication scheme
@@ -36,11 +37,11 @@
 
     - name: "Apply role users"
       ansible.builtin.include_role:
-        name: user_groups
-
+        name: idm_users
+        
     - name: "Apply role user_groups"
       ansible.builtin.include_role:
-        name: user_groups
+        name: idm_user_groups
 
     # password policy is applied to groups
     # group needs to exist of will policy creation/mod will fail
@@ -50,22 +51,22 @@
 
     - name: "Apply role host_groups"
       ansible.builtin.include_role:
-        name: host_groups
+        name: idm_host_groups
 
     # Add the hosts do not support ipa_client
     # Add hosts that *do* support ipa_client
     - name: "Apply role hosts"
       ansible.builtin.include_role:
-        name: hosts
+        name: idm_hosts
 
     - name: "Apply hbac policy"
       ansible.builtin.include_role:
-        name: hbac_policy
+        name: idm_hbac_policy
 
     - name: "Apply sudo policy"
       ansible.builtin.include_role:
-        name: sudo_policy
+        name: idm_sudo_policy
 
-    - name: "Apply dns setup"
-      ansible.builtin.include_role:
-        name: dns_setup
+    # - name: "Apply dns setup"
+    #   ansible.builtin.include_role:
+    #     name: dns_setup
