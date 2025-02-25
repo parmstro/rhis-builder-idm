@@ -34,13 +34,13 @@
       ansible.builtin.include_role:
         name: idm_idp_reference
 
-    - name: "Apply role users"
+    - name: "Apply role idm_users"
       ansible.builtin.include_role:
-        name: user_groups
+        name: idm_users
 
-    - name: "Apply role user_groups"
+    - name: "Apply role idm_user_groups"
       ansible.builtin.include_role:
-        name: user_groups
+        name: idm_user_groups
 
     # password policy is applied to groups
     # group needs to exist of will policy creation/mod will fail
@@ -48,24 +48,24 @@
       ansible.builtin.include_role:
         name: idm_password_policy
 
-    - name: "Apply role host_groups"
+    - name: "Apply role idm_host_groups"
       ansible.builtin.include_role:
-        name: host_groups
+        name: idm_host_groups
 
     # Add the hosts do not support ipa_client
     # Add hosts that *do* support ipa_client
-    - name: "Apply role hosts"
+    - name: "Apply role idm_hosts"
       ansible.builtin.include_role:
-        name: hosts
+        name: idm_hosts
 
-    - name: "Apply hbac policy"
+    - name: "Apply role idm_hbac policy"
       ansible.builtin.include_role:
-        name: hbac_policy
+        name: idm_hbac_policy
 
-    - name: "Apply sudo policy"
+    - name: "Apply role idm_sudo policy"
       ansible.builtin.include_role:
-        name: sudo_policy
+        name: idm_sudo_policy
 
-    - name: "Apply dns setup"
+    - name: "Apply role idm_dns setup"
       ansible.builtin.include_role:
-        name: dns_setup
+        name: idm_dns_setup
