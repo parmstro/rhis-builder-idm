@@ -1,0 +1,16 @@
+---
+
+# Ensure hosts and hostgroups are absent in databases hostgroup
+- name: "Ensure the idm host group {{ idm_host_group.name }}"
+  redhat.rhel_idm.ipahostgroup:
+    ipaadmin_principal: "{{ ipa_admin_principal }}"
+    ipaadmin_password: "{{ ipa_admin_password }}"
+    name: "{{ ipa_host_group.name }}"
+    description: "{{ ipa_host_group.description | default(omit) }}"
+    host: "{{ ipa_host_group.hosts | default(omit) }}"
+    hostgroup: "{{ ipa_host_group.hostgroups | default(omit) }}"
+    membermanager_user: "{{ ipa_host_group.membermanager_users | default(omit) }}"
+    membermanager_group: "{{ ipa_host_group.membermanager_groups | default(omit) }}"
+    action: "{{ ipa_host_group.action | default(omit) }}"
+    rename: "{{ ipa_host_group.new_name | default(omit) }}"
+    state: "{{ ipa_host_group.state | default(omit) }}"

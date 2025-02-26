@@ -20,3 +20,14 @@ idm_host_groups:
     description: "Ansible Automation Platform Servers"
   - name: "hg-container-hosts"
     description: "Container Hosts for running standalone containers e.g. tang, discovery, etc.."
+
+# Available parameters for list members
+#   name: the name of the host group (required)
+#   description: the discription of the host group
+#   host: the list of hosts in the host group
+#   hostgroup: the list of other host groups in this host group
+#   membermanager_user: the list of users that are able to manage this host group
+#   membermanager_group: the list of group that are able to manage this host group
+#   action: 'member' or 'hostgroup' - which level to have the module to work on
+#   newname: the new name that you want to change the existing group to
+#   state: 'present', 'absent', 'renamed'
