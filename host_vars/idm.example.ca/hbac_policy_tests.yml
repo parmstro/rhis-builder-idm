@@ -1,6 +1,7 @@
 ---
 
 # There is no module to implement this. We will do it through the API using the URI object
+# TODO: implement module in upstream freeipa-ansible-modules
 
 # hbac_policy_tests:
 #  - user: string                # required
@@ -12,9 +13,9 @@
 #    enabled: boolean            # whether to include all enabled rules, optional, default is false
 #    disabled: boolean           # whether to include all disabled rules, optional, default is false
 
-hbac_policy_tests:
+idm_hbac_policy_tests:
   - user: "bofh"                          # required
-    host: "idm.example.ca"          # required
+    host: "idm.example.ca"                # required
     service: "sshd"                       # required
     enabled: true                         # whether to include all enabled rules, optional, default is false
     disabled: false                       # whether to include all disabled rules, optional, default is false

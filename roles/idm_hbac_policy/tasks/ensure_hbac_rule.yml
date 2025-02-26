@@ -1,8 +1,9 @@
 ---
 
-- name: "Ensuring the state of rule {{ hbac_rule.name }}"
+- name: "Ensuring the state of rule {{ idm_hbac_rule.name }}"
   redhat.rhel_idm.ipahbacrule:
     ipaadmin_principal: "{{ ipa_admin_principal }}"
     ipaadmin_password: "{{ ipa_admin_password }}"
-    name: "{{ hbac_rule.name }}"
-    description: "{{ hbac_rule.description }}"
+    name: "{{ idm_hbac_rule.name }}"
+    description: "{{ idm_hbac_rule.description }}"
+    state: "{{ idm_hbac_rule.state | default(omit) }}"
