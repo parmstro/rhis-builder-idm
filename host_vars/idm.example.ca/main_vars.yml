@@ -8,4 +8,4 @@
 # when this is fixed we will update the code to allow toggling
 # no_log
 
-main_logging: false
+rhis_builder_idm_logging: false
