@@ -1,0 +1,9 @@
+---
+
+- name: "Ensuring the state of rule {{ idm_hbac_service.name }}"
+  redhat.rhel_idm.ipahbacsvc:
+    ipaadmin_principal: "{{ ipa_admin_principal }}"
+    ipaadmin_password: "{{ ipa_admin_password }}"
+    name: "{{ idm_hbac_service.name }}"
+    description: "{{ idm_hbac_service.description }}"
+    state: "{{ idm_hbac_service.state | default(omit) }}"

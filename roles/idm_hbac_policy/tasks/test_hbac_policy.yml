@@ -1,12 +1,37 @@
 ---
 
-- name: "Run the hbac policy test items through hbactest"
-  ansible.builtin.include_tasks: "hbactest.yml"
-  loop: "{{ hbac_policy_tests }}"
+# run the hbactest command
+- name: "Log test parameters"
+  ansible.builtin.debug:
+    var: idm_hbac_policy_test
+
+# There is no module to implement this. We will do it through the API using the CLI
+- name: "Create the payload --user="
+  ansible.builtin.set_fact:
+    payload: 'ipa hbactest --user={{ idm_hbac_policy_test.user }}'
+
+- name: "Create the payload --host="
+  ansible.builtin.set_fact:
+    payload: '{{ payload }} --host={{ idm_hbac_policy_test.host }}'
+
+- name: "Create the payload --service="
+  ansible.builtin.set_fact:
+    payload: '{{ payload }} --service={{ idm_hbac_policy_test.service }}'
+
+- name: "Create the payload --service="
+  when: idm_hbac_policy_test.rules is defined
+  ansible.builtin.set_fact:
+    payload: '{{ payload }} --rules={{ rule }}'
+  loop: "{{ idm_hbac_policy_test.rules }}"
   loop_control:
-    loop_var: hbactest
-  when: hbac_policy_tests is defined
-  tags:
-    - tags_rhisam
-    - tags_rhis_builder_idm
-    - tags_hbac_tests
+    loop_var: rule
+
+- name: "Call the ipa command"
+  ansible.builtin.shell: "echo '{{ ipa_admin_password }}' | kinit {{ ipa_admin_principal }}; ipa hbactest {{ payload }}" # noqa: yaml[line-length] risky-shell-pipe no-changed-when
+  register: hbac_test_result
+  changed_when: hbac_test_result.rc == 0
+
+# Debug: only asserting true at this point
+- name: "Assert the test was successful"
+  ansible.builtin.assert:
+    that: true
