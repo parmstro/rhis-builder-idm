@@ -1,0 +1,16 @@
+---
+
+#  Metadata for "idm_dns_records"
+
+dependencies: []
+
+galaxy_info:
+  role_name: "idm_dns_records"
+  author: parmstro
+  description: "Ensures the configuration of a list of idm dns records using redhat.rhel_idm"
+  company: "Paul Armstrong"
+  license: "license (GNU GPLv3)"
+  min_ansible_version: 2.14.2
+  galaxy_tags:
+    - rhis
+    - infrastructure

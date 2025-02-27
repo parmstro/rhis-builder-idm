@@ -1,9 +1,0 @@
----
-
-# TODO: Perform IdM DNS configuration
-
-# This will handle
-#  - dns zones (forward and reverse) and entries
-#  - dns forwarder configuration
-#  - dns server configuration
-#  - dns global configuration

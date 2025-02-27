@@ -1,0 +1,15 @@
+---
+
+# ensure the dns forward zone configurations
+
+- name: "Configure the dns forward zones"
+  when: idm_dns_forward_zones is defined
+  ansible.builtin.include_tasks: "ensure_dns_foreward_zone.yml"
+  loop: "{{ idm_dns_forward_zones }}"
+  loop_control:
+    loop_var: idm_dns_forward_zone
+  no_log: true
+  tags:
+    - tags_rhisam
+    - tags_idm_dns_configuration
+    - tags_idm_dns_forward_zones

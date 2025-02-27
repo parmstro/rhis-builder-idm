@@ -1,0 +1,14 @@
+---
+
+# ensure the configuration of a list of idm dns records
+
+- name: "Configure the idm_dns_records"
+  when: idm_dns_records  is defined
+  ansible.builtin.include_tasks: "ensure_idm_dns_record.yml"
+  loop: "{{ idm_dns_records }}"
+  loop_control:
+    loop_var: idm_dns_record
+  no_log: true
+  tags:
+    - tags_rhisam
+    - tags_idm_dns_records

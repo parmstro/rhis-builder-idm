@@ -1,0 +1,16 @@
+---
+
+#  Metadata for "idm_dns_zones"
+
+dependencies: []
+
+galaxy_info:
+  role_name: "idm_dns_zones"
+  author: parmstro
+  description: "ensures the configuration of a list of idm dns zones using redhat.rhel_idm"
+  company: "Paul Armstrong"
+  license: "license (GNU GPLv3)"
+  min_ansible_version: 2.14.2
+  galaxy_tags:
+    - rhis
+    - infrastructure

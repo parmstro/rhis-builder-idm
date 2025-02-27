@@ -1,0 +1,20 @@
+---
+
+# Manage the IdM DNS global configuration.
+# This does not have a collection, there is only ever one global configuration
+# for an IdM Realm
+
+- name: "Configure the idm server global DNS configuration"
+  when: idm_dns_global_configuration is defined
+  redhat.rhel_idm.ipadnsconfig:
+    ipaadmin_principal: "{{ ipa_admin_principal }}"
+    ipaadmin_password: "{{ ipa_admin_password }}"
+    forwarders: "{{ idm_dns_global_configuration.forwarders | default(omit) }}"
+    forward_policy: "{{ idm_dns_global_configuration.forward_policy | default(omit) }}"
+    allow_sync_ptr: "{{ idm_dns_global_configuration.allow_sync_ptr | default(omit) }}"
+    action: "{{ idm_dns_global_configuration.action | default(omit) }}"
+    state: "{{ idm_dns_global_configuration.state | default(omit) }}"
+  tags:
+    - tags_rhisam
+    - tags_idm_dns_configuration
+    - tags_idm_dns_global_configuration

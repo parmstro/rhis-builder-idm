@@ -1,0 +1,14 @@
+---
+
+# ensure the configuration of a list of idm_dns_zones
+
+- name: "Configure the idm_dns_zones"
+  when: idm_dns_zones  is defined
+  ansible.builtin.include_tasks: "ensure_idm_dns_zone.yml"
+  loop: "{{ idm_dns_zones }}"
+  loop_control:
+    loop_var: idm_dns_zone
+  no_log: true
+  tags:
+    - tags_rhisam
+    - tags_idm_dns_zones

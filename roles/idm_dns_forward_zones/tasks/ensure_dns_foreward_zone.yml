@@ -1,0 +1,15 @@
+---
+
+# Configure the idm_dns_forward_zone
+
+- name: "Ensure state for dns forward zone {{ idm_dns_forward_zone.name }}"
+  redhat.rhel_idm.ipadnsforwardzone:
+    ipaadmin_principal: "{{ ipa_admin_principal }}"
+    ipaadmin_password: "{{ ipa_admin_password }}"
+    name: "{{ idm_dns_forward_zone.name }}"                       # required
+    action: "{{ idm_dns_forward_zone.action | default(omit) }}"
+    forwarders: "{{ idm_dns_forward_zone.forewarders | default(omit) }}"         # a list of forwarders - ip_address is required
+    forwardpolicy: "{{ idm_dns_forward_zone.forward_policy | default(omit) }}"
+    permission: "{{ idm_dns_forward_zone.permission | default(omit) }}"
+    skip_overlap_check: "{{ idm_dns_forward_zone.skip_overlap_check | default(omit) }}"
+    state: "{{ idm_dns_forward_zone.state | default(omit) }}"

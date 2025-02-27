@@ -1,0 +1,30 @@
+---
+
+# ensure the state of the idm dns record
+# you typically only need this for none IdM registered systems
+# or for other custom record types you want to add to IdM DNS e.g. a Foreman/Satellite SRV record
+
+# only a sub-set of record types are currently supported here
+# A, AAAA, PTR, SRV, TXT
+#
+
+- name: "Ensure the state of the idm dns record {{ idm_dns_record.name }}"
+  redhat.rhel_idm.ipadnsrecord:
+    ipaadmin_principal: "{{ ipa_admin_principal }}"
+    ipaadmin_password: "{{ ipa_admin_password }}"
+    zone_name: "{{ idm_dns_record.zone_name }}"
+    name: "{{ idm_dns_record.name }}"
+    record_type: "{{ idm_dns_record.record_type }}"
+    state: "{{ idm_dns_record.state | default(omit) }}"                     # "present", "absent", "disabled"
+    create_reverse: "{{ idm_dns_record.create_reverse | default(omit) }}"   # supports both A and AAAA
+    ip_address: "{{ idm_dns_record.ip_address | default(omit) }}"           # supports both A and AAAA
+    cname_hostname: "{{ idm_dns_record.cname_hostname | default(omit) }}"
+    del_all: "{{ idm_dns_record.del_all | default(false) }}"
+    ptr_hostname: "{{ idm_dns_record.ptr_hostname | default(omit) }}"
+    record_ttl: "{{ idm_dns_record.record_ttl | default(omit) }}"
+    record_value: "{{ idm_dns_record.record_value | default(omit) }}"
+    srv_port: "{{ idm_dns_record.srv_port | default(omit) }}"
+    srv_priority: "{{ idm_dns_record.srv_priority | default(omit) }}"
+    srv_target: "{{ idm_dns_record.srv_target | default(omit) }}"
+    srv_weight: "{{ idm_dns_record.srv_weight | default(omit) }}"
+    txt_data: "{{ idm_dns_record.txt_data | default(omit) }}"
