@@ -1,0 +1,40 @@
+---
+
+# Typically used for hosts that need an entry and DNS
+# but do not have an IdM client installed
+
+idm_hosts:
+  - name: "device1.example.ca"
+    action: "host"
+    auth_ind: "password"
+    certificate_list:
+      - "fakecert/y9xQxcWuwKfJl329Ce/L8wV8aPPftZlTBS5Zt/" # list of base64 encoded certs
+    description: "Some random lab host"
+    force: false  # force the creation of the host
+    ipa_address: 192.168.252.249
+    locality: "Hespeler"
+    location: "HockeyTown"
+    mac_address: "00:50:56:ff:ff:ff"
+    os: "tortuga"
+    platform: "hardwareplatform"
+    reverse: true
+    sshpubkey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDEBaKlt31UIbvorZkHe0sWiFhuVnRjqYAnamu8ZMRjm2ZSME7TcteDyGgJfawjTgz1jSiKmicZjozFKUpYDmeM4gINn+enOHokwGPMQXkCyUKhH7HmTeDSwnvpqqOF1CTxSY+os0cF8xO8N3uOMGAAKc4v6xlLIGbhtTE23z87V/wG23fBt+h1OCaXC7G9TYy6liQTWxtD6lbUUM/rWtY7IVwb4uxO2RwaH0dnJyFxdreDnbFjaIXxkNYXCDVsKs0oj55vk2PisLwPi5nFhPd0h37Y6XvbVxqK5M7MJSkaYbpSpHLxmEHtlV5/z3Nply4/v0MO1tia9m8XLTO/quW9/y5PbZPWBPHIoy6mwa/najz4hmF5cRepBV9/fA0ygOKkOSyeaN7btfT17sevPt4jkUx5JzcGP/FutF1qPuG1fQFsT2JIzfwxQ4DET8RCJlsfnjMY0NduZjqFkYSd0hMdf8iKXLm+ySPX18mx0z8wz6U1lRLK7SXvVexFj0aBZaU=" # noqa yaml[line-length]
+    update_dns: true
+    state: present
+  - name: "device2.example.ca"
+    action: "host"
+    auth_ind: "password"
+    certificate_list:
+      - "fakecert2/y9xQxcWuwKfJl329Ce/L8wV8aPPftZlTBS5Zt/" # list of base64 encoded certs
+    description: "Some other random lab host"
+    force: false  # force the creation of the host
+    ipa_address: 192.168.252.248
+    locality: "Hespeler"
+    location: "HockeyTown"
+    mac_address: "00:50:56:ff:ff:fe"
+    os: "yokto"
+    platform: "hardwareplatform"
+    reverse: true
+    sshpubkey: "ssh-rsa BBBBB3NzaC1yc2EAAAADAQABAAABgQDEBaKlt31UIbvorZkHe0sWiFhuVnRjqYAnamu8ZMRjm2ZSME7TcteDyGgJfawjTgz1jSiKmicZjozFKUpYDmeM4gINn+enOHokwGPMQXkCyUKhH7HmTeDSwnvpqqOF1CTxSY+os0cF8xO8N3uOMGAAKc4v6xlLIGbhtTE23z87V/wG23fBt+h1OCaXC7G9TYy6liQTWxtD6lbUUM/rWtY7IVwb4uxO2RwaH0dnJyFxdreDnbFjaIXxkNYXCDVsKs0oj55vk2PisLwPi5nFhPd0h37Y6XvbVxqK5M7MJSkaYbpSpHLxmEHtlV5/z3Nply4/v0MO1tia9m8XLTO/quW9/y5PbZPWBPHIoy6mwa/najz4hmF5cRepBV9/fA0ygOKkOSyeaN7btfT17sevPt4jkUx5JzcGP/FutF1qPuG1fQFsT2JIzfwxQ4DET8RCJlsfnjMY0NduZjqFkYSd0hMdf8iKXLm+ySPX18mx0z8wz6U1lRLK7SXvVexFj0aBZaU=" # noqa yaml[line-length]
+    update_dns: true
+    state: present
