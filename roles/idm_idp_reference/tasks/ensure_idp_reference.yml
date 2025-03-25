@@ -2,7 +2,7 @@
 
 # Add the idp reference
 
-- name: "Ensure the idp reference state"
+- name: "Ensure the idp reference state for - {{ idp_reference.name }}"
   redhat.rhel_idm.ipaidp:
     ipaadmin_principal: "{{ ipa_admin_principal }}"                          # required
     ipaadmin_password: "{{ ipa_admin_password }}"                            # required

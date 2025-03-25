@@ -20,3 +20,5 @@ idm_host_groups:
     description: "Ansible Automation Platform Servers"
   - name: "hg-container-hosts"
     description: "Container Hosts for running standalone containers e.g. tang, discovery, etc.."
+  - name: "hg-webservers"
+    description: "Web Servers"

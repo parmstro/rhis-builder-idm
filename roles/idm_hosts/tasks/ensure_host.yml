@@ -3,7 +3,7 @@
 # used to add hosts to idm that would not otherwise be registered.
 # e.g. to create a service for generating a certificate or similar
 
-- name: "Ensure the idm host configuration"
+- name: "Ensure the idm host configuration for {{ idm_host.fqdn_list[0] }}"
   redhat.rhel_idm.ipahost:
     ipaadmin_principal: "{{ ipa_admin_principal }}"
     ipaadmin_password: "{{ ipa_admin_password }}"

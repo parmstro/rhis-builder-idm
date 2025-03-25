@@ -26,7 +26,7 @@
   loop_control:
     loop_var: rule
 
-- name: "Call the ipa command"
+- name: "Call the ipa command - hbac policy test for user - {{ idm_hbac_policy_test.user }}"
   ansible.builtin.shell: "echo '{{ ipa_admin_password }}' | kinit {{ ipa_admin_principal }}; ipa hbactest {{ payload }}" # noqa: yaml[line-length] risky-shell-pipe no-changed-when
   register: hbac_test_result
   changed_when: hbac_test_result.rc == 0

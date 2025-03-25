@@ -1,6 +1,6 @@
 ---
 
-- name: "Ensure the idm host group configuration"
+- name: "Ensure the idm host group configuration for - {{ idm_host_group.name }}"
   redhat.rhel_idm.ipahostgroup:
     ipaadmin_principal: "{{ ipa_admin_principal }}"
     ipaadmin_password: "{{ ipa_admin_password }}"

@@ -4,7 +4,7 @@
 # switches, routers, etc..
 # Or service records
 
-- name: "Ensure dns record state"
+- name: "Ensure dns record state for - {{ idm_dns_record.name }}"
   redhat.rhel_idm.ipadnsrecord:
     ipaadmin_principal: "{{ ipa_admin_principal }}"                          # required
     ipaadmin_password: "{{ ipa_admin_password }}"                            # required

@@ -2,12 +2,12 @@
 # you can combine action and state to add or delete member commands from the command group.
 
 # ensure the state of a sudo command group.
-- name: "Ensure the state of a sudo command group."
+- name: "Ensure the state of a sudo command group - {{ idm_sudo_command_group.name }}"
   redhat.rhel_idm.ipasudocmdgroup:
     ipaadmin_principal: "{{ ipa_admin_principal }}"
     ipaadmin_password: "{{ ipa_admin_password }}"
-    action: "{{ command_group.action | default(omit) }}"  # defaults to working on the command group vs. members
-    name: "{{ command_group.name }}"
-    description: "{{ command_group.description }}"
-    state: "{{ command_group.state | default(omit) }}"
-    sudocmd: "{{ command_group.commands }}"
+    action: "{{ idm_sudo_command_group.action | default(omit) }}"  # defaults to working on the command group vs. members
+    name: "{{ idm_sudo_command_group.name }}"
+    description: "{{ idm_sudo_command_group.description }}"
+    state: "{{ idm_sudo_command_group.state | default(omit) }}"
+    sudocmd: "{{ idm_sudo_command_group.commands }}"

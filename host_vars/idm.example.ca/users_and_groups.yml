@@ -12,7 +12,7 @@
 # define your configuration using ansible
 
 # The list of rhisam example users
-idm_users_rhisam:
+idm_users:
   - login: "poc-admin"
     first: "POC"
     last: "Admin"
@@ -104,7 +104,7 @@ idm_users_rhisam:
 # no_log: "{{ not (main_logging or idm_user_groups_logging) }}"
 user_groups_logging: true
 
-idm_user_groups_rhisam:
+idm_user_groups:
   - name: "ug-services"
     description: "Service Accounts"
   - name: "ug-admins"

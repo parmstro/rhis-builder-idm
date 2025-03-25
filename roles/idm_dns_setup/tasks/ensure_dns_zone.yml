@@ -2,7 +2,7 @@
 
 # Ensure the DNS Zone configuration
 
-- name: "Ensure the DNS Zone configuration"
+- name: "Ensure the DNS Zone configuration for - {{ idm_dns_zone.name }}"
   redhat.rhel_idm.ipadnszone:
     ipaadmin_principal: "{{ ipa_admin_principal }}"                          # required
     ipaadmin_password: "{{ ipa_admin_password }}"                            # required

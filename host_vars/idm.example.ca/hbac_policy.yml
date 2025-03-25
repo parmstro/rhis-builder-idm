@@ -26,7 +26,7 @@ idm_hbac_rules:
   - name: "hbacr-allow-prod-sysadmins-all-prod"
     description: "System Administrator All Access Pass"
     action: "hbacrule"
-    state: "enabled"
+    state: "present"
     user_groups:
       - "ug-admins"      # aka REALM admins
       - "ug-prod-sysadmins"
@@ -37,7 +37,7 @@ idm_hbac_rules:
   - name: "hbacr-allow-satellite-boot-services"
     description: "Allow boot services to Satellite servers"
     action: "hbacrule"
-    state: "enabled"
+    state: "present"
     users:
       - "sat-admin"
     user_groups:
@@ -55,7 +55,7 @@ idm_hbac_rules:
   - name: "hbacr-allow-webadmins-webservers-ssh"
     description: "Allow boot services to Satellite servers"
     action: "hbacrule"
-    state: "enabled"
+    state: "present"
     users:
       - "poc-admin"
     user_groups:

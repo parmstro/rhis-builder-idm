@@ -7,8 +7,8 @@
   ansible.builtin.include_tasks: "ensure_group.yml"
   loop: "{{ idm_user_groups }}"
   loop_control:
-    loop_var: idm_group
+    loop_var: idm_user_group
   no_log: true
   tags:
     - tags_rhisam
-    - tags_idm_groups
+    - tags_idm_user_groups

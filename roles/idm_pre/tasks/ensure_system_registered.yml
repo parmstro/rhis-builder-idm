@@ -6,8 +6,8 @@
     rhc_auth:
       activation_keys:
         keys:
-          - "{{ activation_key_vault }}"
-    rhc_organization: "{{ org_number_vault }}"
+          - "{{ cdn_activation_key_vault }}"
+    rhc_organization: "{{ cdn_organization_vault }}"
     rhc_insights:
       state: "{{ rhc_insights_state }}"
       autoupdate: "{{ rhc_enable_auto_update }}"

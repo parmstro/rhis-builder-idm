@@ -2,7 +2,7 @@
 
 # Ensure Automount configuration
 
-- name: "Ensure the automount location"
+- name: "Ensure the automount location - {{ idm_automount_location.name }}"
   redhat.rhel_idm.ipaautomountlocation:
     ipaadmin_principal: "{{ ipa_admin_principal }}"                          # required
     ipaadmin_password: "{{ ipa_admin_password }}"                            # required

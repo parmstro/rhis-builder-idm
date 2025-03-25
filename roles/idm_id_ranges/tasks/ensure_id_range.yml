@@ -1,6 +1,6 @@
 ---
 
-- name: "Ensure the idm id range configuration"
+- name: "Ensure the idm id range configuration for - {{ idm_id_range.name_list[0] }}"
   redhat.rhel_idm.ipaidrange:
     ipaadmin_principal: "{{ ipa_admin_principal }}"
     ipaadmin_password: "{{ ipa_admin_password }}"
