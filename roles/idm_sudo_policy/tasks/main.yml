@@ -3,82 +3,37 @@
 # ensure the defined sudo policy configuration - Sudo Commmands, Sudo Command Groups, Sudo Rules
 
 # Sudo Commands
-- name: "Ensure rhisam sudo command states"
-  when: sudo_commands_rhisam is defined
+- name: "Ensure sudo command states"
+  when: idm_sudo_commands is defined
   ansible.builtin.include_tasks: "ensure_sudo_command.yml"
-  loop: "{{ sudo_commands_rhisam }}"
+  loop: "{{ idm_sudo_commands }}"
   loop_control:
-    loop_var: sudo_command
+    loop_var: idm_sudo_command
   no_log: true
   tags:
     - tags_rhisam
-    - tags_rhis_builder_idm
     - tags_sudo_commands
-    - tags_sudo_commands_rhisam
-
-- name: "Ensure user sudo command states"
-  when: sudo_commands_user is defined
-  ansible.builtin.include_tasks: "ensure_sudo_command.yml"
-  loop: "{{ sudo_commands_user }}"
-  loop_control:
-    loop_var: sudo_command
-  no_log: true
-  tags:
-    - tags_rhisam
-    - tags_rhis_builder_idm
-    - tags_sudo_commands
-    - tags_sudo_commands_rhisam
 
 # Sudo Command Groups
-- name: "Ensure rhisam sudo command_group states"
-  when: sudo_command_groups_rhisam is defined
+- name: "Ensure sudo command_group states"
+  when: idm_sudo_command_groups is defined
   ansible.builtin.include_tasks: "ensure_sudo_command_group.yml"
-  loop: "{{ sudo_command_groups_rhisam }}"
+  loop: "{{ idm_sudo_command_groups }}"
   loop_control:
-    loop_var: sudo_command_group
+    loop_var: idm_sudo_command_group
   no_log: true
   tags:
     - tags_rhisam
-    - tags_rhis_builder_idm
     - tags_sudo_command_groups
-    - tags_sudo_command_groups_rhisam
-
-- name: "Ensure user sudo command_group states"
-  when: sudo_command_groups_user is defined
-  ansible.builtin.include_tasks: "ensure_sudo_command_group.yml"
-  loop: "{{ sudo_command_groups_user }}"
-  loop_control:
-    loop_var: sudo_command_group
-  no_log: true
-  tags:
-    - tags_rhisam
-    - tags_rhis_builder_idm
-    - tags_sudo_command_groups
-    - tags_sudo_command_groups_rhisam
 
 # Sudo Rules
-- name: "Ensure rhisam sudo rule states"
-  when: sudo_rules_rhisam is defined
+- name: "Ensure idm sudo rule states"
+  when: idm_sudo_rules is defined
   ansible.builtin.include_tasks: "ensure_sudo_rule.yml"
-  loop: "{{ sudo_rules_rhisam }}"
+  loop: "{{ idm_sudo_rules }}"
   loop_control:
-    loop_var: sudo_rule
+    loop_var: idm_sudo_rule
   no_log: true
   tags:
     - tags_rhisam
-    - tags_rhis_builder_idm
     - tags_sudo_rules
-    - tags_sudo_rules_rhisam
-
-- name: "Ensure user sudo rule states"
-  when: sudo_rules_user is defined
-  ansible.builtin.include_tasks: "ensure_sudo_rule.yml"
-  loop: "{{ sudo_rules_user }}"
-  loop_control:
-    loop_var: sudo_rule
-  no_log: true
-  tags:
-    - tags_rhisam
-    - tags_rhis_builder_idm
-    - tags_sudo_rules
-    - tags_sudo_rules_rhisam

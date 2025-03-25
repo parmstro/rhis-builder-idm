@@ -2,29 +2,13 @@
 
 # ensure the (typically non-idmclient) hosts defined exist
 
-- name: "Configure the idm hosts specified for rh-isam sample environment"
-  when: idm_hosts_rhisam is defined
+- name: "Ensure the idm hosts configuration"
+  when: idm_hosts is defined
   ansible.builtin.include_tasks: "ensure_host.yml"
-  loop: "{{ idm_hosts_rhisam }}"
+  loop: "{{ idm_hosts }}"
   loop_control:
-    loop_var: user
+    loop_var: host
   no_log: true
   tags:
     - tags_rhisam
-    - tags_authentication_config
     - tags_idm_hosts
-    - tags_idm_hosts_rhisam
-
-
-- name: "Configure the idm hosts specified for user defined environment"
-  when: idm_hosts_user is defined
-  ansible.builtin.include_tasks: "ensure_host.yml"
-  loop: "{{ idm_hosts_user }}"
-  loop_control:
-    loop_var: user
-  no_log: true
-  tags:
-    - tags_user
-    - tags_authentication_config
-    - tags_idm_hosts
-    - tags_idm_hosts_user

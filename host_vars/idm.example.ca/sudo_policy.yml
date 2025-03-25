@@ -6,8 +6,8 @@
 # sudo rules define the 'who' gets to access on 'which hosts' to perform 'what commands' as 'which users'
 #  - it also defines sudo options and the priority of a given rule w.r.t. other rules.
 
-# RHISAM demo sudo commands here
-sudo_commands_rhisam:
+# RHISAM demo sudo commands
+idm_sudo_commands:
   - name: "systemctl start httpd"
     description: "Start the httpd service"
     state: "present"                             # default when omitted - set to absent to delete the command
@@ -16,11 +16,8 @@ sudo_commands_rhisam:
   - name: "systemctl restart httpd"
     description: "Restart the httpd service"
 
-# User commands here
-# sudo_commands_user:
-
-# RHISAM demo sudo command groups here
-sudo_command_groups_rhisam:
+# RHISAM demo sudo command groups
+idm_sudo_command_groups:
   - name: "scg-webserver-service-control"
     description: "Commands to control web server service"
     state: "present"                                          # default when omitted - set to absent to delete the command group
@@ -29,14 +26,10 @@ sudo_command_groups_rhisam:
       - "systemctl stop httpd"
       - "systemctl restart httpd"
 
-
-# User sudo command groups here
-# sudo_command_groups_user:
-
 # Examples of addition attributes for defining sudo rules
 # are commented in the "sr-webadmin-sudo-rules" example below
-# RHISAM demo sudo rules here
-sudo_rules_rhisam:
+# RHISAM demo sudo rules
+idm_sudo_rules:
   - name: "sr-webadmin-sudo-rules"
     state: "present"              # default when omitted - set to absent to delete the rule
     action: "sudorule"            # default when omitted - set to memeber to act on lists in the rule
@@ -63,7 +56,3 @@ sudo_rules_rhisam:
 #   runas_users:             # use this to list the individual users able to be impersonated
 #   runas_group_category: "all"  # impersonate any groups (default)
 #   runas_groups:            # the list of groups able to be impersonated using the sudo commands.
-
-
-# User demo sudo rules here
-# sudo_rules_user:
