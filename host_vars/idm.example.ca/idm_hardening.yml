@@ -12,4 +12,4 @@
 #   - rootdse (recommended)  - anonymous access to config info required by web clients, no directory data access
 #   - not specified == on
 
-nsslapd-allow-anonymous-access: rootdse
+idm_nsslapd_allow_anonymous_access: "rootdse"

@@ -1,0 +1,12 @@
+---
+
+# Apply some basic hardening to the IdM configuration
+
+- name: "Configure nsslapd-allow-anonymous-access"
+  community.general.ldap_attrs:
+    dn: "cn=config"
+    attributes:
+      nsslapd-allow-anonymous-access: "rootdse"  # Or "on" depending on your needs
+    state: "exact"
+  delegate_to: "{{ groups['idm_primary'][0] }}"
+  notify: "Restart_ds"

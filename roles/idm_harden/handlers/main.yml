@@ -1,0 +1,6 @@
+---
+
+- name: Restart_ds
+  ansible.builtin.systemd:
+    name: dirsrv.target
+    state: restarted

@@ -1,0 +1,14 @@
+---
+
+- name: "Ensure the idm host group configuration"
+  redhat.rhel_idm.ipahostgroup:
+    ipaadmin_principal: "{{ ipa_admin_principal }}"
+    ipaadmin_password: "{{ ipa_admin_password }}"
+    name: "{{ idm_host_group.name }}"
+    action: "{{ idm_host_group.action | default(omit) }}"    # hostgroup level (d)  or member level
+    description: "{{ idm_host_group.description | default(omit) }}"
+    host: "{{ idm_host_group.member_host_list | default(omit) }}"
+    hostgroup: "{{ idm_host_group.member_host_group_list | default(omit) }}"
+    nomembers: "{{ idm_host_group.nomembers | default(omit) }}"  # suppress processing of member attributes
+    rename: "{{ idm_host_group.rename | default(omit) }}" # to rename the host_group
+    state: "{{ idm_host_group.state | default(omit) }}"   # defaults to present, must use 'renamed' the rename attribute

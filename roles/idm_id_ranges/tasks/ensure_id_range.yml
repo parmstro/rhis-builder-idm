@@ -1,0 +1,17 @@
+---
+
+- name: "Ensure the idm id range configuration"
+  redhat.rhel_idm.ipaidrange:
+    ipaadmin_principal: "{{ ipa_admin_principal }}"
+    ipaadmin_password: "{{ ipa_admin_password }}"
+    name: "{{ idm_id_range.name_list }}"
+    auto_private_groups: "{{ idm_id_range.auto_private_groups | default(omit) }}"   # only valid for AD ranges
+    base_id: "{{ idm_id_range.base_id }}"
+    delete_continue: "{{ idm_id_range.delete_continue | default(omit) }}"           # valid when state = absent to suppress errors
+    dom_name: "{{ idm_id_range.dom_name | default(omit) }}"
+    dom_sid: "{{ idm_id_range.dom_sid | default(omit) }}"
+    idrange_type: "{{ idm_id_range.idrange_type | default(omit) }}"   # ipa-local (d), ipa-ad-trust, ipa-ad-trust-posix
+    range_size: "{{ idm_id_range.range_size }}"
+    rid_base: "{{ idm_id_range.rid_base }}"
+    secondary_rid_base: "{{ idm_id_range.secondary_rid_base }}"
+    state: "{{ idm_id_range.state | default(omit) }}"

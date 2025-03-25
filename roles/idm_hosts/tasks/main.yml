@@ -7,7 +7,7 @@
   ansible.builtin.include_tasks: "ensure_host.yml"
   loop: "{{ idm_hosts }}"
   loop_control:
-    loop_var: host
+    loop_var: idm_host
   no_log: true
   tags:
     - tags_rhisam

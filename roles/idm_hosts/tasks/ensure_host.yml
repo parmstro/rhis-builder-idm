@@ -1,0 +1,42 @@
+---
+
+# used to add hosts to idm that would not otherwise be registered.
+# e.g. to create a service for generating a certificate or similar
+
+- name: "Ensure the idm host configuration"
+  redhat.rhel_idm.ipahost:
+    ipaadmin_principal: "{{ ipa_admin_principal }}"
+    ipaadmin_password: "{{ ipa_admin_password }}"
+    name: "{{ idm_host.fqdn_list }}"
+    state: "{{ idm_host.state | default(omit) }}"
+    action: "{{ idm_host.action | default(omit) }}"    # host level (d)  or member level
+    description: "{{ idm_host.description | default(omit) }}"
+    allow_create_keytab_group: "{{ idm_host.allow_create_keytab_group_list | default(omit) }}"
+    allow_create_keytab_host: "{{ idm_host.allow_create_keytab_host_list | default(omit) }}"
+    allow_create_keytab_hostgroup: "{{ idm_host.allow_create_keytab_hostgroup_list | default(omit) }}"
+    allow_create_keytab_user: "{{ idm_host.allow_create_keytab_user_list | default(omit) }}"
+    allow_retrieve_keytab_group: "{{ idm_host.allow_retrieve_keytab_group_list | default(omit) }}"
+    allow_retrieve_keytab_host: "{{ idm_host.allow_retrieve_keytab_host_list | default(omit) }}"
+    allow_retrieve_keytab_hostgroup: "{{ idm_host.allow_retrieve_keytab_hostgroup_list | default(omit) }}"
+    allow_retrieve_keytab_user: "{{ idm_host.allow_retrieve_keytab_user_list | default(omit) }}"
+    auth_ind: "{{ idm_host.auth_ind_list | default(omit) }}"
+    certificate: "{{ idm_host.certificate_list | default(omit) }}"
+    force: "{{ idm_host.force | default(omit) }}"
+    hosts: "{{ idm_host.host_dict | default(omit) }}"          # you can call this with a whole dictionary of hosts with all the attributes
+    ip_address: "{{ idm_host.ip_address_list | default(omit) }}"
+    locality: "{{ idm_host.locality | default(omit) }}"
+    location: "{{ idm_host.location | default(omit) }}"
+    mac_address: "{{ idm_host.mac_address_list | default(omit) }}"
+    managedby_host: "{{ idm_host.managedby_host_list | default(omit) }}"
+    ok_as_delegate: "{{ idm_host.ok_as_delegate | default(omit) }}"
+    ok_to_auth_as_delegate: "{{ idm_host.ok_to_auth_as_delegate | default(omit) }}"
+    os: "{{ idm_host.os | default(omit) }}"  # e.g. RHEL 9.6
+    platform: "{{ idm_host.platform | default(omit) }}"  # e.g. INTEL NUC8i7BNH
+    principal: "{{ idm_host.principal_alias_list | default(omit) }}"
+    random: "{{ idm_host.random | default(omit) }}"
+    requires_pre_auth: "{{ idm_host.requires_pre_auth | default(omit) }}"
+    reverse: "{{ idm_host.reverse | default(omit) }}"
+    sshpubkey: "{{ idm_host.sshpubkey_list | default(omit) }}"
+    update_dns: "{{ idm_host.update_dns | default(omit) }}"
+    update_password: "{{ idm_host.update_password | default(omit) }}"
+    userclass: "{{ idm_host.userclass_list | default(omit) }}"

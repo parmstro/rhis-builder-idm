@@ -1,6 +1,14 @@
 ---
 
-# TODO: Configure idm_id_ranges for replicas, etc..
-# IdM can handle this by default as replicas are added
-# This is necessary if we want to control the size of the id ranges that
-# replicas use
+# ensure the (typically non-idmclient) hosts defined exist
+
+- name: "Ensure the idm id ranges configuration"
+  when: idm_id_ranges is defined
+  ansible.builtin.include_tasks: "ensure_id_range.yml"
+  loop: "{{ idm_id_ranges }}"
+  loop_control:
+    loop_var: idm_id_range
+  no_log: true
+  tags:
+    - tags_rhisam
+    - tags_idm_id_ranges

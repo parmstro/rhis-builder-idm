@@ -5,9 +5,9 @@
 - name: "Ensure the host groups configuration"
   when: idm_host_groups is defined
   ansible.builtin.include_tasks: "ensure_host_group.yml"
-  loop: "{{ idm_host_groups_rhisam }}"
+  loop: "{{ idm_host_groups }}"
   loop_control:
-    loop_var: host_group
+    loop_var: idm_host_group
   no_log: true
   tags:
     - tags_rhisam
