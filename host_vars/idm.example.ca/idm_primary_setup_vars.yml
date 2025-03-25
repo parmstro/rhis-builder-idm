@@ -19,6 +19,7 @@ ipa_server_realm: "{{ ipa_server_domain | upper }}"
 ipaserver_ip_addresses: "192.168.140.5"
 ipaserver_hostname: "{{ ansible_fqdn }}"
 ipaserver_forwarders:
+  - "192.168.252.5"
   - "8.8.8.8"
 ipaserver_forward_policy: "first"
 default_password: "{{ ipa_default_user_password }}"

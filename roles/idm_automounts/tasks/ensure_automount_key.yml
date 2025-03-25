@@ -1,0 +1,15 @@
+---
+
+# Ensure Automount configuration
+
+- name: "Ensure the automount key"
+  redhat.rhel_idm.ipaautomountkey:
+    ipaadmin_principal: "{{ ipa_admin_principal }}"                          # required
+    ipaadmin_password: "{{ ipa_admin_password }}"                            # required
+    name: "{{ idm_automount_key.name }}"                                     # required
+    state: "{{ idm_automount_key.state | default(omit) }}"
+    info: "{{ idm_automount_key.info | default(omit) }}"
+    key: "{{ idm_automount_map.key }}"                                       # required
+    location: "{{ idm_automount_key.location }}"                             # required
+    mapname: "{{ idm_automount_map.mapname }}"                               # required
+    rename: "{{ idm_automount_map.rename | default(omit) }}"

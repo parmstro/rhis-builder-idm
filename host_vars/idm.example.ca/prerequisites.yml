@@ -12,6 +12,7 @@ repository_ids:
 
 timeserver1: "192.168.252.8"
 timeserver2: "192.168.252.7"
+timeserver3: "192.168.252.9"
 
 ipa_firewalld_zone: "public"
 # interface supporting the default ipv4 address

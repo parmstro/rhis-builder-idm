@@ -4,3 +4,5 @@
 # caECCUserCertSmartCard - for future Yubikey implementation
 # caRSAUserCertSmartCard - for existing Yubikey for SmartCard implementation
 # see: https://github.com/parmstro/rhis-builder-yubi for details
+
+# currently not implemented in redhat.rhel_idm

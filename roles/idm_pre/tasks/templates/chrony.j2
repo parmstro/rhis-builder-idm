@@ -3,6 +3,9 @@
 #
 server {{ timeserver1 }} iburst minpoll 4 maxpoll 8 
 server {{ timeserver2 }} iburst minpoll 4 maxpoll 8 
+{% if timeserver3 is defined %}
+server {{ timeserver3 }} iburst minpoll 4 maxpoll 8 
+{% endif %}
 
 # Record the rate at which the system clock gains/losses time.
 driftfile /var/lib/chrony/drift

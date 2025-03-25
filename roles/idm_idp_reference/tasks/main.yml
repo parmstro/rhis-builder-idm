@@ -1,0 +1,14 @@
+---
+
+# Create idp references.
+
+- name: "Ensure Identity Providers reference states"
+  when: idm_idp_references is defined
+  ansible.builtin.include_tasks: "ensure_idp_reference.yml"
+  loop: "{{ idm_idp_references }}"
+  loop_control:
+    loop_var: idp_reference
+  no_log: true
+  tags:
+    - tags_rhis_builder_idm
+    - tags_idm_idp_references

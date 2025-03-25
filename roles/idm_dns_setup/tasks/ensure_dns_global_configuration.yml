@@ -1,0 +1,13 @@
+---
+
+# Ensure the global DNS configuration
+
+- name: "Ensure the global DNS configuration"
+  redhat.rhel_idm.ipadnsconfig:
+    ipaadmin_principal: "{{ ipa_admin_principal }}"                          # required
+    ipaadmin_password: "{{ ipa_admin_password }}"                            # required
+    action: "{{ idm_dns_global_configuration.action | default(omit) }}"
+    forwarders: "{{ idm_dns_global_configuration.forwarders | default(omit) }}"
+    forward_policy: "{{ idm_dns_global_configuration.forward_policy | default(omit) }}"
+    allow_sync_ptr: "{{ idm_dns_global_configuration.allow_sync_ptr | default(omit) }}"
+    state: "{{ idm_dns_global_configuration.state | default(omit) }}"

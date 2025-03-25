@@ -1,3 +1,36 @@
 ---
 
-# TODO: Implement the configuration for automount locations and maps
+# Create configuration for automount locations and maps
+
+- name: "Ensure Automount locations"
+  when: idm_automount_locations is defined
+  ansible.builtin.include_tasks: "ensure_automount_location.yml"
+  loop: "{{ idm_automount_locations }}"
+  loop_control:
+    loop_var: idm_automount_location
+  no_log: true
+  tags:
+    - tags_rhis_builder_idm
+    - tags_idm_automount_locations
+
+- name: "Ensure Automount maps"
+  when: idm_automount_maps is defined
+  ansible.builtin.include_tasks: "ensure_automount_map.yml"
+  loop: "{{ idm_automount_maps }}"
+  loop_control:
+    loop_var: idm_automount_map
+  no_log: true
+  tags:
+    - tags_rhis_builder_idm
+    - tags_idm_automount_maps
+
+- name: "Ensure Automount keys"
+  when: idm_automount_keys is defined
+  ansible.builtin.include_tasks: "ensure_automount_key.yml"
+  loop: "{{ idm_automount_keys }}"
+  loop_control:
+    loop_var: idm_automount_key
+  no_log: true
+  tags:
+    - tags_rhis_builder_idm
+    - tags_idm_automount_keys
