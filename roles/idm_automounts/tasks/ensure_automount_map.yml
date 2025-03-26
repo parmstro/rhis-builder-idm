@@ -10,5 +10,5 @@
     state: "{{ idm_automount_map.state | default(omit) }}"
     automountlocation: "{{ idm_automount_map.location }}"                    # required
     desc: "{{ idm_automount_map.description | default(omit) }}"
-    mount: "{{ idm_automount_map.mount }}"
+    mount: "{{ idm_automount_map.mount | default(omit) }}"
     parentmap: "{{ idm_automount_map.parentmap | default(omit) }}"

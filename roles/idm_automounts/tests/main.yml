@@ -1,0 +1,23 @@
+---
+
+- name: "Test automount role"
+  hosts: idm_primary
+  gather_facts: false
+  become: true
+  vars_files:
+    - testvars.yml
+  tasks:
+
+    - name: "Load the vault variables"
+      when: vault_path is defined
+      ansible.builtin.include_vars:
+        file: "{{ vault_path }}"
+
+    - name: "Load the other variables"
+      when: vars_path is defined
+      ansible.builtin.include_vars:
+        file: "{{ vars_path }}"
+
+    - name: "Run the role"
+      ansible.builtin.include_role:
+        name: "../../idm_automounts" # noqa role-name[path]
