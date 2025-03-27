@@ -2,8 +2,6 @@
 
 Fork it. Clone it. Configure it. Test it. Change it. Commit it. Create a PR.
 
-Rinse. Repeat.
-
 ***
 
 The code in this repo builds the Red Hat Identity Management configuration for a Red Hat Infrastructure Standard (RHIS) deployment.  Currently, this deployment assumes the Red Hat Infrastructure Standard Adoption Model (RH_ISAM) and deploys your first node in the architecture, the Identity Management Primary instance. In a later phase of the implementation, the code will deploy Identity Management replicas. At this time we are supporting simple configurations in which all IdM replicas deploy the same configuration of components. Subsequent iterations will provide for more comprehensive deployments. Please open an issue to suggest deployment models that you would like to see.
