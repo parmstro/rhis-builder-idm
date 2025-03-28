@@ -49,6 +49,9 @@ It would be a strong recommendation for a production environment to keep the fol
 
 * ***ipa_dm_password_vault:*** This the directory manager password and is a highly sensitive in production environments.
 
+### host_vars for idm.example.ca
+
+There is a sample system defined underneath host_vars. The files in the directory cover most of the the configuration options for the roles defined in rhis-builder-idm. You can model you own deployment after these configurations. Please make sure that you review them, especially the DNS configurations as they will need to be adjusted for your environment. 
 
 ### Running phase1_setup.yml
 
@@ -58,4 +61,6 @@ ansible-playbook -i inventory -e "vault_path=/path/to/vaultfile" -e "vars_path=/
 
 This will setup your IdM Primary Server
 
-# Next Steps
+### Next Steps
+
+Once you are happy with your IdM Primary, it is time to deploy your Satellite system with **[rhis-builder-satellite](https://github.com/parmstro/rhis-builder-satellite)**
