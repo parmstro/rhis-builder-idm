@@ -10,6 +10,8 @@ I know that most of you have experience with these things, but we also work with
 If you haven't been there yet, please visit [rhis-builder-provisioner](https://github.com/parmstro/rhis-builder-provisioner) first
 
 ***
+Hey, welcome. 
+
 The code in this repo builds the Red Hat Identity Management configuration for a Red Hat Infrastructure Standard (RHIS) deployment.  Currently, this deployment assumes the Red Hat Infrastructure Standard Adoption Model (RH_ISAM) and deploys your first node in the architecture, the Identity Management Primary instance. In a later phase of the implementation, the code will deploy Identity Management replicas. At this time we are supporting simple configurations in which all IdM replicas deploy the same configuration of components. Subsequent iterations will provide for more comprehensive deployments. Please open an issue to suggest deployment models that you would like to see.
 
 
@@ -34,6 +36,18 @@ rhis-builder-idm makes the following changes to a system installed with an @Base
 - configures DNS
 
 ### Secrets management
+
+All of the following are used in multiple projects, so typically you would defined in rhis-builder-vault.yml.
+These are passwords used for deployment. It is strongly recommended that these be changed after deployment and subject to a high quality password rotation and escrow methodology.
+
+* ***ipa_admin_principal_vault:*** This is admin.
+* ***ipa_admin_password_vault:*** Make is something complex enough for your environment
+* ***ipa_principal_username_vault:*** This is an alias for admin principal, the names are not consistent across underlying ansible collections
+* ***ipa_principal_password_vault:*** This is an alias for admin password, the names are not consistent across underlying ansible collections
+
+It would be a strong recommendation for a production environment to keep the following in a separate vault file only available at deployment.
+
+* ***ipa_dm_password_vault:*** This the directory manager password and is a highly sensitive in production environments.
 
 
 ### Running phase1_setup.yml
