@@ -10,8 +10,8 @@
     ipaadmin_password: "{{ ipa_admin_password }}"                            # required
     name: "{{ idm_dns_record.name }}"                                        # required
     zone_name: "{{ idm_dns_record.zone_name }}"                              # required
-    record_type: "{{ idm_dns_record.record_type }}"                          # required
-    record_value: "{{ idm_dns_record.record_value }}"                        # required
+    record_type: "{{ idm_dns_record.record_type | default(omit) }}"                          # required
+    record_value: "{{ idm_dns_record.record_value | default(omit) }}"                        # required
     a_create_reverse: "{{ idm_dns_record.a_create_reverse | default(omit) }}"
     a_ip_address: "{{ idm_dns_record.a_ip_address | default(omit) }}"
     a_record: "{{ idm_dns_record.a_record_raw_list | default(omit) }}"

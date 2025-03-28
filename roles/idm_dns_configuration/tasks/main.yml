@@ -38,7 +38,7 @@
     - tags_idm_dns_global_configuration
 
 - name: "Ensure DNS Records configuration"
-  when: idm_dns_global_configuration is defined
+  when: idm_dns_records is defined
   ansible.builtin.include_tasks: "ensure_dns_record.yml"
   loop: "{{ idm_dns_records }}"
   loop_control:

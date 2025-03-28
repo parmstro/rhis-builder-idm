@@ -7,17 +7,17 @@
     ipaadmin_principal: "{{ ipa_admin_principal }}"                          # required
     ipaadmin_password: "{{ ipa_admin_password }}"                            # required
     name: "{{ idm_dns_zone.name }}"                                          # required
-    allow_sync_ptr: "{{ idm_dns_zone.allow_sync_ptr | default(omit) }}"
     admin_email: "{{ idm_dns_zone.admin_email | default(omit) }}"
     allow_transfer: "{{ idm_dns_zone.allow_transfer_list | default(omit) }}"
     allow_query: "{{ idm_dns_zone.allow_query_list | default(omit) }}"
+    allow_sync_ptr: "{{ idm_dns_zone.allow_sync_ptr | default(omit) }}"
     default_ttl: "{{ idm_dns_zone.default_ttl | default(omit) }}"
     dnssec: "{{ idm_dns_zone.dnssec | default(omit) }}"
     dynamic_update: "{{ idm_dns_zone.dynamic_update | default(omit) }}"
     expire: "{{ idm_dns_zone.SOA_expire_seconds | default(omit) }}"
     forward_policy: "{{ idm_dns_zone.forward_policy | default(omit) }}"
     forwarders: "{{ idm_dns_zone.forwarders | default(omit) }}"
-    minimum: "{{ idm_dns_zone.negative_repsonse_cache_seconds | default(omit) }}"
+    minimum: "{{ idm_dns_zone.negative_response_cache_seconds | default(omit) }}"
     name_server: "{{ idm_dns_zone.name_server | default(omit) }}"
     nsec3param_rec: "{{ idm_dns_zone.nsec3param_rec | default(omit) }}"
     refresh: "{{ idm_dns_zone.SOA_refresh_seconds | default(omit) }}"

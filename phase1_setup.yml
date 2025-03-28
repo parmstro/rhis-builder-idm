@@ -74,6 +74,6 @@
       ansible.builtin.include_role:
         name: idm_sudo_policy
 
-    - name: "Apply role idm_dns setup"
+    - name: "Apply role idm_dns configuration"
       ansible.builtin.include_role:
-        name: idm_dns_setup
+        name: idm_dns_configuration
