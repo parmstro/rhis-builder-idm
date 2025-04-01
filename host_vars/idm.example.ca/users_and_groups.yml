@@ -1,17 +1,6 @@
 ---
 # Use this section to configure user groups and users
 
-# Add entries to this section to create your own setup
-# idm_user_groups_user:
-# idm_users_user:
-# idm_group_users_user:
-# idm_group_groups_user:
-
-# This section creates a set of sample users and groups that
-# demonstrate the organization of components in IdM and how to
-# define your configuration using ansible
-
-# The list of rhisam example users
 idm_users:
   - login: "poc-admin"
     first: "POC"
@@ -77,32 +66,6 @@ idm_users:
   - login: "content-mgr"
     first: "Content"
     last: "Mgr"
-
-# The list of rhisam example groups
-# possible values:
-#  - name: The name of the group
-#    description: The description of the group
-#    state: present, absent, renamed
-#    external: Whether the group is an external (trusted domain) group or not
-#    gid: To override the automatic group assignment
-#    group_list: a list of groups that are to be included
-#    group_dict: a nested dictionary of group attributes that are to be included AND created
-#    membermanager_groups: a list of groups that already exist able to manage group membership
-#    membermanager_users: a list of users that already exist able to manage group membership
-#    posix: defaults to true, set to false to create a non-posix group
-#    rename: a new name for the group. must set state to renamed
-#    user_list: a list of **existing** users that you want to assigned to the group
-
-# Turn off no_log: for the user_groups role by setting this to true
-# This will not work until 2.17 or later as
-# "no_log: does not honour variable interpretation"
-# https://github.com/ansible/ansible/issues/83323
-# when this is fixed we will update the code to allow toggling
-# no_log
-
-# e.g.
-# no_log: "{{ not (main_logging or idm_user_groups_logging) }}"
-user_groups_logging: true
 
 idm_user_groups:
   - name: "ug-services"

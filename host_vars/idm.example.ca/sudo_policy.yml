@@ -6,7 +6,6 @@
 # sudo rules define the 'who' gets to access on 'which hosts' to perform 'what commands' as 'which users'
 #  - it also defines sudo options and the priority of a given rule w.r.t. other rules.
 
-# RHISAM demo sudo commands
 idm_sudo_commands:
   - name: "systemctl start httpd"
     description: "Start the httpd service"
@@ -16,7 +15,6 @@ idm_sudo_commands:
   - name: "systemctl restart httpd"
     description: "Restart the httpd service"
 
-# RHISAM demo sudo command groups
 idm_sudo_command_groups:
   - name: "scg-webserver-service-control"
     description: "Commands to control web server service"
@@ -26,9 +24,6 @@ idm_sudo_command_groups:
       - "systemctl stop httpd"
       - "systemctl restart httpd"
 
-# Examples of addition attributes for defining sudo rules
-# are commented in the "sr-webadmin-sudo-rules" example below
-# RHISAM demo sudo rules
 idm_sudo_rules:
   - name: "sr-webadmin-sudo-rules"
     state: "present"              # default when omitted - set to absent to delete the rule
