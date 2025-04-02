@@ -4,12 +4,18 @@
 - name: "Determine what the system thinks its name is"
   ansible.builtin.command: "hostname"
   register: idm_pre_hostname
-  changed_when: true
+  changed_when: idm_pre_hostname.rc == 0
+
+- name: "Validate hostname"
+  ansible.builtin.shell: 'grep -P "(?=^.{1,254}$)(^(?>(?!\d+\.)[a-zA-Z0-9_\-]{1,63}\.?)+(?:[a-zA-Z]{2,})$)" <<< {{ idm_pre_hostname.stdout }}'
+  register: validate_result
+  changed_when: validate_result.rc == 0
 
 - name: "Assert that hostname is a valid FQDN"
   ansible.builtin.assert:
     that:
-      - idm_pre_hostname.stdout is community.general.fqdn_valid(min_labels=2, allow_underscores=False)
+      - validate_result.stdout != ""
+      - idm_pre_hostname.stdout == validate_result.stdout
       - idm_pre_hostname.stdout == (idm_pre_hostname.stdout | lower)
       - idm_pre_hostname.stdout != "localhost"
       - idm_pre_hostname.stdout != "localhost6"

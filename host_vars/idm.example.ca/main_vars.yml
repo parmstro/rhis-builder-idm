@@ -8,4 +8,6 @@
 # when this is fixed we will update the code to allow toggling
 # no_log
 
+async_timeout: 3600
+async_delay: 60
 main_logging: false
