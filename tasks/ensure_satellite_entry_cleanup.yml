@@ -1,0 +1,52 @@
+---
+
+# Delete the satellite host, including DNS, services and certificates
+# Delete the realm-capsule user
+# Delete the smart-proxy role
+- name: "Set some variables"
+  ansible.builtin.set_fact:
+    foreman_proxy_realm_role_name: "Smart Proxy Host Manager"
+    foreman_proxy_realm_principal: "realm-capsule"
+    satellite_ptr_address: "12"
+    satellite_reverse_zone: "140.168.192.in-addr.arpa"
+
+- name: "Delete the IdM host - {{ groups['sat_primary'][0] }}"
+  redhat.rhel_idm.ipahost:
+    ipaadmin_principal: "{{ ipa_admin_principal }}"
+    ipaadmin_password: "{{ ipa_admin_password }}"
+    name: "{{ groups['sat_primary'][0] }}"
+    state: "absent"
+
+- name: "Delete the dns A/AAAA records"
+  redhat.rhel_idm.ipadnsrecord:
+    ipaadmin_principal: "{{ ipa_admin_principal }}"
+    ipaadmin_password: "{{ ipa_admin_password }}"
+    name: "{{ groups['sat_primary'][0] | split('.') | first }}"
+    zone_name: "{{ ipa_server_domain }}"
+    del_all: true
+    state: "absent"
+
+- name: "Delete the dns PTR records"
+  redhat.rhel_idm.ipadnsrecord:
+    ipaadmin_principal: "{{ ipa_admin_principal }}"
+    ipaadmin_password: "{{ ipa_admin_password }}"
+    name: "{{ satellite_ptr_address }}"
+    zone_name: "{{ satellite_reverse_zone }}"
+    del_all: true
+    state: "absent"
+
+- name: "Delete the satellite realm user"
+  redhat.rhel_idm.ipauser:
+    action: "{{ idm_user.action | default(omit) }}"                     # defaults to acting on idm_user
+    ipaadmin_principal: "{{ ipa_admin_principal }}"
+    ipaadmin_password: "{{ ipa_admin_password }}"
+    name: "{{ foreman_proxy_realm_principal }}"
+    state: "absent"
+
+- name: "Delete the Smart Proxy role"
+  redhat.rhel_idm.iparole:
+    action: "{{ idm_user.action | default(omit) }}"                     # defaults to acting on idm_user
+    ipaadmin_principal: "{{ ipa_admin_principal }}"
+    ipaadmin_password: "{{ ipa_admin_password }}"
+    name: "{{ foreman_proxy_realm_role_name }}"
+    state: "absent"
