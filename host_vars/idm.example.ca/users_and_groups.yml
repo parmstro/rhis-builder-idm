@@ -80,6 +80,10 @@ idm_users:
     password: "{{ default_environment_password }}"
 
 idm_user_groups:
+  - name: "admins"
+    user_list:
+      - "admin"
+      - "poc-admin"
   - name: "ug-services"
     description: "Service Accounts"
   - name: "ug-admins"

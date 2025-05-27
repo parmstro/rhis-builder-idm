@@ -25,6 +25,20 @@ idm_sudo_command_groups:
       - "systemctl restart httpd"
 
 idm_sudo_rules:
+  - name: "poc_admins"
+    state: "present"              # default when omitted - set to absent to delete the rule
+    action: "sudorule"            # default when omitted - set to memeber to act on lists in the rule
+    order: "1"
+    description: "Sudo rules for administrators for POC or demo"
+    sudo_options:                 # admins god-mode
+      - "!authenticate"
+    user_groups:                  # admins god-mode
+      - "admins"
+    host_category: "all"
+    command_category: "all"       # use this to enable unrestricted access to all privileged commands  - HANDLE WITH CARE
+    runas_user_category: "all"
+    runas_group_category: "all"   # impersonate any groups (default)
+
   - name: "sr-webadmin-sudo-rules"
     state: "present"              # default when omitted - set to absent to delete the rule
     action: "sudorule"            # default when omitted - set to memeber to act on lists in the rule
