@@ -1,0 +1,4 @@
+---
+
+- name: "Ensure the host is registered"
+  ansible.builtin.include_tasks: "ensure_idm_registered.yml"
