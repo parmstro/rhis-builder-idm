@@ -1,7 +1,7 @@
 # rhis-builder-idm
 
 Fork it. Clone it. Configure it. Test it. Change it. Commit it. Create a PR.
-
+See rhis-builder-SAMPLE-vault repo for secrets definitions.
 ***
 
 #### Helping out
