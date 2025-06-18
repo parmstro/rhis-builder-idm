@@ -12,7 +12,7 @@
     certmapdata: "{{ user.certmaps | default(omit) }}"              # This requires a dictionary of certificate mappings
     city: "{{ user.city | default(omit) }}"
     departmentnumber: "{{ user.departmentnumber | default(omit) }}"
-    email: "{{ user.emails | default(omit) }}"                      # This can be a list of email address strings
+    email: "{{ user.email | default(omit) }}"                      # This can be a list of email address strings
     employeenumber: "{{ user.employeenumber | default(omit) }}"
     employeetype: "{{ user.employeetype | default(omit) }}"
     fax: "{{ user.fax_numbers | default(omit) }}"                   # alias facsimiletelephonenumber - a list

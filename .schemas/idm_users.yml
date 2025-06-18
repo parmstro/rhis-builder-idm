@@ -1,0 +1,52 @@
+---
+
+idm_users:
+  name: "the user login name"     # required, alias login
+  first: "the user given name"    # required, alias givenname
+  last: "the user last name"      # required, alias sn
+  carlicense: "a yaml list of car licenses that you want to register to the user"
+  certificate: "a yaml list of base64 encoded certificates"          # alias usercertificate
+  certmapdata: "a yaml list of dictionaries (key:value) that map certificates" # See certificate mapping documenation
+  city: "the city for the users address"
+  departmentnumber: "a yaml list of user departments (string)"
+  displayname: "the display name for the user e.g for Robert MacKay == Robbie Mac"
+  email: "a yaml list of user emails"                      # This can be a list of email address strings
+  employeenumber: "the user employee number (string)"
+  employeetype: "the user employee type (string)"
+  fax: "a yaml list of the users fax numbers - if you know what a fax is" # alias facsimiletelephonenumber - a list
+  fullname: "the user full name - generated if not supplied"      # alias cn
+  gecos: "the GECOS information, if necessary"
+  gid: "the Linux private group gid - this is usually omitted - provide it to override IdM assignment" # alias gidnumber
+  homedir: "localized linux user home directory"
+  idp: "the name of an existing identity provider reference"        # alias ipaidpconfiglink == this is the identity provider reference name
+  idp_user_id: "the users unique idp identifier"                    # alias ipaidpsub  == the string that identifies the user to the user.idp
+  initials: "the user initials"                                     # middle initials - a string
+  manager: "the idm login name of the user's manager"               # needs to exist as it is a lookup
+  mobile: "a yaml list of the user's mobile phone numbers"          # needs to exist as it is a lookup
+  noprivate: "boolean - whether or not to create the private group" # don't create the users private group
+  orgunit: "the users organizational unit"                          # alias ou
+  pager: "a yaml list of pager numbers"
+  password: "a predefined password for the user"
+  passwordexpiration: "the user's password expiration e.g. YYYY-MM-ddTHH:mm:ss"
+  phone: "a yaml list of the user's telephone numbers"
+  postalcode: "the users postal code for the supplied address"      # alias zip (of course...)
+  preferredlanguage: " the user's preferred language (string)"      # I would use standard language codes here
+  preserve: "a boolean to indicate whether to keep the user as a preserved user"
+  principal: "a yaml list of kerberos principals"    # normally you omit this to create the user in the default REALM
+  principalexpiration: "the user's principal expiration e.g. YYYY-MM-ddTHH:mm:ss"
+  radius: "the radius proxy configuration for the user"    # see configuring radius in the documentation
+  radiususer: "the radius proxy user name"                 # see configuring radius in the documentation
+  random: "a boolean to determine whether to generate a random password for the user"  # omit this if you supply a password defaults to false
+  shell: "the path to the users shell as in linux passwd file"
+  smb_home_dir: "the user's samba home directory"
+  smb_home_drive: "the user's samba home drive"
+  smb_logon_script: "the path to the user's samba logon script"
+  smb_profile_path: "the path to the user's samba profile"
+  sshpubkey: "a yaml list of the user's ssh public keys"  # realm hosts can be configured to get them from IdM
+  street: "the user's street address"
+  title: "the user's title e.g. Dr., Miss., Mr., Ms., etc.. "
+  uid: "the linux uid number. One will be assigned if not provided."   # specify this if the user is being migrated
+  userauthtype: "a yaml list of the user authentication types supported for this user"  # password is default
+  userclass: "user category - the semantics of this are local interpreted"
+  userstate: "the user's address state or province"
+  state: "the action to perform" # present is default  - one of: present, absent, enabled, disabled, locked, unlocked, undeleted, renamed

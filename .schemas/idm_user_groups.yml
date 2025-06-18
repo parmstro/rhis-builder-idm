@@ -1,0 +1,17 @@
+---
+
+idm_user_groups:
+  name: "the name of the group"
+  description: "the text description of the group"
+  external: "boolean - whether or not this is a wrapper for non-IPA members from trusted domains" # use this to wrap an AD group
+  externalmember: "a yaml list of the external members from trusted domains. DOM\name or name@domain groups or users"
+  gid: "the linux gid of the group"
+  group_list: "a yaml list of the groups to include in this entity"
+  membermanager_group: "a yaml list of the groups that can manage this entities membership"
+  membermanager_user: "a yaml list of the users that can manage this entities membership"
+  nonposix: "a boolean - create as a non-posix group" # redundant
+  posix: "a boolean - create as a posix group or convert to a posix group"
+  rename: "the new name for the group when renaming"
+  service: "the list of IdM service names that should be assigned to this group"
+  user_list: "the list of users to add to this group"
+  state: "the action to take" # defaults to present   one of: present, absent, renamed
