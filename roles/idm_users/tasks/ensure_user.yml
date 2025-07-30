@@ -1,53 +1,53 @@
 - name: "Ensure state for idm user - {{ idm_user.name }}"
   redhat.rhel_idm.ipauser:
-    action: "{{ user.action | default(omit) }}"                     # defaults to acting on user
+    action: "{{ idm_user.action | default(omit) }}"                     # defaults to acting on idm_user
     ipaadmin_principal: "{{ ipa_admin_principal }}"
     ipaadmin_password: "{{ ipa_admin_password }}"
-    name: "{{ user.login }}"
-    first: "{{ user.first | default(omit) }}"                       # alias givenname
-    last: "{{ user.last | default(omit) }}"
-    displayname: "{{ user.displayname | default(omit) }}"
-    carlicense: "{{ user.carlicenses | default(omit) }}"
-    certificate: "{{ user.certificates | default(omit) }}"          # alias usercertificate
-    certmapdata: "{{ user.certmaps | default(omit) }}"              # This requires a dictionary of certificate mappings
-    city: "{{ user.city | default(omit) }}"
-    departmentnumber: "{{ user.departmentnumber | default(omit) }}"
-    email: "{{ user.email | default(omit) }}"                      # This can be a list of email address strings
-    employeenumber: "{{ user.employeenumber | default(omit) }}"
-    employeetype: "{{ user.employeetype | default(omit) }}"
-    fax: "{{ user.fax_numbers | default(omit) }}"                   # alias facsimiletelephonenumber - a list
-    fullname: "{{ user.fullname | default(omit) }}"                 # alias cn
-    gecos: "{{ user.gecos | default(omit) }}"
-    gid: "{{ user.user_gid | default(omit) }}"                      # alias gidnumber == the private group gid or default group
-    homedir: "{{ user.home_dir | default(omit) }}"
-    idp: "{{ user.idp | default(omit) }}"                           # alias ipaidpconfiglink == this is the identity provider reference name
-    idp_user_id: "{{ user.idp_user_id | default(omit) }}"           # alias ipaidpsub  == the string that identifies the user to the user.idp
-    initials: "{{ user.initials | default(omit) }}"                 # middle initials - a string
-    manager: "{{ user.managers | default(omit) }}"                  # a list
-    noprivate: "{{ user.noprivate | default(omit) }}"               # don't create the users private group
-    orgunit: "{{ user.orgunit | default(omit) }}"                   # alias ou
-    pager: "{{ user.pager_numbers | default(omit) }}"
-    password: "{{ user.password | default(omit) }}"
-    passwordexpiration: "{{ user.password_expiration | default(omit) }}"
-    phone: "{{ user.phone_numbers | default(omit) }}"
-    postalcode: "{{ user.postalcode | default(omit) }}"
-    preferredlanguage: "{{ user.preferred_language | default(omit) }}"
-    preserve: "{{ user.preserve | default(omit) }}"
-    principal: "{{ user.principal | default(omit) }}"
-    principalexpiration: "{{ user.principal_expiration | default(omit) }}"
-    radius: "{{ user.radius | default(omit) }}"
-    radiususer: "{{ user.radiususer | default(omit) }}"
-    random: "{{ user.random | default(omit) }}"
-    shell: "{{ user.shell | default(omit) }}"
-    smb_home_dir: "{{ user.smb_home_dir | default(omit) }}"
-    smb_home_drive: "{{ user.smb_home_drive | default(omit) }}"
-    smb_logon_script: "{{ user.smb_logon_script | default(omit) }}"
-    smb_profile_path: "{{ user.smb_profile_path | default(omit) }}"
-    sshpubkey: "{{ user.sshpubkey | default(omit) }}"                    # a list of sshpubkey elements
-    street: "{{ user.street | default(omit) }}"
-    title: "{{ user.title | default(omit) }}"
-    uid: "{{ user.uid | default(omit) }}"
-    userauthtype: "{{ user.userauthtype | default(omit) }}"
-    userclass: "{{ user.userclass | default(omit) }}"
-    userstate: "{{ user.userstate | default(omit) }}"
-    state: "{{ user.state | default(omit) }}"
+    name: "{{ idm_user.login }}"
+    first: "{{ idm_user.first | default(omit) }}"                       # alias givenname
+    last: "{{ idm_user.last | default(omit) }}"
+    displayname: "{{ idm_user.displayname | default(omit) }}"
+    carlicense: "{{ idm_user.carlicenses | default(omit) }}"
+    certificate: "{{ idm_user.certificates | default(omit) }}"          # alias usercertificate
+    certmapdata: "{{ idm_user.certmaps | default(omit) }}"              # This requires a dictionary of certificate mappings
+    city: "{{ idm_user.city | default(omit) }}"
+    departmentnumber: "{{ idm_user.departmentnumber | default(omit) }}"
+    email: "{{ idm_user.email | default(omit) }}"                      # This can be a list of email address strings
+    employeenumber: "{{ idm_user.employeenumber | default(omit) }}"
+    employeetype: "{{ idm_user.employeetype | default(omit) }}"
+    fax: "{{ idm_user.fax_numbers | default(omit) }}"                   # alias facsimiletelephonenumber - a list
+    fullname: "{{ idm_user.fullname | default(omit) }}"                 # alias cn
+    gecos: "{{ idm_user.gecos | default(omit) }}"
+    gid: "{{ idm_user.user_gid | default(omit) }}"                      # alias gidnumber == the private group gid or default group
+    homedir: "{{ idm_user.home_dir | default(omit) }}"
+    idp: "{{ idm_user.idp | default(omit) }}"                           # alias ipaidpconfiglink == this is the identity provider reference name
+    idp_user_id: "{{ idm_user.idp_user_id | default(omit) }}"           # alias ipaidpsub  == the string that identifies the user to the idm_user.idp
+    initials: "{{ idm_user.initials | default(omit) }}"                 # middle initials - a string
+    manager: "{{ idm_user.managers | default(omit) }}"                  # a list
+    noprivate: "{{ idm_user.noprivate | default(omit) }}"               # don't create the users private group
+    orgunit: "{{ idm_user.orgunit | default(omit) }}"                   # alias ou
+    pager: "{{ idm_user.pager_numbers | default(omit) }}"
+    password: "{{ idm_user.password | default(omit) }}"
+    passwordexpiration: "{{ idm_user.password_expiration | default(omit) }}"
+    phone: "{{ idm_user.phone_numbers | default(omit) }}"
+    postalcode: "{{ idm_user.postalcode | default(omit) }}"
+    preferredlanguage: "{{ idm_user.preferred_language | default(omit) }}"
+    preserve: "{{ idm_user.preserve | default(omit) }}"
+    principal: "{{ idm_user.principal | default(omit) }}"
+    principalexpiration: "{{ idm_user.principal_expiration | default(omit) }}"
+    radius: "{{ idm_user.radius | default(omit) }}"
+    radiususer: "{{ idm_user.radiususer | default(omit) }}"
+    random: "{{ idm_user.random | default(omit) }}"
+    shell: "{{ idm_user.shell | default(omit) }}"
+    smb_home_dir: "{{ idm_user.smb_home_dir | default(omit) }}"
+    smb_home_drive: "{{ idm_user.smb_home_drive | default(omit) }}"
+    smb_logon_script: "{{ idm_user.smb_logon_script | default(omit) }}"
+    smb_profile_path: "{{ idm_user.smb_profile_path | default(omit) }}"
+    sshpubkey: "{{ idm_user.sshpubkey | default(omit) }}"                    # a list of sshpubkey elements
+    street: "{{ idm_user.street | default(omit) }}"
+    title: "{{ idm_user.title | default(omit) }}"
+    uid: "{{ idm_user.uid | default(omit) }}"
+    userauthtype: "{{ idm_user.userauthtype | default(omit) }}"
+    userclass: "{{ idm_user.userclass | default(omit) }}"
+    userstate: "{{ idm_user.userstate | default(omit) }}"
+    state: "{{ idm_user.state | default(omit) }}"
