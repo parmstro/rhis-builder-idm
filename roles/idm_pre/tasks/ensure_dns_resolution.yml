@@ -2,7 +2,7 @@
 #
 # host resolves forward and backward OR
 - name: "Make sure we are resolving internet addresses"
-  ansible.builtin.command: "nmcli conn mod {{ ansible_default_ipv4.interface }} ipv4.dns 8.8.8.8"
+  ansible.builtin.command: "nmcli conn mod {{ ansible_default_ipv4.interface }} ipv4.dns {{ idm_pre_dns_resolvers | join(',') }}"
   changed_when: true
 
 - name: "Ensure the interface is up with defined configuration"
