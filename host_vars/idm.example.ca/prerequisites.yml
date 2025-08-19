@@ -16,8 +16,8 @@ timeserver2: "192.168.252.7"
 timeserver3: "192.168.252.9"
 
 idm_pre_dns_resolvers:  # e.g. replace with your own resolvers
-  - 8.8.8.8
-  - 8.8.4.4
+  - "8.8.8.8"
+  - "8.8.4.4"
 
 ipa_firewalld_zone: "public"
 # interface supporting the default ipv4 address
