@@ -2,6 +2,7 @@
 #
 # host resolves forward and backward OR
 - name: "Make sure we are resolving internet addresses"
+  when: idm_pre_dns_resolvers is defined and ( idm_pre_dns_resolvers | length > 0 )
   ansible.builtin.command: "nmcli conn mod {{ ansible_default_ipv4.interface }} ipv4.dns {{ idm_pre_dns_resolvers | join(',') }}"
   changed_when: true
 
@@ -21,6 +22,7 @@
 # we will setup /etc/hosts if ipaserver_setup_dns is true
 
 - name: "Configure /etc/hosts for resolve the local host if ipaserver_setup_dns is true"
+  when: ipaserver_setup_dns is defined and ipaserver_setup_dns
   ansible.builtin.template:
     src: "etc_hosts.j2"
     dest: "/etc/hosts"
