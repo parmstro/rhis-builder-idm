@@ -1,0 +1,15 @@
+---
+
+# this really does not require a role, simply a task
+# ensure that the replica can find the realm
+
+- name: "Ensure ipa server ip is in /etc/hosts or is resolvable"
+  when: ipaservers is defined and ( ipaservers | length ) > 0
+  ansible.builtin.assert:
+    that: "{{ target_host is ansible.utils.resolvable }}"
+    fail_msg: "Host '{{ target_host }}' is not resolvable."
+    success_msg: "Host '{{ target_host }}' is resolvable."
+  loop: "{{ ipaservers }}"
+  loop_control:
+    loop_var: target_host
+

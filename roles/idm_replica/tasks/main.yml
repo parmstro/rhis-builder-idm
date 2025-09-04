@@ -1,4 +1,9 @@
 ---
+
+- name: "Prerequisites check for replica installation"
+  ansible.builtin.include_tasks: "ipareplica_pre.yml"
+
 - name: "Apply the IdM Replica role to {{ ansible_fqdn }}"
-  ansible.builtin.include_roles:
-    - redhat.rhel_idm.ipareplica
+  ansible.builtin.include_role:
+    name: "redhat.rhel_idm.ipareplica"
+
