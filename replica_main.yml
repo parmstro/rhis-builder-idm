@@ -1,7 +1,7 @@
 ---
 # Set up the prerequisites, install idm, configure idm
 # our idm role encapsulates ipaserver and post configuration
-- name: "Build the idm primary"
+- name: "Build the idm replicas"
   hosts: idm_replicas
   become: true
   gather_facts: true
