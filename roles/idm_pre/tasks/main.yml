@@ -26,4 +26,3 @@
 
 - name: "Ensure that the hostname is fully qualified"
   ansible.builtin.include_tasks: "ensure_hostname_fqdn.yml"
-

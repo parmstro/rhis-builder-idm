@@ -2,24 +2,12 @@
 #
 # host resolves forward and backward OR
 - name: "Make sure we are resolving internet addresses"
-  when: idm_pre_dns_resolvers is defined and ( idm_pre_dns_resolvers | length > 0 )
-  ansible.builtin.command: "nmcli conn mod {{ ansible_default_ipv4.interface }} ipv4.dns {{ idm_pre_dns_resolvers | join(',') }}"
-  changed_when: true
+  ansible.builtin.assert:
+    that: "{{ 'cdn.redhat.com' is ansible.utils.resolvable }}"
 
-- name: "Ensure the interface is up with defined configuration"
-  ansible.builtin.command: "nmcli conn up {{ ansible_default_ipv4.interface }}"
-  changed_when: true
-
-# /etc/hosts
-# only local host entries OR
-
-# The first two entries are the IPv4 and IPv6 localhost entries.
-# The next entry specifies the IdM server IPv4 address and host name.
-# The FQDN of the IdM server comes before the short name of the IdM server.
-# The IdM server host name is not part of the localhost entry.
-
-
-# we will setup /etc/hosts if ipaserver_setup_dns is true
+- name: "Make sure we are resolving internet addresses"
+  ansible.builtin.assert:
+    that: "{{ ansible_fqdn is ansible.utils.resolvable }}"
 
 - name: "Configure /etc/hosts for resolve the local host if ipaserver_setup_dns is true"
   when: ipaserver_setup_dns is defined and ipaserver_setup_dns
