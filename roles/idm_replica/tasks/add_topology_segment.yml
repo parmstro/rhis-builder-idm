@@ -1,11 +1,22 @@
 ---
 
 - name: "Apply the segment"
-  redhat.rhel_idm.ipatopologysegment:
-    ipaadmin_principal: "{{ ipa_admin_principal }}"
-    ipaadmin_password: "{{ ipa_admin_password }}"
-    direction: "{{ current_tg_segment.direction }}"
-    left: "{{ groups['idm_topology'][current_tg_segment.left] }}"
-    right: "{{ groups['idm_topology'][current_tg_segment.right] }}"
-    state: "{{ current_tg_segment.state }}"
-    suffix: "{{ current_tg_segment.suffix }}"
+  block:
+
+    - name: "Attempt to add the segment"
+      redhat.rhel_idm.ipatopologysegment:
+        ipaadmin_principal: "{{ ipa_admin_principal }}"
+        ipaadmin_password: "{{ ipa_admin_password }}"
+        direction: "{{ current_tg_segment.direction | default(omit) }}"
+        left: "{{ groups['idm_topology'][current_tg_segment.left] }}"
+        right: "{{ groups['idm_topology'][current_tg_segment.right] }}"
+        state: "{{ current_tg_segment.state }}"
+        suffix: "{{ current_tg_segment.suffix }}"
+      register: segment_result
+
+  rescue:
+
+    - name: "If the segment exists, continue"
+      when: "'Segment already exists' in segment_result.msg"
+      ansible.builtin.debug:
+        msg: "Segment exists. Continuing..."

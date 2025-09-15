@@ -26,16 +26,21 @@
 
 # NOTE: This currently does not handle multi site configurations, need to add site information to inventory
 - name: "Determine the size of the group"
-  ansible.builtin.setfact:
+  ansible.builtin.set_fact:
     topology_size: "{{ groups['idm_topology'] | length }}"
 
+- name: "Echo the size"
+  ansible.builtin.debug:
+    var: topology_size
+
 - name: "Set the recommended topology"
-  when: topology_size == topology_graph.size
-  ansible.builtin.setfact:
+  when: ( topology_size | int ) == ( topology_graph.size | int )
+  ansible.builtin.set_fact:
     current_tg: "{{ topology_graph }}"
   loop: "{{ idm_standard_topologies }}"
   loop_control:
     loop_var: topology_graph
 
 - name: "Apply graph"
-  ansible.builtin.include_task: "apply_idm_topology_graph.yml"
+  ansible.builtin.include_tasks: "apply_idm_topology_graph.yml"
+                                                                     

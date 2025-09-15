@@ -1,7 +1,7 @@
 ---
 
 - name: "Ensure graph elements"
-  ansible.builtin.include_task: "add_topology_segment.yml"
-  loop: "{{ current_tg }}"
+  ansible.builtin.include_tasks: "add_topology_segment.yml"
+  loop: "{{ current_tg.segments }}"
   loop_control:
     loop_var: current_tg_segment
