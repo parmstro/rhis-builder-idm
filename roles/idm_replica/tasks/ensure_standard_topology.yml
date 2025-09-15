@@ -1,0 +1,41 @@
+---
+
+# based on the number of nodes, ensure we meet
+# an HA topology requirement with no SPOF
+# no more than 3 replication agreements per host
+
+# consolidate the list of primary and replicas into a single group
+
+- name: "Add the IdM primary to the idm_topology group"
+  ansible.builtin.add_host:
+    name: "{{ groups['idm_primary'][0] }}"
+    groups: "idm_topology"
+
+- name: "Add the IdM replicas to the idm topology group"
+  when: groups['idm_replicas'] is defined and ( groups['idm_replicas'] | length ) > 0
+  ansible.builtin.add_host:
+    name: "{{ replica }}"
+    groups: "idm_topology"
+  loop: "{{ groups['idm_replicas'] }}"
+  loop_control:
+    loop_var: replica
+
+- name: "List the nodes in the group"
+  ansible.builtin.debug:
+    var: groups['idm_topology']
+
+# NOTE: This currently does not handle multi site configurations, need to add site information to inventory
+- name: "Determine the size of the group"
+  ansible.builtin.setfact:
+    topology_size: "{{ groups['idm_topology'] | length }}"
+
+- name: "Set the recommended topology"
+  when: topology_size == topology_graph.size
+  ansible.builtin.setfact:
+    current_tg: "{{ topology_graph }}"
+  loop: "{{ idm_standard_topologies }}"
+  loop_control:
+    loop_var: topology_graph
+
+- name: "Apply graph"
+  ansible.builtin.include_task: "apply_idm_topology_graph.yml"
