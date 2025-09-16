@@ -27,34 +27,43 @@
 # NOTE: This currently does not handle multi site configurations, need to add site information to inventory
 - name: "Determine the size of the group"
   ansible.builtin.set_fact:
-    topology_size: "{{ groups['idm_topology'] | length }}"
+    idmreplica_topology_size: "{{ groups['idm_topology'] | length }}"
 
 - name: "Assert the topology_size is not zero"
   ansible.builtin.assert:
-    that: ( topology_size | int ) > 0
+    that: ( idmreplica_topology_size | int ) > 0
 
 # currently fault_level can be 1 or 2
-- name: "Set the default fault level"
-  when: fault_level is not defined
+- name: "Set the default replica fault level"
+  when: idmreplica_fault_level is not defined
   ansible.builtin.set_fact:
-    fault_level: 1
+    idmreplica_fault_level: 1
 
-- name: "Validate fault_level"
+- name: "Validate idmreplica_fault_level"
   ansible.builtin.assert:
-    that: ( fault_level | int) <= ( idm_fault_level_max | int )
+    that: ( idmreplica_fault_level | int) <= ( idmreplica_fault_level_max | int )
+
+# the topology index is defined by the number of nodes (topology size) mutiplied by
+# the number of faulted nodes the topology will support (fault level) without losing redundancy
+# e.g. a BOX-X topology requires 4 nodes and will support any 2 nodes failing without losing redundancy = topology index 8
+# e.g. a BOX topology also requires 4 nodes, but will only support 1 node failing without potentially losing redundancy = topology index 4
+# a BOX results in complete isolation and a split brain state if nodes in opposite corners of the box are lost.
+# with 4 nodes, a BOX-X is preferred
+# this allows us to navigate the simple topology graph
+# see rhis-builder-inventory for the topology graph
 
 - name: "Determine the topology index"
-  when: fault_level is defined and (fault_level | int) != 0
+  when: idmreplica_fault_level is defined and (idmreplica_fault_level | int) != 0
   ansible.builtin.set_fact:
-    topology_index: "{{ topology_size * fault_level }}"
+    idmreplica_topology_index: "{{ idmreplica_topology_size * idmreplica_fault_level }}"
 
 - name: "Set the recommended topology"
-  when: ( topology_index | int ) == ( topology_graph.index | int )
+  when: ( idmreplica_topology_index | int ) == ( idmreplica_topology_graph.index | int )
   ansible.builtin.set_fact:
-    current_tg: "{{ topology_graph }}"
+    current_tg: "{{ idmreplica_topology_graph }}"
   loop: "{{ idm_standard_topologies }}"
   loop_control:
-    loop_var: topology_graph
+    loop_var: idmreplica_topology_graph
 
 - name: "Applying topology"
   ansible.builtin.debug:
