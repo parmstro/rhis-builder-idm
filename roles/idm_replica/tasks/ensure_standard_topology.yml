@@ -55,7 +55,7 @@
 - name: "Determine the topology index"
   when: idmreplica_fault_level is defined and (idmreplica_fault_level | int) != 0
   ansible.builtin.set_fact:
-    idmreplica_topology_index: "{{ idmreplica_topology_size * idmreplica_fault_level }}"
+    idmreplica_topology_index: "{{ (idmreplica_topology_size | int) * (idmreplica_fault_level | int) }}"
 
 - name: "Set the recommended topology"
   when: ( idmreplica_topology_index | int ) == ( idmreplica_topology_graph.index | int )
