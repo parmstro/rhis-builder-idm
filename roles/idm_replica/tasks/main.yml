@@ -6,3 +6,6 @@
 - name: "Apply the IdM Replica role to {{ ansible_fqdn }}"
   ansible.builtin.include_role:
     name: "redhat.rhel_idm.ipareplica"
+
+- name: "Post deployment configuration"
+  ansible.builtin.include_tasks: "ipa_replica_post.yml"

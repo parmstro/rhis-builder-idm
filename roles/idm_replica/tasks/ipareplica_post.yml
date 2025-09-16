@@ -1,0 +1,9 @@
+---
+
+# ipa replica post install configuration tasks
+#
+- name: "Configure replication topology"
+  ansible.builtin.include_tasks: "ensure_standard_topology.yml"
+
+# Set DNA ranges
+#
