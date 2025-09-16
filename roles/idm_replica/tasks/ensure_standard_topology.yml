@@ -29,18 +29,36 @@
   ansible.builtin.set_fact:
     topology_size: "{{ groups['idm_topology'] | length }}"
 
-- name: "Echo the size"
-  ansible.builtin.debug:
-    var: topology_size
+- name: "Assert the topology_size is not zero"
+  ansible.builtin.assert:
+    that: ( topology_size | int ) > 0
+
+# currently fault_level can be 1 or 2
+- name: "Set the default fault level"
+  when: fault_level is not defined
+  ansible.builtin.set_fact:
+    fault_level: 1
+
+- name: "Validate fault_level"
+  ansible.builtin.assert:
+    that: ( fault_level | int) <= ( idm_fault_level_max | int )
+
+- name: "Determine the topology index"
+  when: fault_level is defined and (fault_level | int) != 0
+  ansible.builtin.set_fact:
+    topology_index: "{{ topology_size * fault_level }}"
 
 - name: "Set the recommended topology"
-  when: ( topology_size | int ) == ( topology_graph.size | int )
+  when: ( topology_index | int ) == ( topology_graph.index | int )
   ansible.builtin.set_fact:
     current_tg: "{{ topology_graph }}"
   loop: "{{ idm_standard_topologies }}"
   loop_control:
     loop_var: topology_graph
 
+- name: "Applying topology"
+  ansible.builtin.debug:
+    msg: "Applying topology: {{ current_tg.name }} with topology index: {{ current_tg.index }}"
+
 - name: "Apply graph"
   ansible.builtin.include_tasks: "apply_idm_topology_graph.yml"
-                                                                     

@@ -1,5 +1,7 @@
 ---
+
 - name: Register to Red Hat Portal {{ inventory_hostname }}
+  when: not register_to_satellite
   ansible.builtin.include_role:
     name: redhat.rhel_system_roles.rhc
   vars:
