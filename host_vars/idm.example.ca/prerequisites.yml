@@ -23,6 +23,7 @@ ipa_firewalld_zone: "public"
 # interface supporting the default ipv4 address
 ipa_prime_interface: "{{ ansible_interfaces | map('regex_replace', '^', 'ansible_') | map('extract', vars) | selectattr('ipv4', 'defined') | selectattr('ipv4.address', 'match', ansible_default_ipv4.address) | map(attribute='device') | first }}" # noqa yaml[line-length]
 ipa_firewalld_services:
+  - dns
   - freeipa-4
   - freeipa-ldap
   - freeipa-ldaps
