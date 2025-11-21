@@ -2,6 +2,7 @@
 
 Fork it. Clone it. Configure it. Test it. Change it. Commit it. Create a PR.
 ***
+**NOTE:** All ansible variables, files and templates for rhis-builder-* repos are now configured through the unified inventory project [rhis-builder-inventory](https://github.com/parmstro/rhis-builder-inventory)
 
 #### Helping out
 I know that most of you have experience with these things, but we also work with people with less experience. So, please bear with us if a lot of items that you know are spelled out. If you have any comments, tips, tricks or suggestions to add to the documentation or README.md file, PRs are greatly appreciated. Let's share the wealth!
