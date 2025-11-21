@@ -12,78 +12,124 @@
       when: vault_path is defined
       ansible.builtin.include_vars:
         file: "{{ vault_path }}"
+      tags:
+        - always
 
     - name: "Load the other variables"
       when: vars_path is defined
       ansible.builtin.include_vars:
         file: "{{ vars_path }}"
+      tags:
+        - always
 
     - name: "Load the vault variables"
       when: vault_dir is defined
       ansible.builtin.include_vars:
         dir: "{{ vault_dir }}"
+      tags:
+        - always
 
     - name: "Load the other variables"
       when: vars_dir is defined
       ansible.builtin.include_vars:
         dir: "{{ vars_dir }}"
+      tags:
+        - always
 
     - name: "Apply role idm_pre"
       ansible.builtin.include_role:
         name: idm_pre
+      tags:
+        - tags_idm_pre
+        - tags_idm_install
 
     - name: "Apply role idm_primary"
       ansible.builtin.include_role:
         name: idm_primary
+      tags:
+        - tags_idm_install
 
     # set the base configurations for the deployment
     - name: "Apply role idm_configuration"
       ansible.builtin.include_role:
         name: idm_configuration
+      tags:
+        - tags_idm_post_install
+        - tags_idm_config
 
     # ensure your id ranges before you create users
     - name: "Apply role idm_id_ranges"
       ansible.builtin.include_role:
         name: idm_id_ranges
+      tags:
+        - tags_idm_post_install
+        - tags_idm_id_ranges
 
     # idp references must exist before you can
     # apply to a user authentication scheme
     - name: "Apply role idm_idp_reference"
       ansible.builtin.include_role:
         name: idm_idp_reference
+      tags:
+        - tags_idm_post_install
+        - tags_idm_idp_config
 
     - name: "Apply role idm_users"
       ansible.builtin.include_role:
         name: idm_users
+      tags:
+        - tags_idm_post_install
+        - tags_idm_users
 
     - name: "Apply role idm_user_groups"
       ansible.builtin.include_role:
         name: idm_user_groups
+      tags:
+        - tags_idm_post_install
+        - tags_idm_groups
 
     # password policy is applied to groups
     # group needs to exist of will policy creation/mod will fail
     - name: "Apply role idm_password_policy"
       ansible.builtin.include_role:
         name: idm_password_policy
+      tags:
+        - tags_idm_post_install
+        - tags_idm_password_policy
 
     - name: "Apply role idm_host_groups"
       ansible.builtin.include_role:
         name: idm_host_groups
+      tags:
+        - tags_idm_post_install
+        - tags_idm_groups_hosts
 
     # Add the hosts do not support ipa_client
     # Add hosts that *do* support ipa_client
     - name: "Apply role idm_hosts"
       ansible.builtin.include_role:
         name: idm_hosts
+      tags:
+        - tags_idm_post_install
+        - tags_idm_hosts
 
     - name: "Apply role idm_hbac policy"
       ansible.builtin.include_role:
         name: idm_hbac_policy
+      tags:
+        - tags_idm_post_install
+        - tags_idm_hbac
 
     - name: "Apply role idm_sudo policy"
       ansible.builtin.include_role:
         name: idm_sudo_policy
+      tags:
+        - tags_idm_post_install
+        - tags_idm_sudo
 
     - name: "Apply role idm_dns configuration"
       ansible.builtin.include_role:
         name: idm_dns_configuration
+      tags:
+        - tags_idm_post_install
+        - tags_idm_dns
