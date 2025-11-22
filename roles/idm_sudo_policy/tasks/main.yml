@@ -10,9 +10,6 @@
   loop_control:
     loop_var: idm_sudo_command
   no_log: true
-  tags:
-    - tags_rhisam
-    - tags_sudo_commands
 
 # Sudo Command Groups
 - name: "Ensure sudo command_group states"
@@ -22,9 +19,6 @@
   loop_control:
     loop_var: idm_sudo_command_group
   no_log: true
-  tags:
-    - tags_rhisam
-    - tags_sudo_command_groups
 
 # Sudo Rules
 - name: "Ensure idm sudo rule states"
@@ -34,6 +28,3 @@
   loop_control:
     loop_var: idm_sudo_rule
   no_log: true
-  tags:
-    - tags_rhisam
-    - tags_sudo_rules

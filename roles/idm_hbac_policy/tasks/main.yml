@@ -7,9 +7,6 @@
   loop_control:
     loop_var: idm_hbac_service
   no_log: true
-  tags:
-    - tags_rhis_builder_idm
-    - tags_idm_hbac_services
 
 - name: "Ensure HBAC service group states"
   when: idm_hbac_service_groups is defined
@@ -18,9 +15,6 @@
   loop_control:
     loop_var: idm_hbac_service_group
   no_log: true
-  tags:
-    - tags_rhis_builder_idm
-    - tags_idm_hbac_service_groups
 
 - name: "Ensure rhisam HBAC rule states"
   when: idm_hbac_rules is defined
@@ -29,9 +23,6 @@
   loop_control:
     loop_var: idm_hbac_rule
   no_log: true
-  tags:
-    - tags_rhis_builder_idm
-    - tags_idm_hbac_rules
 
 # Running HBAC tests is under development
 # Code commented out
@@ -40,6 +31,3 @@
 # - name: "Run HBAC policy tests"
 #   when: idm_hbac_policy_tests is defined
 #   ansible.builtin.include_tasks: "test_hbac_policies.yml"
-#   tags:
-#     - tags_rhis_builder_idm
-#     - tags_idm_hbac_policy_tests

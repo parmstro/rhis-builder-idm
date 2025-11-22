@@ -8,6 +8,3 @@
   loop_control:
     loop_var: idm_user
   no_log: true
-  tags:
-    - tags_rhisam
-    - tags_idm_users

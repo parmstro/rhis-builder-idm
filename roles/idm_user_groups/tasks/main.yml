@@ -9,6 +9,3 @@
   loop_control:
     loop_var: idm_user_group
   no_log: true
-  tags:
-    - tags_rhisam
-    - tags_idm_user_groups

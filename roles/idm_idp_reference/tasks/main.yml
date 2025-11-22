@@ -9,6 +9,3 @@
   loop_control:
     loop_var: idp_reference
   no_log: true
-  tags:
-    - tags_rhis_builder_idm
-    - tags_idm_idp_references
