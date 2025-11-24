@@ -5,6 +5,11 @@
   ansible.builtin.dnf:
     name: chrony
     state: present
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install
 
 - name: "Configure time servers"
   ansible.builtin.template:
@@ -13,13 +18,28 @@
     owner: root
     group: root
     mode: "0744"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install
 
 - name: "Start the chronyd service with default settings"
   ansible.builtin.service:
     name: chronyd
     state: restarted
     enabled: true
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install
 
 - name: "Ensure the time is synchronized"
   ansible.builtin.command: "chronyc makestep"
   changed_when: true
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install

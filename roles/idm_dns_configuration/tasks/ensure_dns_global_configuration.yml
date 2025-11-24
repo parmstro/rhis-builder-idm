@@ -11,3 +11,7 @@
     forward_policy: "{{ idm_dns_global_configuration.forward_policy | default(omit) }}"
     allow_sync_ptr: "{{ idm_dns_global_configuration.allow_sync_ptr | default(omit) }}"
     state: "{{ idm_dns_global_configuration.state | default(omit) }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

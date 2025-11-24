@@ -12,3 +12,7 @@
     nomembers: "{{ idm_host_group.nomembers | default(omit) }}"  # suppress processing of member attributes
     rename: "{{ idm_host_group.rename | default(omit) }}" # to rename the host_group
     state: "{{ idm_host_group.state | default(omit) }}"   # defaults to present, must use 'renamed' the rename attribute
+  tags:
+    - tags_rhisam
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

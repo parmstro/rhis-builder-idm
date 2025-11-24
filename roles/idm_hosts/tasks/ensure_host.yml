@@ -40,3 +40,7 @@
     update_dns: "{{ idm_host.update_dns | default(omit) }}"
     update_password: "{{ idm_host.update_password | default(omit) }}"
     userclass: "{{ idm_host.userclass_list | default(omit) }}"
+  tags:
+    - tags_rhisam
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

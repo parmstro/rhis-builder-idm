@@ -8,3 +8,5 @@
     forwarders: "{{ zone.forwarders }}"
     forwardpolicy: "{{ zone.forward_policy }}"
     skip_overlap_check: "{{ zone.skip_overlap_check }}"
+  tags:
+    - tags_idm_install

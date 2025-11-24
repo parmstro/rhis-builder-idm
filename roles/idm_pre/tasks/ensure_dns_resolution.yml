@@ -4,10 +4,20 @@
 - name: "Make sure we are resolving internet addresses"
   ansible.builtin.assert:
     that: "{{ 'cdn.redhat.com' is ansible.utils.resolvable }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install
 
 - name: "Make sure we are resolving internet addresses"
   ansible.builtin.assert:
     that: "{{ ansible_fqdn is ansible.utils.resolvable }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install
 
 - name: "Configure /etc/hosts for resolve the local host if ipaserver_setup_dns is true"
   when: ipaserver_setup_dns is defined and ipaserver_setup_dns
@@ -17,3 +27,8 @@
     owner: "root"
     group: "root"
     mode: "0644"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install

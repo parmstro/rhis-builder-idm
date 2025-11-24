@@ -94,3 +94,7 @@
     uri_record: "{{ idm_dns_record.uri_record_raw_list | default(omit) }}"
     uri_target: "{{ idm_dns_record.uri_target | default(omit) }}"
     uri_weight: "{{ idm_dns_record.uri_weight | default(omit) }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

@@ -10,3 +10,7 @@
     state: "exact"
   delegate_to: "{{ groups['idm_primary'][0] }}"
   notify: "Restart_ds"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

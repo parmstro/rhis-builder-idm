@@ -4,6 +4,10 @@
 #
 - name: "Configure replication topology"
   ansible.builtin.include_tasks: "ensure_standard_topology.yml"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_install
 
 # Set DNA ranges
 #

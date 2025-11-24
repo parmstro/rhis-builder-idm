@@ -2,10 +2,22 @@
 
 - name: "Prerequisites check for replica installation"
   ansible.builtin.include_tasks: "ipareplica_pre.yml"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_install
 
 - name: "Apply the IdM Replica role to {{ ansible_fqdn }}"
   ansible.builtin.include_role:
     name: "redhat.rhel_idm.ipareplica"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_install
 
 - name: "Post deployment configuration"
   ansible.builtin.include_tasks: "ipa_replica_post.yml"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_install

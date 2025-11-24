@@ -27,3 +27,7 @@
     state: "{{ idm_dns_zone.state | default(omit) }}"
     ttl: "{{ idm_dns_zone.apex_ttl | default(omit) }}"
     update_policy: "{{ idm_dns_zone.update_policy | default(omit) }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

@@ -2,6 +2,10 @@
 - name: "Apply the ipaserver role"
   ansible.builtin.include_role:
     name: redhat.rhel_idm.ipaserver
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_install
 
 - name: "Ensure dns forward zones exist"
   when: "idm_dns_forward_zones is defined"
@@ -9,6 +13,10 @@
   loop: "{{ idm_dns_forward_zones }}"
   loop_control:
     loop_var: zone
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_install
 
 - name: "Ensure realm dns update permissions are configured"
   when: "idm_dns_update_zones is defined"
@@ -16,6 +24,14 @@
   loop: "{{ idm_dns_update_zones }}"
   loop_control:
     loop_var: zone
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_install
 
 - name: "Ensure DNS server is queryable on local network"
   ansible.builtin.include_tasks: ensure_dns_queryable.yml
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_install

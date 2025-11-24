@@ -30,3 +30,7 @@
     user_auth_type: "{{ idm_config_auth_type_list | default(omit) }}"
     userobjectclasses: "{{ idm_config_userobjectclasses_list | default(omit) }}"
     usersearch: "{{ idm_config_usersearch_list | default(omit) }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

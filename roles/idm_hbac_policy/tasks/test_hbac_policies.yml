@@ -7,6 +7,7 @@
   loop_control:
     loop_var: idm_hbac_policy_test
   tags:
-    - tags_rhisam
+    - tags_rhis_builder
     - tags_rhis_builder_idm
+    - tags_idm_post_install
     - tags_hbac_tests

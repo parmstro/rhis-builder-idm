@@ -2,27 +2,72 @@
 
 - name: "Ensure dns or hosts resolution"
   ansible.builtin.include_tasks: "ensure_dns_resolution.yml"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install
 
 - name: "Ensure system is registered to CDN"
   ansible.builtin.include_tasks: "ensure_system_registered.yml"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install
 
 - name: "Ensure updates are applied"
   ansible.builtin.include_tasks: "ensure_update_system.yml"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install
 
 - name: "Ensure idm packages"
   ansible.builtin.include_tasks: "ensure_idm_packages.yml"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install
 
 - name: "Ensure time is in sync"
   ansible.builtin.include_tasks: "ensure_time_service.yml"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install
 
 - name: "Ensure firewall ports are configured"
   ansible.builtin.include_tasks: "ensure_firewall.yml"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install
 
 - name: "Ensure system-wide cryptographic policy is set"
   ansible.builtin.include_tasks: "ensure_crypto_policy.yml"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install
 
 - name: "Ensure proper umask"
   ansible.builtin.include_tasks: "ensure_umask.yml"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install
 
 - name: "Ensure that the hostname is fully qualified"
   ansible.builtin.include_tasks: "ensure_hostname_fqdn.yml"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install

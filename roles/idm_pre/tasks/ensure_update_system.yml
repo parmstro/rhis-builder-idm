@@ -4,6 +4,11 @@
     name: "{{ idm_repository_ids }}"
     state: enabled
     purge: true
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install
 
 # We are purposefully trying to update the system, hence latest.
 - name: "Update the system" # noqa: package-latest
@@ -12,3 +17,8 @@
     state: latest
   async: "{{ async_timeout }}"
   poll: "{{ async_delay }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install

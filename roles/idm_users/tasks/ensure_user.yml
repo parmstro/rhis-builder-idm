@@ -51,3 +51,7 @@
     userclass: "{{ idm_user.userclass | default(omit) }}"
     userstate: "{{ idm_user.userstate | default(omit) }}"
     state: "{{ idm_user.state | default(omit) }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

@@ -12,3 +12,7 @@
     desc: "{{ idm_automount_map.description | default(omit) }}"
     mount: "{{ idm_automount_map.mount | default(omit) }}"
     parentmap: "{{ idm_automount_map.parentmap | default(omit) }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

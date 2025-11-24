@@ -8,3 +8,7 @@
     description: "{{ idm_hbac_service_group.description }}"
     hbacsvc: "{{ idm_hbac_service_group.services }}"
     state: "{{ idm_hbac_service_group.state | default(omit) }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

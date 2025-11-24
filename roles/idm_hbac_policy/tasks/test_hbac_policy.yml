@@ -4,19 +4,39 @@
 - name: "Log test parameters"
   ansible.builtin.debug:
     var: idm_hbac_policy_test
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install
+    - tags_hbac_tests
 
 # There is no module to implement this. We will do it through the API using the CLI
 - name: "Create the payload --user="
   ansible.builtin.set_fact:
     payload: 'ipa hbactest --user={{ idm_hbac_policy_test.user }}'
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install
+    - tags_hbac_tests
 
 - name: "Create the payload --host="
   ansible.builtin.set_fact:
     payload: '{{ payload }} --host={{ idm_hbac_policy_test.host }}'
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install
+    - tags_hbac_tests
 
 - name: "Create the payload --service="
   ansible.builtin.set_fact:
     payload: '{{ payload }} --service={{ idm_hbac_policy_test.service }}'
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install
+    - tags_hbac_tests
 
 - name: "Create the payload --service="
   when: idm_hbac_policy_test.rules is defined
@@ -25,13 +45,28 @@
   loop: "{{ idm_hbac_policy_test.rules }}"
   loop_control:
     loop_var: rule
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install
+    - tags_hbac_tests
 
 - name: "Call the ipa command - hbac policy test for user - {{ idm_hbac_policy_test.user }}"
   ansible.builtin.shell: "echo '{{ ipa_admin_password }}' | kinit {{ ipa_admin_principal }}; ipa hbactest {{ payload }}" # noqa: yaml[line-length] risky-shell-pipe no-changed-when
   register: hbac_test_result
   changed_when: hbac_test_result.rc == 0
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install
+    - tags_hbac_tests
 
 # Debug: only asserting true at this point
 - name: "Assert the test was successful"
   ansible.builtin.assert:
     that: true
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install
+    - tags_hbac_tests

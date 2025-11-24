@@ -12,3 +12,8 @@
       - { service: "{{ ipa_firewalld_services }}",
           permanent: true,
           state: enabled }
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install

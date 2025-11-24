@@ -8,3 +8,7 @@
   loop_control:
     loop_var: pwpolicy
   no_log: true
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

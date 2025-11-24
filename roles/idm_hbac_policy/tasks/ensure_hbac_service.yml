@@ -7,3 +7,7 @@
     name: "{{ idm_hbac_service.name }}"
     description: "{{ idm_hbac_service.description }}"
     state: "{{ idm_hbac_service.state | default(omit) }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

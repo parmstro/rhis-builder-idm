@@ -5,3 +5,8 @@
 - name: "Ensure system umask"
   ansible.builtin.command: "umask {{ ipa_required_umask }}"
   changed_when: true
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install

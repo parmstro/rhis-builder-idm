@@ -9,6 +9,10 @@
   loop_control:
     loop_var: idm_automount_location
   no_log: true
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install
 
 - name: "Ensure Automount maps"
   when: idm_automount_maps is defined
@@ -17,6 +21,10 @@
   loop_control:
     loop_var: idm_automount_map
   no_log: true
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install
 
 - name: "Ensure Automount keys"
   when: idm_automount_keys is defined
@@ -25,3 +33,7 @@
   loop_control:
     loop_var: idm_automount_key
   no_log: true
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

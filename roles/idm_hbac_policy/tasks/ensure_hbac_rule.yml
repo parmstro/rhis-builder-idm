@@ -7,3 +7,7 @@
     name: "{{ idm_hbac_rule.name }}"
     description: "{{ idm_hbac_rule.description }}"
     state: "{{ idm_hbac_rule.state | default(omit) }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

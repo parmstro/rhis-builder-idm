@@ -20,3 +20,7 @@
       when: "'Segment already exists' in segment_result.msg"
       ansible.builtin.debug:
         msg: "Segment exists. Continuing..."
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_install

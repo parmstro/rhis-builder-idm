@@ -12,3 +12,7 @@
   loop: "{{ ipaservers }}"
   loop_control:
     loop_var: target_host
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_install

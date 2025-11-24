@@ -12,3 +12,7 @@
     location: "{{ idm_automount_key.location }}"                             # required
     mapname: "{{ idm_automount_key.mapname }}"                               # required
     rename: "{{ idm_automount_key.rename | default(omit) }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

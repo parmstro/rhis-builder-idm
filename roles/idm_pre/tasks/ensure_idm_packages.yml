@@ -7,6 +7,11 @@
   ansible.builtin.assert:
     that: (ansible_distribution_major_version | int) > 7
     fail_msg: "Deployment on RHEL 7 or lower is no longer supported"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install
 
 - name: "If RHEL8, configure the modular components for installation"
   when: (ansible_distribution_major_version | int) == 8
@@ -15,14 +20,29 @@
     - name: "Reset the IdM Module"
       ansible.builtin.command: "dnf module reset idm"
       changed_when: true
+      tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
+        - tags_idm_pre
+        - tags_idm_install
 
     - name: "Enable the IdM Module"
       ansible.builtin.command: "dnf module enable idm:DL1"
       changed_when: true
+      tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
+        - tags_idm_pre
+        - tags_idm_install
 
     - name: "Perform a modular install of packages"
       ansible.builtin.command: "dnf module install idm:DL1/{adtrust,client,common,dns,server}"
       changed_when: true
+      tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
+        - tags_idm_pre
+        - tags_idm_install
 
 - name: "Install the components"
   when: (ansible_distribution_major_version | int) > 8
@@ -35,8 +55,18 @@
           - ipa-server-dns
           - ipa-server-trust-ad
           - ipa-healthcheck
+      tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
+        - tags_idm_pre
+        - tags_idm_install
 
 - name: "Install the SOS Report package"
   ansible.builtin.dnf:
     name: sos
     state: present
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install

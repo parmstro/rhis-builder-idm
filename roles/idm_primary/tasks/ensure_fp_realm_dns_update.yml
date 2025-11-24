@@ -9,3 +9,5 @@
     name: "{{ zone.name }}"
     update_policy: "{{ zone.foreman_proxy_BIND_update_policy }}"
     state: enabled
+  tags:
+    - tags_idm_install

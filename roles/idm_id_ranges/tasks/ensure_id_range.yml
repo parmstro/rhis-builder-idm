@@ -15,3 +15,7 @@
     rid_base: "{{ idm_id_range.rid_base }}"
     secondary_rid_base: "{{ idm_id_range.secondary_rid_base }}"
     state: "{{ idm_id_range.state | default(omit) }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

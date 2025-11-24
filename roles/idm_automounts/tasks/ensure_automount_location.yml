@@ -8,3 +8,7 @@
     ipaadmin_password: "{{ ipa_admin_password }}"                            # required
     name: "{{ idm_automount_location.name }}"                                  # required
     state: "{{ idm_automount_location.state | default(omit) }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

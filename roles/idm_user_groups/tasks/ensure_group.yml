@@ -19,3 +19,7 @@
     posix: "{{ idm_user_group.posix | default(omit) }}"
     rename: "{{ idm_user_group.rename | default(omit) }}"
     user: "{{ idm_user_group.user_list | default(omit) }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

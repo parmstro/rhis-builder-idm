@@ -5,3 +5,7 @@
   loop: "{{ current_tg.segments }}"
   loop_control:
     loop_var: current_tg_segment
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_install

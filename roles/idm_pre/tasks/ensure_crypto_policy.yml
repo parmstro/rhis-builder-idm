@@ -15,6 +15,11 @@
             that:
               - (ipa_crypto_policy | upper) != "FUTURE"
             fail_msg: "Requested policy is FUTURE. IdM Server deployment is not supported with policy FUTURE. Aborting."
+            tags:
+              - tags_rhis_builder
+              - tags_rhis_builder_idm
+              - tags_idm_pre
+              - tags_idm_install
 
 
         - name: "Set the policy as requested"
@@ -22,10 +27,21 @@
             name: redhat.rhel_system_roles.crypto_policies
           vars:
             crypto_policies_policy: "{{ ipa_crypto_policy | upper }}"
+          tags:
+              - tags_rhis_builder
+              - tags_rhis_builder_idm
+              - tags_rhis_pre
+              - tags_idm_install
+
 
     - name: "Validate the current crypto-policy"
       ansible.builtin.include_role:
         name: redhat.rhel_system_roles.crypto_policies
+      tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
+        - tags_idm_pre
+        - tags_idm_install
 
     - name: "Assert that the current cryptographic policy is not FUTURE"
       when: crypto_policies_active is defined
@@ -33,3 +49,8 @@
         that:
           - crypto_policies_active != "FUTURE"
         fail_msg: "The current system-wide cryptographic policy is FUTURE. IdM Server deployment is not supported with policy FUTURE. Aborting."
+      tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
+        - tags_idm_pre
+        - tags_idm_install

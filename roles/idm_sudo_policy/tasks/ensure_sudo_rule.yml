@@ -26,3 +26,7 @@
     runasusercategory: "{{ idm_sudo_rule.runas_user_category | default(omit) }}"
     runasgroup: "{{ idm_sudo_rule.runas_user_groups | default(omit) }}"
     runasgroupcategory: "{{ idm_sudo_rule.runas_group_category | default(omit) }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

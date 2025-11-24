@@ -22,3 +22,7 @@
     state: "{{ idp_reference.state | default(omit) }}"
     token_uri: "{{ idp_reference.token_uri | default(omit) }}"
     userinfo_uri: "{{ idp_reference.user_info_uri | default(omit) }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

@@ -11,3 +11,7 @@
     description: "{{ idm_sudo_command_group.description }}"
     state: "{{ idm_sudo_command_group.state | default(omit) }}"
     sudocmd: "{{ idm_sudo_command_group.commands }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

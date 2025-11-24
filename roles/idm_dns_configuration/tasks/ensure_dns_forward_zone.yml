@@ -12,3 +12,7 @@
     forwarders: "{{ idm_dns_forward_zone.forwarders | default(omit) }}"
     skip_overlap_check: "{{ idm_dns_forward_zone.skip_overlap_check | default(omit) }}"
     state: "{{ idm_dns_forward_zone.state | default(omit) }}"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install

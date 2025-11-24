@@ -10,6 +10,10 @@
   loop_control:
     loop_var: idm_sudo_command
   no_log: true
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install
 
 # Sudo Command Groups
 - name: "Ensure sudo command_group states"
@@ -19,6 +23,10 @@
   loop_control:
     loop_var: idm_sudo_command_group
   no_log: true
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install
 
 # Sudo Rules
 - name: "Ensure idm sudo rule states"
@@ -28,3 +36,7 @@
   loop_control:
     loop_var: idm_sudo_rule
   no_log: true
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install
