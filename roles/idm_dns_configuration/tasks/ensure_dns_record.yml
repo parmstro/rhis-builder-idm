@@ -74,7 +74,7 @@
     ptr_record: "{{ idm_dns_record.ptr_record_raw_list | default(omit) }}"
     record_ttl: "{{ idm_dns_record.record_ttl | default(omit) }}"
     records: "{{ idm_dns_record.records_raw_list | default(omit) }}"
-    srv_port: "{{ idm_dns_record.srv | default(omit) }}"
+    srv_port: "{{ idm_dns_record.srv_priority | default(omit) }}"
     srv_priority: "{{ idm_dns_record.srv_priority | default(omit) }}"
     srv_record: "{{ idm_dns_record.srv_record_raw_list | default(omit) }}"
     srv_target: "{{ idm_dns_record.srv_target | default(omit) }}"
