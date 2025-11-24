@@ -6,3 +6,18 @@
 # see: https://github.com/parmstro/rhis-builder-yubi for details
 
 # currently not implemented in redhat.rhel_idm
+# tags_idm_certificate_profiles
+
+
+- name: "Ensure certificate profile"
+  when: idm_certificate_profiles is defined and (idm_certificate_profiles | length) > 0
+  ansible.builtin.include_tasks: "ensure_certificate_profile.yml"
+  loop: "{{ idm_certificate_profiles }}"
+  loop_control:
+    loop_var: idm_certificate_profile
+  no_log: true
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install
+    - tags_idm_certificate_profiles

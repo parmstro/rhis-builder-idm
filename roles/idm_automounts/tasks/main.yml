@@ -3,7 +3,7 @@
 # Create configuration for automount locations and maps
 
 - name: "Ensure Automount locations"
-  when: idm_automount_locations is defined
+  when: idm_automount_locations is defined and (idm_automount_locations | length) > 0
   ansible.builtin.include_tasks: "ensure_automount_location.yml"
   loop: "{{ idm_automount_locations }}"
   loop_control:
@@ -13,9 +13,10 @@
     - tags_rhis_builder
     - tags_rhis_builder_idm
     - tags_idm_post_install
+    - tags_idm_automounts
 
 - name: "Ensure Automount maps"
-  when: idm_automount_maps is defined
+  when: idm_automount_maps is defined and (idm_automount_maps | length) > 0
   ansible.builtin.include_tasks: "ensure_automount_map.yml"
   loop: "{{ idm_automount_maps }}"
   loop_control:
@@ -25,9 +26,10 @@
     - tags_rhis_builder
     - tags_rhis_builder_idm
     - tags_idm_post_install
+    - tags_idm_automounts
 
 - name: "Ensure Automount keys"
-  when: idm_automount_keys is defined
+  when: idm_automount_keys is defined and (idm_automount_keys | length) > 0
   ansible.builtin.include_tasks: "ensure_automount_key.yml"
   loop: "{{ idm_automount_keys }}"
   loop_control:
@@ -37,3 +39,4 @@
     - tags_rhis_builder
     - tags_rhis_builder_idm
     - tags_idm_post_install
+    - tags_idm_automounts

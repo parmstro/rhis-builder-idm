@@ -40,6 +40,8 @@
       ansible.builtin.include_role:
         name: idm_pre
       tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
         - tags_idm_pre
         - tags_idm_install
 
@@ -47,13 +49,26 @@
       ansible.builtin.include_role:
         name: idm_primary
       tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
         - tags_idm_install
 
+    - name: "Apply role idm_harden"
+      ansible.builtin.include_role:
+        name: idm_harden
+      tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
+        - tags_idm_post_install
+        - tags_idm_harden
+
     # set the base configurations for the deployment
-    - name: "Apply role idm_configuration"
+    - name: "Apply role idm_configuration"  
       ansible.builtin.include_role:
         name: idm_configuration
       tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
         - tags_idm_post_install
         - tags_idm_config
 
@@ -62,6 +77,8 @@
       ansible.builtin.include_role:
         name: idm_id_ranges
       tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
         - tags_idm_post_install
         - tags_idm_id_ranges
 
@@ -71,13 +88,35 @@
       ansible.builtin.include_role:
         name: idm_idp_reference
       tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
         - tags_idm_post_install
         - tags_idm_idp_config
+
+    - name: "Apply automount policy"
+      ansible.builtin.include_role:
+        name: idm_automounts
+      tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
+        - tags_idm_post_install
+        - tags_idm_automounts
+
+    - name: "Apply certificate profiles"
+      ansible.builtin.include_role:
+        name: idm_certificate_profiles
+      tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
+        - tags_idm_post_install
+        - tags_idm_certificate_profiles
 
     - name: "Apply role idm_users"
       ansible.builtin.include_role:
         name: idm_users
       tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
         - tags_idm_post_install
         - tags_idm_users
 
@@ -85,8 +124,10 @@
       ansible.builtin.include_role:
         name: idm_user_groups
       tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
         - tags_idm_post_install
-        - tags_idm_groups
+        - tags_idm_user_groups
 
     # password policy is applied to groups
     # group needs to exist of will policy creation/mod will fail
@@ -94,6 +135,8 @@
       ansible.builtin.include_role:
         name: idm_password_policy
       tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
         - tags_idm_post_install
         - tags_idm_password_policy
 
@@ -101,8 +144,10 @@
       ansible.builtin.include_role:
         name: idm_host_groups
       tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
         - tags_idm_post_install
-        - tags_idm_groups_hosts
+        - tags_idm_host_groups
 
     # Add the hosts do not support ipa_client
     # Add hosts that *do* support ipa_client
@@ -110,6 +155,8 @@
       ansible.builtin.include_role:
         name: idm_hosts
       tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
         - tags_idm_post_install
         - tags_idm_hosts
 
@@ -117,19 +164,25 @@
       ansible.builtin.include_role:
         name: idm_hbac_policy
       tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
         - tags_idm_post_install
-        - tags_idm_hbac
+        - tags_idm_hbac_policy
 
     - name: "Apply role idm_sudo policy"
       ansible.builtin.include_role:
         name: idm_sudo_policy
       tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
         - tags_idm_post_install
-        - tags_idm_sudo
+        - tags_idm_sudo_policy
 
     - name: "Apply role idm_dns configuration"
       ansible.builtin.include_role:
         name: idm_dns_configuration
       tags:
+        - tags_rhis_builder
+        - tags_rhis_builder_idm
         - tags_idm_post_install
         - tags_idm_dns

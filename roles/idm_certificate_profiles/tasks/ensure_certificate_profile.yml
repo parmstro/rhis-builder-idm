@@ -1,0 +1,12 @@
+---
+
+# Waiting on code from upstream
+
+- name: "Ensure the certificate_profile - {{ idm_certificate_profile.name }}"
+  ansible.builtin.debug:
+    msg: "Not yet implemented"
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_post_install
+    - tags_idm_certificate_profiles
