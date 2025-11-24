@@ -8,8 +8,12 @@
     attributes:
       nsslapd-allow-anonymous-access: "rootdse"  # Or "on" depending on your needs
     state: "exact"
-  delegate_to: "{{ groups['idm_primary'][0] }}"
+    bind_dn: "{{ ipa_keytab_dn_vault }}"
+    bind_pw: "{{ ipa_dm_password_vault }}"
+    server_uri: "ldaps://{{ ansible_fqdn }}"
+    validate_certs: false
   notify: "Restart_ds"
+  no_log: true
   tags:
     - tags_rhis_builder
     - tags_rhis_builder_idm
