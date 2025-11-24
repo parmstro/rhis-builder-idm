@@ -86,7 +86,7 @@
     # apply to a user authentication scheme
     - name: "Apply role idm_idp_reference"
       ansible.builtin.include_role:
-        name: idm_idp_reference
+        name: idm_idp_references
       tags:
         - tags_rhis_builder
         - tags_rhis_builder_idm
