@@ -1,4 +1,4 @@
-- name: "Ensure state for idm user - {{ idm_user.name }}"
+- name: "Ensure state for idm user - {{ idm_user.login }}"
   redhat.rhel_idm.ipauser:
     action: "{{ idm_user.action | default(omit) }}"                     # defaults to acting on idm_user
     ipaadmin_principal: "{{ ipa_admin_principal }}"
