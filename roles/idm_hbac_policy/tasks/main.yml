@@ -1,7 +1,7 @@
 ---
 
 - name: "Ensure HBAC service states"
-  when: idm_hbac_services is defined
+  when: idm_hbac_services is defined and (idm_hbac_services | length) > 0
   ansible.builtin.include_tasks: "ensure_hbac_service.yml"
   loop: "{{ idm_hbac_services }}"
   loop_control:
@@ -11,9 +11,10 @@
     - tags_rhis_builder
     - tags_rhis_builder_idm
     - tags_idm_post_install
+    - tags_idm_hbac_policy
 
 - name: "Ensure HBAC service group states"
-  when: idm_hbac_service_groups is defined
+  when: idm_hbac_service_groups is defined and (idm_hbac_service_groups | length) > 0
   ansible.builtin.include_tasks: "ensure_hbac_service_group.yml"
   loop: "{{ idm_hbac_service_groups }}"
   loop_control:
@@ -23,9 +24,10 @@
     - tags_rhis_builder
     - tags_rhis_builder_idm
     - tags_idm_post_install
+    - tags_idm_hbac_policy
 
 - name: "Ensure rhisam HBAC rule states"
-  when: idm_hbac_rules is defined
+  when: idm_hbac_rules is defined and (idm_hbac_rules | length) > 0
   ansible.builtin.include_tasks: "ensure_hbac_rule.yml"
   loop: "{{ idm_hbac_rules }}"
   loop_control:
@@ -35,16 +37,18 @@
     - tags_rhis_builder
     - tags_rhis_builder_idm
     - tags_idm_post_install
+    - tags_idm_hbac_policy
 
 # Running HBAC tests is under development
 # Code commented out
 
 # This is done so that you could call the test_hbac_policies task on its own.
 # - name: "Run HBAC policy tests"
-#   when: idm_hbac_policy_tests is defined
+#   when: idm_hbac_policy_tests is defined and (idm_hbac_policy_tests | length) > 0
 #   ansible.builtin.include_tasks: "test_hbac_policies.yml"
 #   tags:
 #     - tags_rhis_builder
 #     - tags_rhis_builder_idm
 #     - tags_idm_post_install
-#     - tags_idm_post_install
+#     - tags_idm_hbac_policy
+#     - tags_idm_hbac_tests

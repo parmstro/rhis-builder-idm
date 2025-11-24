@@ -3,7 +3,7 @@
 # Configure the sample and user host_groups
 
 - name: "Ensure the host groups configuration"
-  when: idm_host_groups is defined
+  when: idm_host_groups is defined and (idm_host_groups | length) > 0
   ansible.builtin.include_tasks: "ensure_host_group.yml"
   loop: "{{ idm_host_groups }}"
   loop_control:
@@ -13,3 +13,4 @@
     - tags_rhisam
     - tags_rhis_builder_idm
     - tags_idm_post_install
+    - tags_idm_host_groups

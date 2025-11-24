@@ -3,7 +3,7 @@
 # ensure the (typically non-idmclient) hosts defined exist
 
 - name: "Ensure the idm hosts configuration"
-  when: idm_hosts is defined
+  when: idm_hosts is defined and (idm_hosts | length) > 0
   ansible.builtin.include_tasks: "ensure_host.yml"
   loop: "{{ idm_hosts }}"
   loop_control:
@@ -13,3 +13,4 @@
     - tags_rhisam
     - tags_rhis_builder_idm
     - tags_idm_post_install
+    - tags_idm_hosts

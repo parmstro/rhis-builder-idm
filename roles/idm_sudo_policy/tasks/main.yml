@@ -4,7 +4,7 @@
 
 # Sudo Commands
 - name: "Ensure sudo command states"
-  when: idm_sudo_commands is defined
+  when: idm_sudo_commands is defined and (idm_sudo_commands | length) > 0
   ansible.builtin.include_tasks: "ensure_sudo_command.yml"
   loop: "{{ idm_sudo_commands }}"
   loop_control:
@@ -14,10 +14,11 @@
     - tags_rhis_builder
     - tags_rhis_builder_idm
     - tags_idm_post_install
+    - tags_idm_sudo_policy
 
 # Sudo Command Groups
 - name: "Ensure sudo command_group states"
-  when: idm_sudo_command_groups is defined
+  when: idm_sudo_command_groups is defined and (idm_sudo_command_groups | length) > 0
   ansible.builtin.include_tasks: "ensure_sudo_command_group.yml"
   loop: "{{ idm_sudo_command_groups }}"
   loop_control:
@@ -27,10 +28,11 @@
     - tags_rhis_builder
     - tags_rhis_builder_idm
     - tags_idm_post_install
+    - tags_idm_sudo_policy
 
 # Sudo Rules
 - name: "Ensure idm sudo rule states"
-  when: idm_sudo_rules is defined
+  when: idm_sudo_rules is defined and (idm_sudo_rules | length) > 0
   ansible.builtin.include_tasks: "ensure_sudo_rule.yml"
   loop: "{{ idm_sudo_rules }}"
   loop_control:
@@ -40,3 +42,4 @@
     - tags_rhis_builder
     - tags_rhis_builder_idm
     - tags_idm_post_install
+    - tags_idm_sudo_policy
