@@ -1,27 +1,28 @@
 ---
 
 # Add the idp reference
+# you can provide the uri info or a provider, not both
 
 - name: "Ensure the idp reference state for - {{ idp_reference.name }}"
   redhat.rhel_idm.ipaidp:
     ipaadmin_principal: "{{ ipa_admin_principal }}"                          # required
     ipaadmin_password: "{{ ipa_admin_password }}"                            # required
-    name: "{{ idp_reference.name }}"                                               # required
-    auth_uri: "{{ idp_reference.auth_uri }}"                                       # required
+    name: "{{ idp_reference.name }}"                                         # required
+    auth_uri: "{{ idp_reference.auth_uri | default(omit) }}"
     base_url: "{{ idp_red.base_url | default(omit) }}"
-    client_id: "{{ idp_reference.client_id }}"                                     # required
+    client_id: "{{ idp_reference.client_id }}"                               # required
     delete_continue: "{{ idp_reference.delete_continue | default(omit) }}"
-    dev_auth_uri: "{{ idp_reference.device_auth_uri }}"
+    dev_auth_uri: "{{ idp_reference.dev_auth_uri | default(omit) }}"
     idp_user_id: "{{ idp_reference.user_id_attribute }}" # e.g. 'email'
     issuer_url: "{{ idp_reference.issuer_url | default(omit) }}"
-    organization: "{{ idp_reference.organization_or_realm | default(omit) }}"
+    organization: "{{ idp_reference.idp_organization | default(omit) }}"
     provider: "{{ idp_reference.provider | default(omit) }}"
     rename: "{{ idp_reference.rename | default(omit) }}"
     scope: "{{ idp_reference.scope | default(omit) }}"
     secret: "{{ idp_reference.secret | default(omit) }}"
     state: "{{ idp_reference.state | default(omit) }}"
     token_uri: "{{ idp_reference.token_uri | default(omit) }}"
-    userinfo_uri: "{{ idp_reference.user_info_uri | default(omit) }}"
+    userinfo_uri: "{{ idp_reference.userinfo_uri | default(omit) }}"
   tags:
     - tags_rhis_builder
     - tags_rhis_builder_idm
