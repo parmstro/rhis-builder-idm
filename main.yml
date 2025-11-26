@@ -63,7 +63,7 @@
         - tags_idm_harden
 
     # set the base configurations for the deployment
-    - name: "Apply role idm_configuration"  
+    - name: "Apply role idm_configuration"
       ansible.builtin.include_role:
         name: idm_configuration
       tags:
