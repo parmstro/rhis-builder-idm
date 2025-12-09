@@ -15,11 +15,11 @@
             that:
               - (ipa_crypto_policy | upper) != "FUTURE"
             fail_msg: "Requested policy is FUTURE. IdM Server deployment is not supported with policy FUTURE. Aborting."
-            tags:
-              - tags_rhis_builder
-              - tags_rhis_builder_idm
-              - tags_idm_pre
-              - tags_idm_install
+          tags:
+            - tags_rhis_builder
+            - tags_rhis_builder_idm
+            - tags_idm_pre
+            - tags_idm_install
 
 
         - name: "Set the policy as requested"
@@ -28,10 +28,10 @@
           vars:
             crypto_policies_policy: "{{ ipa_crypto_policy | upper }}"
           tags:
-              - tags_rhis_builder
-              - tags_rhis_builder_idm
-              - tags_rhis_pre
-              - tags_idm_install
+            - tags_rhis_builder
+            - tags_rhis_builder_idm
+            - tags_rhis_pre
+            - tags_idm_install
 
 
     - name: "Validate the current crypto-policy"
