@@ -1,0 +1,24 @@
+---
+
+# Send an email notification to new user
+
+- name: "Send email notification"
+  community.general.mail:
+    username: "{{ idm_smtp_username_vault }}"
+    password: "{{ idm_smtp_password_vault }}"
+    host: "{{ idm_smtp_address }}"
+    port: "{{ idm_smtp_port }}"
+    subject: "{{ idm_email_subject_prefix }}"
+    body: "{{ idm_notification_body }}"
+    from: "{{ idm_reply_address }}"
+    to: "{{ idm_user.email }}"
+    attach: "{{ idm_new_user_file | default(omit) }}"
+    headers:
+      - Reply-To={{ idm_reply_address }}
+      - X-Special="User Notification"
+    charset: us-ascii
+
+- name: "Clean up"
+  ansible.builtin.file:
+    path: "{{ idm_new_user_file }}"
+    state: absent

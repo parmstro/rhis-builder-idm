@@ -1,3 +1,6 @@
+---
+# yamllint disable rule:line-length
+
 - name: "Ensure state for idm user - {{ idm_user.login }}"
   redhat.rhel_idm.ipauser:
     action: "{{ idm_user.action | default(omit) }}"                     # defaults to acting on idm_user
@@ -28,7 +31,7 @@
     orgunit: "{{ idm_user.orgunit | default(omit) }}"                   # alias ou
     pager: "{{ idm_user.pager_numbers | default(omit) }}"
     password: "{{ idm_user.password | default(omit) }}"
-    passwordexpiration: "{{ idm_user.password_expiration | default(omit) }}"
+    passwordexpiration: "{{ idm_user.password_expire | default(omit) }}"
     phone: "{{ idm_user.phone_numbers | default(omit) }}"
     postalcode: "{{ idm_user.postalcode | default(omit) }}"
     preferredlanguage: "{{ idm_user.preferred_language | default(omit) }}"
@@ -47,12 +50,54 @@
     street: "{{ idm_user.street | default(omit) }}"
     title: "{{ idm_user.title | default(omit) }}"
     uid: "{{ idm_user.uid | default(omit) }}"
+    update_password: "{{ idm_user.update_password | default(omit) }}"
     userauthtype: "{{ idm_user.userauthtype | default(omit) }}"
     userclass: "{{ idm_user.userclass | default(omit) }}"
     userstate: "{{ idm_user.userstate | default(omit) }}"
     state: "{{ idm_user.state | default(omit) }}"
+  register: user_result
   tags:
     - tags_rhis_builder
     - tags_rhis_builder_idm
     - tags_idm_post_install
     - tags_idm_users
+
+
+- name: "Send a notification to the new user"
+  when:
+    - ((idm_user.random is defined and idm_user.random) and (user_result.user | length) > 0) or (idm_user.password is defined and idm_send_new_user_notifications)
+    - idm_user.email is defined and (idm_user.email | length) > 0
+  block:
+    - name: "Retrieve the user password for notification"
+      when: idm_user.random
+      ansible.builtin.set_fact:
+        new_password: "{{ user_result.user.randompassword }}"
+
+    - name: "Retrieve the user password for notification"
+      when: not idm_user.random
+      ansible.builtin.set_fact:
+        new_password: "{{ idm_user.password }}"
+
+    - name: "Encrypt a value using a shared secret" # noqa risky-shell-pipe
+      ansible.builtin.shell: "echo '{{ new_password }}' | gpg --batch --yes --passphrase {{ default_environment_password_vault }} --symmetric --output {{ idm_new_user_file }}" # noqa yaml[line-length]
+      register: gpg_result
+      changed_when: gpg_result.rc == 0
+
+    - name: "Generate the notification body"
+      ansible.builtin.set_fact:
+        idm_notification_body: |
+          Welcome to the {{ _global_domain_name | upper }} realm.
+          You have been assigned the login: {{ idm_user.login }}
+          A random password has been encrypted using gpg and stored in the attached file.
+          A passphrase for the encrypted file will be sent to you in a separate email.
+          Save the attached file and decrypt it using gpg and the passphrase.
+          gpg --batch --passphrase "your_passphrase" -d encrypted.file.txt
+          When you log in to the environment for the first time you wiil be prompted for the
+          random password contained in the file and should be asked to change the password.
+
+
+    - name: "Sending notification for user {{ idm_user.login }} to {{ idm_user.email }}" # noqa name[template]
+      when:
+        - idm_notification_delivery_method == "SMTP"
+        - idm_user.email is defined and (idm_user.email | length) > 0
+      ansible.builtin.include_tasks: "send_email_notification.yml"
