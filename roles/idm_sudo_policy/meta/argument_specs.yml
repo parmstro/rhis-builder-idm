@@ -1,0 +1,172 @@
+---
+argument_specs:
+  main:
+    short_description: Manage IDM sudo policies
+    description:
+      - Manages sudo commands, sudo command groups, and sudo rules
+      - Defines what commands users/groups can execute with elevated privileges
+    author:
+      - Red Hat Infrastructure Services
+      - parmstro
+
+    options:
+      ipa_admin_principal:
+        description: IPA admin principal for authentication
+        type: str
+        required: true
+
+      ipa_admin_password:
+        description: IPA admin password for authentication
+        type: str
+        required: true
+        no_log: true
+
+      idm_sudo_commands:
+        description: List of sudo command definitions
+        type: list
+        elements: dict
+        required: false
+        options:
+          name:
+            description: Sudo command name or path
+            type: str
+            required: true
+          state:
+            description: Whether the sudo command should exist
+            type: str
+            required: false
+            choices: [present, absent]
+            default: present
+          description:
+            description: Command description
+            type: str
+            required: false
+
+      idm_sudo_command_groups:
+        description: List of sudo command group definitions
+        type: list
+        elements: dict
+        required: false
+        options:
+          name:
+            description: Sudo command group name
+            type: str
+            required: true
+          action:
+            description: Action to perform (member vs group level)
+            type: str
+            required: false
+          state:
+            description: Whether the command group should exist
+            type: str
+            required: false
+            choices: [present, absent]
+            default: present
+          description:
+            description: Command group description
+            type: str
+            required: false
+          sudocmd_list:
+            description: List of sudo commands in this group
+            type: list
+            elements: str
+            required: false
+
+      idm_sudo_rules:
+        description: List of sudo rule definitions
+        type: list
+        elements: dict
+        required: false
+        options:
+          name:
+            description: Sudo rule name
+            type: str
+            required: true
+          action:
+            description: Action to perform (member vs rule level)
+            type: str
+            required: false
+          state:
+            description: Whether the sudo rule should exist
+            type: str
+            required: false
+            choices: [present, absent, enabled, disabled]
+            default: present
+          description:
+            description: Rule description
+            type: str
+            required: false
+          cmdcategory:
+            description: Command category (all commands)
+            type: str
+            required: false
+            choices: [all]
+          hostcategory:
+            description: Host category (all hosts)
+            type: str
+            required: false
+            choices: [all]
+          usercategory:
+            description: User category (all users)
+            type: str
+            required: false
+            choices: [all]
+          runasusercategory:
+            description: Run-as user category
+            type: str
+            required: false
+            choices: [all]
+          runasgroupcategory:
+            description: Run-as group category
+            type: str
+            required: false
+            choices: [all]
+          sudocmd_list:
+            description: Sudo commands allowed by this rule
+            type: list
+            elements: str
+            required: false
+          sudocmdgroup_list:
+            description: Sudo command groups allowed by this rule
+            type: list
+            elements: str
+            required: false
+          host_list:
+            description: Hosts where rule applies
+            type: list
+            elements: str
+            required: false
+          hostgroup_list:
+            description: Host groups where rule applies
+            type: list
+            elements: str
+            required: false
+          user_list:
+            description: Users who can use this rule
+            type: list
+            elements: str
+            required: false
+          group_list:
+            description: Groups who can use this rule
+            type: list
+            elements: str
+            required: false
+          runasuser_list:
+            description: Users to run as
+            type: list
+            elements: str
+            required: false
+          runasgroup_list:
+            description: Groups to run as
+            type: list
+            elements: str
+            required: false
+          sudooption_list:
+            description: Sudo options (e.g., !authenticate)
+            type: list
+            elements: str
+            required: false
+          order:
+            description: Rule processing order
+            type: int
+            required: false

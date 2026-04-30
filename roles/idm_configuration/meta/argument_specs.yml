@@ -1,0 +1,173 @@
+---
+argument_specs:
+  main:
+    short_description: Configure global IDM server settings
+    description:
+      - Configures global settings for the IDM server environment
+      - Sets user defaults, search limits, authentication types, and SELinux mappings
+      - This role wraps the redhat.rhel_idm.ipaconfig module
+    author:
+      - Red Hat Infrastructure Services
+      - parmstro
+
+    options:
+      ipa_admin_principal:
+        description: IPA admin principal for authentication
+        type: str
+        required: true
+
+      ipa_admin_password:
+        description: IPA admin password for authentication
+        type: str
+        required: true
+        no_log: true
+
+      idm_config_add_sids:
+        description: Add SIDs for trust with Active Directory
+        type: bool
+        required: false
+
+      idm_config_ca_renewal_master_server:
+        description: Renewal master server for IPA certificate authority
+        type: str
+        required: false
+
+      idm_config_confstring_list:
+        description: Set extra hashes to generate in password plug-in
+        type: list
+        elements: str
+        required: false
+        choices:
+          - "AllowNThash"
+          - "KDC:Disable Last Success"
+
+      idm_config_defaultgroup:
+        description: Default group for new users
+        type: str
+        required: false
+        default: "ipausers"
+
+      idm_config_defaultshell:
+        description: Default shell for new users
+        type: str
+        required: false
+        default: "/bin/bash"
+
+      idm_config_emaildomain:
+        description: Default email domain for users
+        type: str
+        required: false
+
+      idm_config_enable_migration:
+        description: Enable migration mode for importing users from LDAP
+        type: bool
+        required: false
+        default: false
+
+      idm_config_enable_sid:
+        description: |
+          Enable SID generation support
+          Cannot be disabled if it was activated during trust-ad install
+        type: bool
+        required: false
+        default: true
+
+      idm_config_groupobjectclasses_list:
+        description: Default group object classes
+        type: list
+        elements: str
+        required: false
+
+      idm_config_groupsearch_list:
+        description: List of fields to search for group search
+        type: list
+        elements: str
+        required: false
+
+      idm_config_homedirectory:
+        description: Default home directory base path for new users
+        type: str
+        required: false
+        default: "/home"
+
+      idm_config_maxhostname:
+        description: Maximum length of hostname
+        type: int
+        required: false
+
+      idm_config_maxusername:
+        description: Maximum length of username
+        type: int
+        required: false
+
+      idm_config_netbios_name:
+        description: NetBIOS name for the IDM domain
+        type: str
+        required: false
+
+      idm_config_pac_type_list:
+        description: Privilege Attribute Certificate (PAC) type list
+        type: list
+        elements: str
+        required: false
+
+      idm_config_pwdexpnotify:
+        description: Number of days notice before password expiration
+        type: int
+        required: false
+        default: 12
+
+      idm_config_searchrecordslimit:
+        description: Maximum count of records to return in searches
+        type: int
+        required: false
+        default: 20
+
+      idm_config_searchtimelimit:
+        description: Maximum time in seconds for search operations
+        type: int
+        required: false
+        default: 10
+
+      idm_config_selinuxusermapdefault:
+        description: Default SELinux user map
+        type: str
+        required: false
+        default: "unconfined_u:s0-s0:c0.c1023"
+
+      idm_config_selinuxusermaporder_list:
+        description: |
+          Ordered list of SELinux user mappings
+          Listed in order of increasing priority (highest priority last)
+        type: list
+        elements: str
+        required: false
+
+      idm_config_auth_type_list:
+        description: |
+          Default authentication types supported
+          By default, per-user override is enabled
+          Password is implied if none are selected
+        type: list
+        elements: str
+        required: false
+        choices:
+          - disabled
+          - password
+          - radius
+          - otp
+          - pkinit
+          - hardened
+          - idp
+
+      idm_config_userobjectclasses_list:
+        description: Default user object classes
+        type: list
+        elements: str
+        required: false
+
+      idm_config_usersearch_list:
+        description: List of fields to search for user search
+        type: list
+        elements: str
+        required: false

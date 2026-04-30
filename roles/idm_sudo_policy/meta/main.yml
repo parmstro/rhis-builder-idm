@@ -1,0 +1,36 @@
+---
+galaxy_info:
+  role_name: idm_sudo_policy
+  author: parmstro
+  description: Manages sudo policies and rules in rhis-builder
+  license: GPL-3.0
+  min_ansible_version: "2.9"
+
+  platforms:
+    - name: EL
+      versions:
+        - "8"
+        - "9"
+        - "10"
+    - name: Fedora
+      versions:
+        - "38"
+        - "39"
+        - "40"
+        - "41"
+        - "42"
+        - "43"
+
+  galaxy_tags:
+    - rhis
+    - idm
+    - ipa
+    - sudo
+    - policy
+    - privilege
+    - rhel
+
+dependencies: []
+
+collections:
+  - redhat.rhel_idm

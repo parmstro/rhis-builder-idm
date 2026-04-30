@@ -1,0 +1,182 @@
+---
+argument_specs:
+  main:
+    short_description: Manage IDM host entries
+    description:
+      - Creates, modifies, or removes IDM host entries
+      - Used to add hosts that would not otherwise be registered
+      - Supports keytab delegation and host certificates
+    author:
+      - Red Hat Infrastructure Services
+      - parmstro
+
+    options:
+      ipa_admin_principal:
+        description: IPA admin principal for authentication
+        type: str
+        required: true
+
+      ipa_admin_password:
+        description: IPA admin password for authentication
+        type: str
+        required: true
+        no_log: true
+
+      idm_hosts:
+        description: List of host definitions to manage
+        type: list
+        elements: dict
+        required: false
+        options:
+          fqdn_list:
+            description: Fully qualified domain name(s) for the host
+            type: list
+            elements: str
+            required: true
+          action:
+            description: Action level (host or member)
+            type: str
+            required: false
+          state:
+            description: Whether the host should exist
+            type: str
+            required: false
+            choices: [present, absent, disabled]
+            default: present
+          description:
+            description: Host description
+            type: str
+            required: false
+          force:
+            description: Force host operations
+            type: bool
+            required: false
+          random:
+            description: Generate random password for enrollment
+            type: bool
+            required: false
+          ip_address_list:
+            description: IP address(es) for the host
+            type: list
+            elements: str
+            required: false
+          mac_address_list:
+            description: MAC address(es) for the host
+            type: list
+            elements: str
+            required: false
+          certificate_list:
+            description: Host certificate(s)
+            type: list
+            elements: str
+            required: false
+          sshpubkey_list:
+            description: SSH public key(s)
+            type: list
+            elements: str
+            required: false
+          principal_alias_list:
+            description: Kerberos principal alias(es)
+            type: list
+            elements: str
+            required: false
+          locality:
+            description: Host locality
+            type: str
+            required: false
+          location:
+            description: Host location
+            type: str
+            required: false
+          platform:
+            description: Hardware platform
+            type: str
+            required: false
+          os:
+            description: Operating system
+            type: str
+            required: false
+          userclass_list:
+            description: Host category classes
+            type: list
+            elements: str
+            required: false
+          auth_ind_list:
+            description: Authentication indicators
+            type: list
+            elements: str
+            required: false
+          requires_pre_auth:
+            description: Require pre-authentication
+            type: bool
+            required: false
+          ok_as_delegate:
+            description: Client credentials may be delegated
+            type: bool
+            required: false
+          ok_to_auth_as_delegate:
+            description: Service is allowed to authenticate on behalf of client
+            type: bool
+            required: false
+          update_dns:
+            description: Update DNS records when adding host
+            type: bool
+            required: false
+          reverse:
+            description: Create reverse DNS record
+            type: bool
+            required: false
+          update_password:
+            description: When to update password
+            type: str
+            required: false
+            choices: [always, on_create]
+          managedby_host_list:
+            description: Hosts that manage this host
+            type: list
+            elements: str
+            required: false
+          allow_create_keytab_user_list:
+            description: Users allowed to create keytabs
+            type: list
+            elements: str
+            required: false
+          allow_create_keytab_group_list:
+            description: Groups allowed to create keytabs
+            type: list
+            elements: str
+            required: false
+          allow_create_keytab_host_list:
+            description: Hosts allowed to create keytabs
+            type: list
+            elements: str
+            required: false
+          allow_create_keytab_hostgroup_list:
+            description: Host groups allowed to create keytabs
+            type: list
+            elements: str
+            required: false
+          allow_retrieve_keytab_user_list:
+            description: Users allowed to retrieve keytabs
+            type: list
+            elements: str
+            required: false
+          allow_retrieve_keytab_group_list:
+            description: Groups allowed to retrieve keytabs
+            type: list
+            elements: str
+            required: false
+          allow_retrieve_keytab_host_list:
+            description: Hosts allowed to retrieve keytabs
+            type: list
+            elements: str
+            required: false
+          allow_retrieve_keytab_hostgroup_list:
+            description: Host groups allowed to retrieve keytabs
+            type: list
+            elements: str
+            required: false
+          host_dict:
+            description: Dictionary of hosts with all attributes
+            type: dict
+            required: false
