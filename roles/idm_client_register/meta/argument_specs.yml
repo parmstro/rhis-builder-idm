@@ -1,0 +1,61 @@
+---
+argument_specs:
+  main:
+    short_description: Register systems as IDM clients
+    description:
+      - Enrolls systems as IDM clients using ipa-client-install
+      - Configures client authentication and authorization
+    author:
+      - Red Hat Infrastructure Services
+      - parmstro
+
+    options:
+      ipa_admin_principal:
+        description: IPA admin principal for client enrollment
+        type: str
+        required: false
+
+      ipa_admin_password:
+        description: IPA admin password for client enrollment
+        type: str
+        required: false
+        no_log: true
+
+      idm_server:
+        description: IDM server to enroll with
+        type: str
+        required: false
+
+      idm_domain:
+        description: IDM domain name
+        type: str
+        required: false
+
+      idm_realm:
+        description: Kerberos realm
+        type: str
+        required: false
+
+      idm_client_force_join:
+        description: Force client enrollment even if already enrolled
+        type: bool
+        required: false
+        default: false
+
+      idm_client_configure_ssh:
+        description: Configure SSH to use IDM for host keys
+        type: bool
+        required: false
+        default: true
+
+      idm_client_configure_sudo:
+        description: Configure SSSD for sudo rules
+        type: bool
+        required: false
+        default: true
+
+      idm_client_mkhomedir:
+        description: Create home directories on first login
+        type: bool
+        required: false
+        default: true

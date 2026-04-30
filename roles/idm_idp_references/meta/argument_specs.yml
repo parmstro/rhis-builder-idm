@@ -1,0 +1,65 @@
+---
+argument_specs:
+  main:
+    short_description: Manage IDM identity provider references
+    description:
+      - Configures external identity provider (IdP) references
+      - Enables authentication via OAuth2/OIDC providers
+    author:
+      - Red Hat Infrastructure Services
+      - parmstro
+
+    options:
+      ipa_admin_principal:
+        description: IPA admin principal for authentication
+        type: str
+        required: true
+
+      ipa_admin_password:
+        description: IPA admin password for authentication
+        type: str
+        required: true
+        no_log: true
+
+      idm_idp_references:
+        description: List of identity provider reference definitions
+        type: list
+        elements: dict
+        required: false
+        options:
+          name:
+            description: IdP reference name
+            type: str
+            required: true
+          state:
+            description: Whether the IdP reference should exist
+            type: str
+            required: false
+            choices: [present, absent]
+            default: present
+          provider:
+            description: IdP provider type
+            type: str
+            required: false
+            choices: [google, github, microsoft, keycloak, okta]
+          organization:
+            description: Organization identifier for IdP
+            type: str
+            required: false
+          base_url:
+            description: Base URL for IdP
+            type: str
+            required: false
+          client_id:
+            description: OAuth2 client ID
+            type: str
+            required: false
+          secret:
+            description: OAuth2 client secret
+            type: str
+            required: false
+            no_log: true
+          scope:
+            description: OAuth2 scopes
+            type: str
+            required: false

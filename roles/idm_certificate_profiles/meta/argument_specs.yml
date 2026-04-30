@@ -1,0 +1,51 @@
+---
+argument_specs:
+  main:
+    short_description: Manage IDM certificate profiles
+    description:
+      - Creates and manages certificate profiles for PKI operations
+      - Defines certificate attributes and constraints
+    author:
+      - Red Hat Infrastructure Services
+      - parmstro
+
+    options:
+      ipa_admin_principal:
+        description: IPA admin principal for authentication
+        type: str
+        required: true
+
+      ipa_admin_password:
+        description: IPA admin password for authentication
+        type: str
+        required: true
+        no_log: true
+
+      idm_certificate_profiles:
+        description: List of certificate profile definitions
+        type: list
+        elements: dict
+        required: false
+        options:
+          name:
+            description: Certificate profile name
+            type: str
+            required: true
+          state:
+            description: Whether the profile should exist
+            type: str
+            required: false
+            choices: [present, absent]
+            default: present
+          description:
+            description: Profile description
+            type: str
+            required: false
+          store:
+            description: Store issued certificates
+            type: bool
+            required: false
+          profile_file:
+            description: Path to profile configuration file
+            type: str
+            required: false

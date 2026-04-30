@@ -1,0 +1,54 @@
+---
+argument_specs:
+  main:
+    short_description: Install and configure IDM primary server
+    description:
+      - Installs the primary IDM server using redhat.rhel_idm.ipaserver role
+      - Configures DNS forward zones and realm DNS update permissions
+      - Ensures DNS server is queryable on local network
+    author:
+      - Red Hat Infrastructure Services
+      - parmstro
+
+    options:
+      ipa_admin_password:
+        description: IPA admin password
+        type: str
+        required: true
+        no_log: true
+
+      idm_dns_forward_zones:
+        description: List of DNS forward zone definitions
+        type: list
+        elements: dict
+        required: false
+        options:
+          name:
+            description: Forward zone name
+            type: str
+            required: true
+          forwarders:
+            description: List of DNS forwarders
+            type: list
+            elements: dict
+            required: true
+          forward_policy:
+            description: Forward policy (first or only)
+            type: str
+            required: false
+            choices: [first, only]
+          skip_overlap_check:
+            description: Skip overlap check
+            type: bool
+            required: false
+
+      idm_dns_update_zones:
+        description: List of DNS zones requiring realm update permissions
+        type: list
+        elements: dict
+        required: false
+        options:
+          name:
+            description: Zone name
+            type: str
+            required: true

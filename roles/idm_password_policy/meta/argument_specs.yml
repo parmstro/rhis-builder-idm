@@ -1,0 +1,75 @@
+---
+argument_specs:
+  main:
+    short_description: Manage IDM password policies
+    description:
+      - Creates and manages password policies for users and groups
+      - Controls password complexity, length, expiration, and history
+    author:
+      - Red Hat Infrastructure Services
+      - parmstro
+
+    options:
+      ipa_admin_principal:
+        description: IPA admin principal for authentication
+        type: str
+        required: true
+
+      ipa_admin_password:
+        description: IPA admin password for authentication
+        type: str
+        required: true
+        no_log: true
+
+      idm_password_policies:
+        description: List of password policy definitions
+        type: list
+        elements: dict
+        required: false
+        options:
+          name:
+            description: Policy name (usually group name)
+            type: str
+            required: true
+          state:
+            description: Whether the policy should exist
+            type: str
+            required: false
+            choices: [present, absent]
+            default: present
+          priority:
+            description: Policy priority (lower number = higher priority)
+            type: int
+            required: false
+          maxlife:
+            description: Maximum password lifetime in days
+            type: int
+            required: false
+          minlife:
+            description: Minimum password lifetime in hours
+            type: int
+            required: false
+          history:
+            description: Number of previous passwords to remember
+            type: int
+            required: false
+          minclasses:
+            description: Minimum number of character classes required
+            type: int
+            required: false
+          minlength:
+            description: Minimum password length
+            type: int
+            required: false
+          maxfail:
+            description: Maximum consecutive login failures before lockout
+            type: int
+            required: false
+          failinterval:
+            description: Time window for counting login failures (seconds)
+            type: int
+            required: false
+          lockouttime:
+            description: Account lockout duration (seconds)
+            type: int
+            required: false

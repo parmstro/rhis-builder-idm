@@ -1,0 +1,36 @@
+---
+galaxy_info:
+  role_name: idm_users
+  author: parmstro
+  description: Manages IDM user accounts for rhis-builder
+  license: GPL-3.0
+  min_ansible_version: "2.9"
+
+  platforms:
+    - name: EL
+      versions:
+        - "8"
+        - "9"
+        - "10"
+    - name: Fedora
+      versions:
+        - "38"
+        - "39"
+        - "40"
+        - "41"
+        - "42"
+        - "43"
+
+  galaxy_tags:
+    - rhis
+    - idm
+    - ipa
+    - users
+    - accounts
+    - rhel
+
+dependencies: [gpg]
+
+collections:
+  - redhat.rhel_idm
+  - community.general

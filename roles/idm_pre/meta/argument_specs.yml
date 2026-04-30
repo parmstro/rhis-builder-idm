@@ -1,0 +1,58 @@
+---
+argument_specs:
+  main:
+    short_description: Prepare system for IDM installation
+    description:
+      - Performs prerequisite checks and configuration before IDM installation
+      - Ensures DNS resolution, system registration, updates, packages
+      - Configures time sync, firewall, crypto policy, umask, and hostname
+    author:
+      - Red Hat Infrastructure Services
+      - parmstro
+
+    options:
+      idm_dns_servers:
+        description: DNS servers for name resolution
+        type: list
+        elements: str
+        required: false
+
+      idm_packages:
+        description: List of packages to install for IDM
+        type: list
+        elements: str
+        required: false
+
+      idm_firewall_services:
+        description: Firewall services to enable for IDM
+        type: list
+        elements: str
+        required: false
+
+      idm_firewall_ports:
+        description: Firewall ports to open for IDM
+        type: list
+        elements: str
+        required: false
+
+      idm_crypto_policy:
+        description: System-wide cryptographic policy
+        type: str
+        required: false
+
+      idm_umask:
+        description: System umask value
+        type: str
+        required: false
+
+      idm_update_system:
+        description: Whether to update all packages
+        type: bool
+        required: false
+        default: true
+
+      idm_register_system:
+        description: Whether to register system with subscription manager
+        type: bool
+        required: false
+        default: true

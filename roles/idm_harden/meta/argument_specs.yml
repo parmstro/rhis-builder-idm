@@ -1,0 +1,45 @@
+---
+argument_specs:
+  main:
+    short_description: Harden IDM server security
+    description:
+      - Applies security hardening configurations to IDM servers
+      - Implements security best practices and compliance requirements
+    author:
+      - parmstro
+
+    options:
+      ipa_admin_principal:
+        description: IPA admin principal for authentication
+        type: str
+        required: false
+
+      ipa_admin_password:
+        description: IPA admin password for authentication
+        type: str
+        required: false
+        no_log: true
+
+      idm_harden_disable_anonymous_bind:
+        description: Disable anonymous LDAP binds
+        type: bool
+        required: false
+        default: true
+
+      idm_harden_require_secure_binds:
+        description: Require secure (TLS) LDAP binds
+        type: bool
+        required: false
+        default: true
+
+      idm_harden_disable_weak_ciphers:
+        description: Disable weak cryptographic ciphers
+        type: bool
+        required: false
+        default: true
+
+      idm_harden_audit_logging:
+        description: Enable comprehensive audit logging
+        type: bool
+        required: false
+        default: true

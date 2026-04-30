@@ -1,0 +1,266 @@
+---
+argument_specs:
+  main:
+    short_description: Manage IDM users
+    description:
+      - Creates, modifies, or removes IDM user accounts
+      - Supports comprehensive user attributes including personal info, authentication, and notifications
+      - Can send email notifications to new users with encrypted passwords
+    author:
+      - Red Hat Infrastructure Services
+      - parmstro
+
+    options:
+      ipa_admin_principal:
+        description: IPA admin principal for authentication
+        type: str
+        required: true
+
+      ipa_admin_password:
+        description: IPA admin password for authentication
+        type: str
+        required: true
+        no_log: true
+
+      idm_users:
+        description: List of user definitions to manage
+        type: list
+        elements: dict
+        required: false
+        options:
+          login:
+            description: User login name
+            type: str
+            required: true
+          action:
+            description: Action to perform (member vs host level)
+            type: str
+            required: false
+          state:
+            description: Whether the user should exist
+            type: str
+            required: false
+            choices: [present, absent, enabled, disabled]
+            default: present
+          first:
+            description: First name (givenname)
+            type: str
+            required: false
+          last:
+            description: Last name (surname)
+            type: str
+            required: false
+          displayname:
+            description: Display name
+            type: str
+            required: false
+          email:
+            description: Email address(es)
+            type: raw
+            required: false
+          password:
+            description: User password
+            type: str
+            required: false
+            no_log: true
+          random:
+            description: Generate random password
+            type: bool
+            required: false
+          uid:
+            description: User ID number
+            type: int
+            required: false
+          user_gid:
+            description: Primary group ID (gidnumber)
+            type: int
+            required: false
+          home_dir:
+            description: Home directory path
+            type: str
+            required: false
+          shell:
+            description: Login shell
+            type: str
+            required: false
+          phone_numbers:
+            description: Phone number(s)
+            type: list
+            elements: str
+            required: false
+          sshpubkey:
+            description: SSH public key(s)
+            type: list
+            elements: str
+            required: false
+          title:
+            description: Job title
+            type: str
+            required: false
+          managers:
+            description: Manager(s)
+            type: list
+            elements: str
+            required: false
+          carlicenses:
+            description: Car license(s)
+            type: list
+            elements: str
+            required: false
+          certificates:
+            description: User certificate(s)
+            type: list
+            elements: str
+            required: false
+          certmaps:
+            description: Certificate mapping data
+            type: dict
+            required: false
+          city:
+            description: City
+            type: str
+            required: false
+          departmentnumber:
+            description: Department number
+            type: str
+            required: false
+          employeenumber:
+            description: Employee number
+            type: str
+            required: false
+          employeetype:
+            description: Employee type
+            type: str
+            required: false
+          fax_numbers:
+            description: Fax number(s)
+            type: list
+            elements: str
+            required: false
+          fullname:
+            description: Full name (cn)
+            type: str
+            required: false
+          gecos:
+            description: GECOS field
+            type: str
+            required: false
+          idp:
+            description: Identity provider reference name
+            type: str
+            required: false
+          idp_user_id:
+            description: User identifier for the IdP
+            type: str
+            required: false
+          initials:
+            description: Middle initials
+            type: str
+            required: false
+          noprivate:
+            description: Do not create user private group
+            type: bool
+            required: false
+          orgunit:
+            description: Organizational unit
+            type: str
+            required: false
+          pager_numbers:
+            description: Pager number(s)
+            type: list
+            elements: str
+            required: false
+          password_expire:
+            description: Password expiration date
+            type: str
+            required: false
+          postalcode:
+            description: Postal code
+            type: str
+            required: false
+          preferred_language:
+            description: Preferred language
+            type: str
+            required: false
+          preserve:
+            description: Preserve on delete
+            type: bool
+            required: false
+          principal:
+            description: Kerberos principal
+            type: str
+            required: false
+          principal_expiration:
+            description: Principal expiration date
+            type: str
+            required: false
+          radius:
+            description: RADIUS proxy configuration
+            type: str
+            required: false
+          radiususer:
+            description: RADIUS proxy username
+            type: str
+            required: false
+          smb_home_dir:
+            description: SMB home directory
+            type: str
+            required: false
+          smb_home_drive:
+            description: SMB home drive letter
+            type: str
+            required: false
+          smb_logon_script:
+            description: SMB logon script path
+            type: str
+            required: false
+          smb_profile_path:
+            description: SMB profile path
+            type: str
+            required: false
+          street:
+            description: Street address
+            type: str
+            required: false
+          update_password:
+            description: When to update password
+            type: str
+            required: false
+            choices: [always, on_create]
+          userauthtype:
+            description: User authentication types
+            type: list
+            elements: str
+            required: false
+          userclass:
+            description: User category/class
+            type: str
+            required: false
+          userstate:
+            description: User account state
+            type: str
+            required: false
+
+      idm_send_new_user_notifications:
+        description: Send email notifications to new users
+        type: bool
+        required: false
+        default: false
+
+      idm_notification_delivery_method:
+        description: Method for sending notifications
+        type: str
+        required: false
+        choices: [SMTP]
+        default: SMTP
+
+      idm_new_user_file:
+        description: Path to store encrypted password file
+        type: str
+        required: false
+
+      default_environment_password_vault:
+        description: Passphrase for GPG encryption of user passwords
+        type: str
+        required: false
+        no_log: true

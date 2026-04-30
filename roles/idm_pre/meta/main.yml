@@ -1,0 +1,36 @@
+---
+galaxy_info:
+  role_name: idm_pre
+  author: parmstro
+  description: Prepares systems for IDM installation in rhis-builder
+  license: GPL-3.0
+  min_ansible_version: "2.9"
+
+  platforms:
+    - name: EL
+      versions:
+        - "8"
+        - "9"
+        - "10"
+    - name: Fedora
+      versions:
+        - "38"
+        - "39"
+        - "40"
+        - "41"
+        - "42"
+        - "43"
+
+  galaxy_tags:
+    - rhis
+    - idm
+    - ipa
+    - prerequisites
+    - installation
+    - rhel
+
+dependencies: []
+
+collections:
+  - community.general
+  - redhat.rhel_system_roles
