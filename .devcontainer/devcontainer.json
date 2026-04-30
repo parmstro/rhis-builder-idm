@@ -1,0 +1,31 @@
+{
+  "name": "Claude Code on Fedora",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "vscode",
+  "containerUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode-remote.remote-containers",
+        "anthropic.claude-code"
+      ]
+    }
+  },
+  "features": {
+    "ghcr.io/stefanmaron/devcontainer-features/claude-code:1": {}
+  },
+  // Ensure Docker/Podman socket is accessible if agent needs to run containers
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.config/gh,target=/home/vscode/.config/gh,type=bind"
+  ],
+  "runArgs": [
+    "--network=host",
+    "--userns=keep-id"
+  ],
+  "containerEnv": {
+        "HOME": "/home/vscode" // Or your specific container user's home
+    }
+}
