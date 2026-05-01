@@ -1,0 +1,88 @@
+---
+argument_specs:
+  main:
+    short_description: Manage IDM user groups
+    description:
+      - Creates, modifies, or removes IDM user groups
+      - Supports POSIX and non-POSIX groups
+      - Manages group memberships and member managers
+    author:
+      - Red Hat Infrastructure Services
+      - parmstro
+
+    options:
+      ipa_admin_principal:
+        description: IPA admin principal for authentication
+        type: str
+        required: true
+
+      ipa_admin_password:
+        description: IPA admin password for authentication
+        type: str
+        required: true
+        no_log: true
+
+      idm_user_groups:
+        description: List of user group definitions to manage
+        type: list
+        elements: dict
+        required: false
+        options:
+          name:
+            description: Group name
+            type: str
+            required: true
+          action:
+            description: Action to perform (member vs group level)
+            type: str
+            required: false
+          state:
+            description: Whether the group should exist
+            type: str
+            required: false
+            choices: [present, absent]
+            default: present
+          description:
+            description: Group description
+            type: str
+            required: false
+          gid:
+            description: Group ID number
+            type: int
+            required: false
+          external:
+            description: External group for AD trusts
+            type: bool
+            required: false
+          posix:
+            description: Create as POSIX group
+            type: bool
+            required: false
+          rename:
+            description: New name when renaming group
+            type: str
+            required: false
+          group_list:
+            description: List of groups to add as members
+            type: list
+            elements: str
+            required: false
+          group_dict:
+            description: Dictionary of groups with action operations
+            type: dict
+            required: false
+          user_list:
+            description: List of users to add as members
+            type: list
+            elements: str
+            required: false
+          membermanager_groups:
+            description: Groups that can manage this group's membership
+            type: list
+            elements: str
+            required: false
+          membermanager_users:
+            description: Users that can manage this group's membership
+            type: list
+            elements: str
+            required: false

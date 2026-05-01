@@ -1,0 +1,100 @@
+---
+# yamllint configuration for rhis-builder-idm
+# https://yamllint.readthedocs.io/
+
+extends: default
+
+rules:
+  # Line length - allow reasonable length for readability
+  line-length:
+    max: 160
+    level: warning
+    allow-non-breakable-words: true
+    allow-non-breakable-inline-mappings: true
+
+  # Indentation - 2 spaces, consistent with Ansible style
+  indentation:
+    spaces: 2
+    indent-sequences: true
+    check-multi-line-strings: false
+
+  # Trailing spaces - error
+  trailing-spaces:
+    level: error
+
+  # Document start - require --- at start of files
+  document-start:
+    present: true
+
+  # Document end - not required
+  document-end:
+    present: false
+
+  # Comments - require space after #, allow standalone comments
+  comments:
+    require-starting-space: true
+    min-spaces-from-content: 1
+    ignore-shebangs: true
+
+  # Empty lines - reasonable limits
+  empty-lines:
+    max: 2
+    max-start: 0
+    max-end: 1
+
+  # Truthy values - allow yes/no/true/false/on/off
+  truthy:
+    allowed-values: ['true', 'false', 'yes', 'no', 'on', 'off']
+    check-keys: false
+    level: warning
+
+  # Key duplicates - error
+  key-duplicates:
+    level: error
+
+  # Hyphens - consistent spacing
+  hyphens:
+    max-spaces-after: 1
+
+  # Empty values - allow for defaults
+  empty-values:
+    forbid-in-block-mappings: false
+    forbid-in-flow-mappings: true
+
+  # Brackets - consistent spacing
+  brackets:
+    min-spaces-inside: 0
+    max-spaces-inside: 0
+
+  # Braces - consistent spacing
+  braces:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+
+  # Colons - consistent spacing
+  colons:
+    max-spaces-before: 0
+    max-spaces-after: 1
+
+  # Commas - consistent spacing
+  commas:
+    max-spaces-before: 0
+    min-spaces-after: 1
+    max-spaces-after: 1
+
+  # New lines - Unix style
+  new-line-at-end-of-file:
+    level: error
+
+  new-lines:
+    type: unix
+
+# File patterns to ignore
+ignore: |
+  .git/
+  .github/
+  .vscode/
+  .devcontainer/
+  .claude/
+  .cache/
+  *.code-workspace

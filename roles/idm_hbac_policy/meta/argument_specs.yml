@@ -1,0 +1,143 @@
+---
+argument_specs:
+  main:
+    short_description: Manage IDM HBAC policies
+    description:
+      - Manages Host-Based Access Control (HBAC) services, service groups, and rules
+      - Controls which users can access which hosts/services
+    author:
+      - Red Hat Infrastructure Services
+      - parmstro
+
+    options:
+      ipa_admin_principal:
+        description: IPA admin principal for authentication
+        type: str
+        required: true
+
+      ipa_admin_password:
+        description: IPA admin password for authentication
+        type: str
+        required: true
+        no_log: true
+
+      idm_hbac_services:
+        description: List of HBAC service definitions
+        type: list
+        elements: dict
+        required: false
+        options:
+          name:
+            description: Service name
+            type: str
+            required: true
+          state:
+            description: Whether the service should exist
+            type: str
+            required: false
+            choices: [present, absent]
+            default: present
+          description:
+            description: Service description
+            type: str
+            required: false
+
+      idm_hbac_service_groups:
+        description: List of HBAC service group definitions
+        type: list
+        elements: dict
+        required: false
+        options:
+          name:
+            description: Service group name
+            type: str
+            required: true
+          action:
+            description: Action to perform (member vs group level)
+            type: str
+            required: false
+          state:
+            description: Whether the service group should exist
+            type: str
+            required: false
+            choices: [present, absent]
+            default: present
+          description:
+            description: Service group description
+            type: str
+            required: false
+          hbacsvc_list:
+            description: List of HBAC services in this group
+            type: list
+            elements: str
+            required: false
+
+      idm_hbac_rules:
+        description: List of HBAC rule definitions
+        type: list
+        elements: dict
+        required: false
+        options:
+          name:
+            description: HBAC rule name
+            type: str
+            required: true
+          action:
+            description: Action to perform (member vs rule level)
+            type: str
+            required: false
+          state:
+            description: Whether the rule should exist
+            type: str
+            required: false
+            choices: [present, absent, enabled, disabled]
+            default: present
+          description:
+            description: Rule description
+            type: str
+            required: false
+          usercategory:
+            description: User category (all users)
+            type: str
+            required: false
+            choices: [all]
+          hostcategory:
+            description: Host category (all hosts)
+            type: str
+            required: false
+            choices: [all]
+          servicecategory:
+            description: Service category (all services)
+            type: str
+            required: false
+            choices: [all]
+          user_list:
+            description: Users who can access
+            type: list
+            elements: str
+            required: false
+          group_list:
+            description: Groups who can access
+            type: list
+            elements: str
+            required: false
+          host_list:
+            description: Hosts that can be accessed
+            type: list
+            elements: str
+            required: false
+          hostgroup_list:
+            description: Host groups that can be accessed
+            type: list
+            elements: str
+            required: false
+          hbacsvc_list:
+            description: Services that can be accessed
+            type: list
+            elements: str
+            required: false
+          hbacsvcgroup_list:
+            description: Service groups that can be accessed
+            type: list
+            elements: str
+            required: false

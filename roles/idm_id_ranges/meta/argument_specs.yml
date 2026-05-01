@@ -1,0 +1,60 @@
+---
+argument_specs:
+  main:
+    short_description: Manage IDM ID ranges
+    description:
+      - Manages UID and GID ranges for local and trusted domains
+      - Prevents ID conflicts between different identity sources
+    author:
+      - Red Hat Infrastructure Services
+      - parmstro
+
+    options:
+      ipa_admin_principal:
+        description: IPA admin principal for authentication
+        type: str
+        required: true
+
+      ipa_admin_password:
+        description: IPA admin password for authentication
+        type: str
+        required: true
+        no_log: true
+
+      idm_id_ranges:
+        description: List of ID range definitions
+        type: list
+        elements: dict
+        required: false
+        options:
+          name:
+            description: ID range name
+            type: str
+            required: true
+          state:
+            description: Whether the ID range should exist
+            type: str
+            required: false
+            choices: [present, absent]
+            default: present
+          base_id:
+            description: First ID in the range
+            type: int
+            required: false
+          range_size:
+            description: Number of IDs in the range
+            type: int
+            required: false
+          rid_base:
+            description: First RID value for the range
+            type: int
+            required: false
+          secondary_rid_base:
+            description: First secondary RID value
+            type: int
+            required: false
+          range_type:
+            description: Type of ID range
+            type: str
+            required: false
+            choices: [ipa-local, ipa-ad-trust, ipa-ad-trust-posix, ipa-ipa-trust]

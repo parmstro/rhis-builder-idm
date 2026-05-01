@@ -1,0 +1,17 @@
+---
+argument_specs:
+  main:
+    short_description: Install and configure IDM replica server
+    description:
+      - Installs an IDM replica server using redhat.rhel_idm.ipareplica role
+      - Provides high availability and load distribution for IDM services
+    author:
+      - Red Hat Infrastructure Services
+      - parmstro
+
+    options:
+      ipa_admin_password:
+        description: IPA admin password for replica enrollment
+        type: str
+        required: true
+        no_log: true

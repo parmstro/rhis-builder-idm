@@ -1,0 +1,93 @@
+---
+argument_specs:
+  main:
+    short_description: Manage IDM automount configuration
+    description:
+      - Manages automount locations, maps, and keys
+      - Enables automatic mounting of network filesystems
+    author:
+      - Red Hat Infrastructure Services
+      - parmstro
+
+    options:
+      ipa_admin_principal:
+        description: IPA admin principal for authentication
+        type: str
+        required: true
+
+      ipa_admin_password:
+        description: IPA admin password for authentication
+        type: str
+        required: true
+        no_log: true
+
+      idm_automount_locations:
+        description: List of automount location definitions
+        type: list
+        elements: dict
+        required: false
+        options:
+          name:
+            description: Automount location name
+            type: str
+            required: true
+          state:
+            description: Whether the location should exist
+            type: str
+            required: false
+            choices: [present, absent]
+            default: present
+
+      idm_automount_maps:
+        description: List of automount map definitions
+        type: list
+        elements: dict
+        required: false
+        options:
+          name:
+            description: Automount map name
+            type: str
+            required: true
+          location:
+            description: Automount location containing this map
+            type: str
+            required: true
+          state:
+            description: Whether the map should exist
+            type: str
+            required: false
+            choices: [present, absent]
+            default: present
+          description:
+            description: Map description
+            type: str
+            required: false
+
+      idm_automount_keys:
+        description: List of automount key (mount point) definitions
+        type: list
+        elements: dict
+        required: false
+        options:
+          name:
+            description: Mount point key
+            type: str
+            required: true
+          location:
+            description: Automount location
+            type: str
+            required: true
+          mapname:
+            description: Automount map containing this key
+            type: str
+            required: true
+          info:
+            description: Mount information (e.g., NFS server and path)
+            type: str
+            required: true
+          state:
+            description: Whether the key should exist
+            type: str
+            required: false
+            choices: [present, absent]
+            default: present

@@ -1,0 +1,53 @@
+---
+# ansible-lint configuration for rhis-builder-idm
+# https://ansible-lint.readthedocs.io/
+
+profile: production
+
+# Exclude paths from linting
+exclude_paths:
+  - .git/
+  - .github/
+  - .vscode/
+  - .devcontainer/
+  - .claude/
+  - tests/
+  - .cache/
+
+# Skip specific rules (with rationale)
+skip_list:
+  - experimental  # Skip experimental rules until they're stable
+  - role-name  # Our role names follow rhis_ prefix convention (non-standard but intentional)
+
+# Warn on these rules instead of failing
+warn_list:
+  - no-changed-when  # Warn but don't fail on missing changed_when
+  - command-instead-of-module  # Some commands are necessary/intentional
+  - risky-file-permissions  # Context-dependent, review case-by-case
+
+# Enable additional rules for quality
+enable_list:
+  - yaml  # YAML syntax and formatting
+  - fqcn  # Enforce fully qualified collection names
+  - fqcn-builtins  # Use ansible.builtin.* for built-in modules
+
+# Ansible-lint behavior
+kinds:
+  - yaml: "*.yaml"
+  - yaml: "*.yml"
+  - playbook: "**/main.yml"
+  - playbook: "**/playbooks/*.yml"
+  - playbook: "**/playbooks/*.yaml"
+  - tasks: "**/tasks/*.yml"
+  - vars: "**/vars/*.yml"
+  - vars: "**/defaults/*.yml"
+  - vars: "**/group_vars/*.yml"
+  - vars: "**/host_vars/*.yml"
+  - meta: "**/meta/main.yml"
+  - meta: "**/meta/argument_specs.yml"
+
+# Offline mode - set to true if running without internet
+offline: false
+
+# Verbosity
+verbosity: 1

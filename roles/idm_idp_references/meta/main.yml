@@ -1,0 +1,36 @@
+---
+galaxy_info:
+  role_name: idm_idp_references
+  author: parmstro
+  description: Manages external identity provider references for rhis-builder
+  license: GPL-3.0
+  min_ansible_version: "2.9"
+
+  platforms:
+    - name: EL
+      versions:
+        - "8"
+        - "9"
+        - "10"
+    - name: Fedora
+      versions:
+        - "38"
+        - "39"
+        - "40"
+        - "41"
+        - "42"
+        - "43"
+
+  galaxy_tags:
+    - rhis
+    - idm
+    - ipa
+    - idp
+    - oauth
+    - oidc
+    - rhel
+
+dependencies: []
+
+collections:
+  - redhat.rhel_idm

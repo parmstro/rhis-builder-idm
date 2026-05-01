@@ -1,0 +1,67 @@
+---
+argument_specs:
+  main:
+    short_description: Manage IDM host groups
+    description:
+      - Creates, modifies, or removes IDM host groups
+      - Manages host group memberships and nesting
+    author:
+      - Red Hat Infrastructure Services
+      - parmstro
+
+    options:
+      ipa_admin_principal:
+        description: IPA admin principal for authentication
+        type: str
+        required: true
+
+      ipa_admin_password:
+        description: IPA admin password for authentication
+        type: str
+        required: true
+        no_log: true
+
+      idm_host_groups:
+        description: List of host group definitions to manage
+        type: list
+        elements: dict
+        required: false
+        options:
+          name:
+            description: Host group name
+            type: str
+            required: true
+          action:
+            description: Action to perform (member vs group level)
+            type: str
+            required: false
+          state:
+            description: Whether the host group should exist
+            type: str
+            required: false
+            choices: [present, absent]
+            default: present
+          description:
+            description: Host group description
+            type: str
+            required: false
+          host_list:
+            description: List of hosts to add as members
+            type: list
+            elements: str
+            required: false
+          hostgroup_list:
+            description: List of host groups to nest
+            type: list
+            elements: str
+            required: false
+          membermanager_users:
+            description: Users that can manage this group's membership
+            type: list
+            elements: str
+            required: false
+          membermanager_groups:
+            description: Groups that can manage this group's membership
+            type: list
+            elements: str
+            required: false
