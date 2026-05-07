@@ -29,8 +29,6 @@ galaxy_info:
     - accounts
     - rhel
 
-dependencies: [gpg]
-
 collections:
   - redhat.rhel_idm
   - community.general
