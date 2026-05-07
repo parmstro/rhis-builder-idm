@@ -63,3 +63,7 @@ argument_specs:
             description: OAuth2 scopes
             type: str
             required: false
+          user_id_attribute:
+            description: User attribute used to match identity
+            type: str
+            required: true
