@@ -65,7 +65,7 @@
 
 - name: "Send a notification to the new user"
   when:
-    - ((idm_user.random is defined and idm_user.random) and (user_result.user | length) > 0) or (idm_user.password is defined and idm_send_new_user_notifications)
+    - idm_send_new_user_notifications
     - idm_user.email is defined and (idm_user.email | length) > 0
   block:
     - name: "Retrieve the user password for notification"
