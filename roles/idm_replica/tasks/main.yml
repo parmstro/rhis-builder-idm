@@ -16,7 +16,7 @@
     - tags_idm_install
 
 - name: "Post deployment configuration"
-  ansible.builtin.include_tasks: "ipa_replica_post.yml"
+  ansible.builtin.include_tasks: "ipareplica_post.yml"
   tags:
     - tags_rhis_builder
     - tags_rhis_builder_idm
