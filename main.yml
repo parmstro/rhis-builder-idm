@@ -186,3 +186,9 @@
         - tags_rhis_builder_idm
         - tags_idm_post_install
         - tags_idm_dns
+
+    - name: "IdM Primary build complete"
+      ansible.builtin.debug:
+        msg:
+          - "IdM Primary build complete."
+          - "Web UI: https://{{ ansible_fqdn }}/ipa/ui"
