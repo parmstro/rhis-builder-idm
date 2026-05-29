@@ -69,12 +69,12 @@
     - idm_user.email is defined and (idm_user.email | length) > 0
   block:
     - name: "Retrieve the user password for notification"
-      when: idm_user.random
+      when: idm_user.random | default(false)
       ansible.builtin.set_fact:
         new_password: "{{ user_result.user.randompassword }}"
 
     - name: "Retrieve the user password for notification"
-      when: not idm_user.random
+      when: not (idm_user.random | default(false))
       ansible.builtin.set_fact:
         new_password: "{{ idm_user.password }}"
 
