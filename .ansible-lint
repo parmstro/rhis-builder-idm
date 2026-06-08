@@ -21,9 +21,12 @@ skip_list:
 
 # Warn on these rules instead of failing
 warn_list:
-  - no-changed-when  # Warn but don't fail on missing changed_when
-  - command-instead-of-module  # Some commands are necessary/intentional
-  - risky-file-permissions  # Context-dependent, review case-by-case
+  - no-changed-when              # Warn but don't fail on missing changed_when
+  - command-instead-of-module    # Some commands are necessary/intentional
+  - risky-file-permissions       # Context-dependent, review case-by-case
+  - var-naming[no-role-prefix]   # RHIS uses component-scoped prefixes (satellite_, idm_, kvm_)
+                                 # not role-scoped prefixes. Clean up incrementally during
+                                 # feature verification. See schema/TODO.md variable scoping note.
 
 # Enable additional rules for quality
 enable_list:
