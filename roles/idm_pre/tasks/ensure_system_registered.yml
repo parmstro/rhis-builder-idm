@@ -1,7 +1,9 @@
 ---
 
-- name: Register to Red Hat Portal {{ inventory_hostname }}
-  when: not register_to_satellite
+- name: Register to Red Hat Portal when not disconnected and not registering to Satellite - {{ inventory_hostname }}
+  when:
+    - not register_to_satellite
+    - not idm_disconnected
   ansible.builtin.include_role:
     name: redhat.rhel_system_roles.rhc
   vars:

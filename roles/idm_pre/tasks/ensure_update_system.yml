@@ -1,5 +1,8 @@
 ---
 - name: "Ensure the proper repositories are enabled"
+  when:
+    - not register_to_satellite
+    - not idm_disconnected
   community.general.rhsm_repository:
     name: "{{ idm_repository_ids }}"
     state: enabled

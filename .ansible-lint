@@ -36,18 +36,19 @@ enable_list:
 
 # Ansible-lint behavior
 kinds:
-  - yaml: "*.yaml"
-  - yaml: "*.yml"
-  - playbook: "**/main.yml"
   - playbook: "**/playbooks/*.yml"
   - playbook: "**/playbooks/*.yaml"
   - tasks: "**/tasks/*.yml"
+  - tasks: "**/tasks/*.yaml"
+  - handlers: "**/handlers/*.yml"
   - vars: "**/vars/*.yml"
   - vars: "**/defaults/*.yml"
-  - vars: "**/group_vars/*.yml"
-  - vars: "**/host_vars/*.yml"
+  - vars: "**/group_vars/**/*.yml"
+  - vars: "**/host_vars/**/*.yml"
   - meta: "**/meta/main.yml"
   - meta: "**/meta/argument_specs.yml"
+  - yaml: "*.yaml"
+  - yaml: "*.yml"
 
 # Offline mode - set to true if running without internet
 offline: false

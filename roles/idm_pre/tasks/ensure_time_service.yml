@@ -35,7 +35,32 @@
     - tags_idm_pre
     - tags_idm_install
 
+- name: "Check if time servers are reachable (waitsync 2 samples, 10s timeout)"
+  ansible.builtin.command: "chronyc waitsync 2 0 0 10"
+  register: _ntp_sync_check
+  failed_when: false
+  changed_when: false
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install
+
+- name: "Warn if time servers are not reachable"
+  when: _ntp_sync_check.rc != 0
+  ansible.builtin.debug:
+    msg: >-
+      WARNING: Time servers ({{ _default_timeservers | join(', ') }}) are not reachable
+      or not synchronized within the timeout period. The system clock may not be accurate.
+      Verify NTP servers are accessible from this host. chronyc makestep will be skipped.
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install
+
 - name: "Ensure the time is synchronized"
+  when: _ntp_sync_check.rc == 0
   ansible.builtin.command: "chronyc makestep"
   changed_when: true
   tags:

@@ -8,7 +8,7 @@
     - tags_idm_pre
     - tags_idm_install
 
-- name: "Ensure system is registered to CDN"
+- name: "Ensure system is registered to CDN when required"
   ansible.builtin.include_tasks: "ensure_system_registered.yml"
   tags:
     - tags_rhis_builder

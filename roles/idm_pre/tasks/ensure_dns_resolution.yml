@@ -2,6 +2,9 @@
 #
 # host resolves forward and backward OR
 - name: "Make sure we are resolving internet addresses"
+  when:
+    - not register_to_satellite
+    - not idm_disconnected
   ansible.builtin.assert:
     that: "{{ 'cdn.redhat.com' is ansible.utils.resolvable }}"
   tags:
@@ -10,7 +13,7 @@
     - tags_idm_pre
     - tags_idm_install
 
-- name: "Make sure we are resolving internet addresses"
+- name: "Make sure our own address"
   ansible.builtin.assert:
     that: "{{ ansible_fqdn is ansible.utils.resolvable }}"
   tags:

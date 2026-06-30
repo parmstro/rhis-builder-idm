@@ -1,0 +1,6 @@
+---
+
+async_timeout: 14400         # noqa: var-naming[no-role-prefix]
+async_delay: 15              # noqa: var-naming[no-role-prefix]
+register_to_satellite: false # noqa: var-naming[no-role-prefix]
+idm_disconnected: false      # noqa: var-naming[no-role-prefix]
