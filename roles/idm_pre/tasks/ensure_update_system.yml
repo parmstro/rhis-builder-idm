@@ -13,6 +13,22 @@
     - tags_idm_pre
     - tags_idm_install
 
+# This is addresses cache inconsistencies observered  periodically with dnf update failures when updating after a fresh install.
+# (e.g. observed with sqlite-libs-3.39.4-1.el9.x86_64 on a recent build of RHEL 9.8).
+# Functionally, this should solve any similar issue with other binaries.
+
+- name: "Clean the dnf cache"
+  ansible.builtin.command:
+    cmd: dnf clean all
+  register: dnf_clean
+  changed_when: dnf_clean.rc == 0
+  failed_when: dnf_clean.rc != 0
+  tags:
+    - tags_rhis_builder
+    - tags_rhis_builder_idm
+    - tags_idm_pre
+    - tags_idm_install
+
 # We are purposefully trying to update the system, hence latest.
 - name: "Update the system" # noqa: package-latest
   ansible.builtin.dnf:
