@@ -1,10 +1,12 @@
----
 # ansible-lint configuration for rhis-builder-idm
+---
+# RHIS standard ansible-lint configuration
+# Used as the baseline for all rhis-builder projects.
+# Copy to .ansible-lint in each repo and add repo-specific exceptions below the marker.
 # https://ansible-lint.readthedocs.io/
 
 profile: production
 
-# Exclude paths from linting
 exclude_paths:
   - .git/
   - .github/
@@ -14,27 +16,23 @@ exclude_paths:
   - tests/
   - .cache/
 
-# Skip specific rules (with rationale)
 skip_list:
-  - experimental  # Skip experimental rules until they're stable
-  - role-name  # Our role names follow rhis_ prefix convention (non-standard but intentional)
+  - experimental       # Skip experimental rules until they're stable
+  - role-name          # RHIS uses component-prefixed role names (satellite_, idm_, etc.) — intentional
 
-# Warn on these rules instead of failing
 warn_list:
-  - no-changed-when              # Warn but don't fail on missing changed_when
-  - command-instead-of-module    # Some commands are necessary/intentional
-  - risky-file-permissions       # Context-dependent, review case-by-case
+  - no-changed-when              # Warn but don't fail — some commands are fire-and-forget by design
+  - command-instead-of-module    # Some commands are necessary or intentional
+  - risky-file-permissions       # Context-dependent — review case by case
   - var-naming[no-role-prefix]   # RHIS uses component-scoped prefixes (satellite_, idm_, kvm_)
                                  # not role-scoped prefixes. Clean up incrementally during
                                  # feature verification. See schema/TODO.md variable scoping note.
 
-# Enable additional rules for quality
 enable_list:
-  - yaml  # YAML syntax and formatting
-  - fqcn  # Enforce fully qualified collection names
-  - fqcn-builtins  # Use ansible.builtin.* for built-in modules
+  - yaml
+  - fqcn
+  - fqcn-builtins
 
-# Ansible-lint behavior
 kinds:
   - playbook: "**/playbooks/*.yml"
   - playbook: "**/playbooks/*.yaml"
@@ -50,8 +48,6 @@ kinds:
   - yaml: "*.yaml"
   - yaml: "*.yml"
 
-# Offline mode - set to true if running without internet
 offline: false
-
-# Verbosity
 verbosity: 1
+# Repo-specific exceptions: none
