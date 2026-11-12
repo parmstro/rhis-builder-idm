@@ -3,6 +3,9 @@
 # Send an email notification to new user
 
 - name: "Send email notification"
+  when: 
+    - idm_send_new_user_notifications | bool
+    - idm_user.email is defined and (idm_user.email | length) > 0
   community.general.mail:
     username: "{{ idm_smtp_username_vault }}"
     password: "{{ idm_smtp_password_vault }}"
